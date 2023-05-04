@@ -52,6 +52,11 @@ public class HelloService {
         return sqlToDataAll(sql);
     }
 
+//    public String getEmployeeNumber(String name) throws JsonProcessingException{
+//        String sql = String.format("SELECT employeeNumber FROM UserInfo WHERE name = \"%s\"",name);
+//        return sqlToData(sql);
+//    }
+
     public String getAllDataElectric(String table, int state) throws JsonProcessingException {
         String sql = String.format("SELECT * FROM person.%s where state = %d",table, state);
         return sqlToDataAll(sql);
@@ -65,6 +70,21 @@ public class HelloService {
     public String getElectric(String table, String id) throws JsonProcessingException {
         String sql = String.format("SELECT * FROM person.%s where id = \"%s\"",table, id);
         return sqlToData(sql);
+    }
+
+    public String getQRdate(String table, int id, int date) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.%s where employeeNumber= %d and date= %d",table, id, date);
+        return sqlToData(sql);
+    }
+
+    public String getQRdateAll(String table, int id) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.%s where employeeNumber= %d",table, id);
+        return sqlToDataAll(sql);
+    }
+
+    public String getAllQR(String table, int id) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.%s where date= %d;",table, id);
+        return sqlToDataAll(sql);
     }
 
     public String getALLElectricTeam(String table, String team, int state) throws JsonProcessingException
@@ -95,6 +115,8 @@ public class HelloService {
         jdbcTemplate.update(sql);
     }
 
+
+
     public void AddNotice(int num, String name, String title, String content, int wdate, String division, String id)
     {
         String sql = String.format("Call InsertNoticeBoard(%d, \"%s\", \"%s\", \"%s\", %d, \"%s\", \"%s\")", num,name, title,content,wdate,division,id);
@@ -108,7 +130,7 @@ public class HelloService {
         jdbcTemplate.update(sql);
     }
 
-    public void Addjournal(String title, String writer, String team, String JG, int date, String morning, String afternoon, String significant, String untreated, String id,
+    public void Addjournal(String title, String writer, String team, String  JG, int date, String morning, String afternoon, String significant, String untreated, String id,
                            int state, int type)
     {
         String sql = String.format("call InsertJournal(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d,%d)",title,
@@ -126,6 +148,29 @@ public class HelloService {
     public void AddPost(int num, String name, String title, String content, int wdate, String division, String id) {
         String sql = String.format("Call InsertFreeBoard(%d, \"%s\", \"%s\", \"%s\", %d, \"%s\", \"%s\")", num, name, title, content, wdate, division, id);
         this.jdbcTemplate.update(sql);
+    }
+
+    public void AddAnnualLeave(int num, int start, int end)
+    {
+        String sql = String.format("Call InsertAnnualLeave(%d, %d, %d)", num, start, end);
+        jdbcTemplate.update(sql);
+    }
+    public void AddQrcode(int num, int date,int start, int end)
+    {
+        String sql = String.format("Call InsertQrcode(%d, %d, %d, %d)", num, date ,start, end);
+        jdbcTemplate.update(sql);
+    }
+
+    public void AddTeam(int teamID,String team, String teamDOC)
+    {
+        String sql = String.format("Call InsertTeam(%d, \"%s\", \"%s\")", teamID, team, teamDOC);
+        jdbcTemplate.update(sql);
+    }
+
+    public void AddLeaveCount(int num, int count)
+    {
+        String sql = String.format("Call InsertLeaveCount(%d, %d)", num, count);
+        jdbcTemplate.update(sql);
     }
 
     public String getBoard(String table) throws JsonProcessingException {
@@ -175,12 +220,38 @@ public class HelloService {
         jdbcTemplate.update(sql);
     }
 
+    public void updateTeam(int teamID, String change)
+    {
+        String sql = String.format("UPDATE Team SET team = \"%s\" WHERE teamID = %d", change,teamID);
+        jdbcTemplate.update(sql);
+    }
     // Delete
     public void deleteDataInt(String table_name, int number) {
         String sql = String.format("DELETE FROM person." +table_name+ " WHERE employeeNumber = %d",number);
         jdbcTemplate.update(sql);
     }
+    public void deleteLeave(String table, int num, int start, int end)
+    {
+        String sql = String.format("DELETE person.%s \n" +
+                "FROM person.AnnualLeave \n" +
+                "JOIN (SELECT num FROM person.AnnualLeave WHERE employeeNumber = %d AND start = %d and end = %d) AS subquery \n" +
+                "ON person.AnnualLeave.num = subquery.num;",table,num,start,end);
+        jdbcTemplate.update(sql);
+    }
 
+    public void deleteTeam(int teamID)
+    {
+        String sql = String.format("DELETE FROM person.Team WHERE teamID = %d",teamID);
+        jdbcTemplate.update(sql);
+    }
+    public void deleteQrcode(String table, int num,int date)
+    {
+        String sql = String.format("DELETE person.%s \n" +
+                "FROM person.Qrcode \n" +
+                "JOIN (SELECT num FROM person.Qrcode WHERE employeeNumber = %d AND date = %d) AS subquery \n" +
+                "ON person.Qrcode.num = subquery.num;",table,num,date);
+        jdbcTemplate.update(sql);
+    }
     public void deleteDataString(String table_name, String number) {
         String sql = String.format("DELETE FROM person." +table_name+ " WHERE id = \"%s\"",number);
         jdbcTemplate.update(sql);

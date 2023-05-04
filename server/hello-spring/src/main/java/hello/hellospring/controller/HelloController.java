@@ -19,6 +19,12 @@ public class HelloController {
         return service.getAllData(table);
     }
 
+//    @GetMapping("ReadEmployeeNumber")
+//    @ResponseBody
+//    public String ReadEmployeeNumber(@RequestParam("name") String name) throws JsonProcessingException{
+//        return service.getEmployeeNumber(name);
+//    }
+
     @GetMapping("ReadAllElectric")
     @ResponseBody
     public String ReadAllElectric(@RequestParam("table") String table, @RequestParam("state") int state) throws JsonProcessingException {
@@ -77,6 +83,30 @@ public class HelloController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("AddAnnualLeave")
+    public ResponseEntity<Void> AddAnnualLeave(@RequestBody HelloDTO.AnnualLeaveDTO annualLeaveDTO) {
+        this.service.AddAnnualLeave(annualLeaveDTO.getNum(), annualLeaveDTO.getStart(), annualLeaveDTO.getEnd());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("AddQrcode")
+    public ResponseEntity<Void> AddQrcode(@RequestBody HelloDTO.AnnualQrcodeDTO annualQrcodeDTO) {
+        this.service.AddQrcode(annualQrcodeDTO.getNum(),annualQrcodeDTO.getDate(), annualQrcodeDTO.getStart(), annualQrcodeDTO.getEnd());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("AddTeam")
+    public ResponseEntity<Void> AddTeam(@RequestBody HelloDTO.TeamDTO teamDTO) {
+        this.service.AddTeam(teamDTO.getTeamID(),teamDTO.getTeam(), teamDTO.getTeamDOC());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("AddLeaveCount")
+    public ResponseEntity<Void> AddLeaveCount(@RequestBody HelloDTO.LeaveCountDTO leaveCountDTO) {
+        this.service.AddLeaveCount(leaveCountDTO.getEmployeeNumber(), leaveCountDTO.getCount());
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("Addpost")
     public ResponseEntity<Void> Addpost(@RequestBody HelloDTO.noticeDTO noticeDTO) {
         this.service.AddPost(noticeDTO.getNum(), noticeDTO.getName(), noticeDTO.getTitle(), noticeDTO.getContent(), noticeDTO.getWdate(), noticeDTO.getDivision(), noticeDTO.getId());
@@ -127,6 +157,24 @@ public class HelloController {
         return service.getBoardContent(table, id);
     }
 
+    @GetMapping("ReadQRdate")
+    @ResponseBody
+    public String ReadQRdate(@RequestParam("table") String table, @RequestParam("id") int id,@RequestParam("date") int date) throws JsonProcessingException {
+        return service.getQRdate(table, id, date);
+    }
+
+    @GetMapping("ReadQRdateAll")
+    @ResponseBody
+    public String ReadQRdateAll(@RequestParam("table") String table, @RequestParam("id") int id) throws JsonProcessingException {
+        return service.getQRdateAll(table, id);
+    }
+
+    @GetMapping("ReadAllQR")
+    @ResponseBody
+    public String ReadAllQR(@RequestParam("table") String table, @RequestParam("date") int date) throws JsonProcessingException {
+        return service.getAllQR(table, date);
+    }
+
     @GetMapping("Add")
     @ResponseBody
     public ResponseEntity<Void> Add(@RequestParam("table") String table ,@RequestParam("data") String data){
@@ -140,6 +188,14 @@ public class HelloController {
         service.updateData(table, column, data, num);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("UpdateTeam")
+    @ResponseBody
+    public ResponseEntity<Void> Update(@RequestParam("teamID") int teamID, @RequestParam("change") String change){
+        service.updateTeam(teamID, change);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("UpdateState")
     @ResponseBody
     public ResponseEntity<Void> UpdateState(@RequestParam("table") String table ,@RequestParam("state") int state, @RequestParam("id") String id){
@@ -156,6 +212,29 @@ public class HelloController {
         catch (NumberFormatException ex){
             service.deleteDataString(table,num);
         }
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping("DeleteTeam")
+    @ResponseBody
+    public  ResponseEntity<Void> DeleteTeam(@RequestParam("teamID") int teamID)
+    {
+        service.deleteTeam(teamID);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("DeleteLeave")
+    @ResponseBody
+    public  ResponseEntity<Void> DeleteLeave(@RequestParam("table") String table, @RequestParam("num") int num, @RequestParam("start") int start, @RequestParam("end") int end)
+    {
+        service.deleteLeave(table, num, start, end);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("DeleteQrcode")
+    @ResponseBody
+    public  ResponseEntity<Void> DeleteQrcode(@RequestParam("table") String table, @RequestParam("num") int num, @RequestParam("date") int date)
+    {
+        service.deleteQrcode(table, num,date);
         return ResponseEntity.ok().build();
     }
 

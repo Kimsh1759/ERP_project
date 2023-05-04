@@ -1,5 +1,7 @@
 package hello.hellospring.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Base64;
 
 public class HelloDTO {
@@ -274,7 +276,7 @@ public class HelloDTO {
         private String writer;
 
         private String team;
-
+        @JsonProperty("JG")
         private String JG;
 
         private int date;
@@ -298,11 +300,11 @@ public class HelloDTO {
             this.team = team;
         }
 
-        public String getJG() {
+        public String  getJG() {
             return JG;
         }
 
-        public void setJG(String JG) {
+        public void setJG(String  JG) {
             this.JG = JG;
         }
 
@@ -391,9 +393,12 @@ public class HelloDTO {
     {
         private int number;
         private String team;
+        @JsonProperty("JG")
         private String JG;
         private String writer;
-        private int date;
+        @JsonProperty("Date")
+        private int Date;
+
         private String title;
         private String remarks;
         private String detail;
@@ -417,14 +422,9 @@ public class HelloDTO {
             this.team = team;
         }
 
-        public String getJG() {
-            return JG;
-        }
+        public String getJG() { return JG; }
 
-        public void setJG(String JG) {
-            this.JG = JG;
-        }
-
+        public void setJG(String JG) { this.JG = JG; }
         public int getState() {
             return state;
         }
@@ -466,11 +466,11 @@ public class HelloDTO {
         }
 
         public int getDate() {
-            return date;
+            return Date;
         }
 
-        public void setDate(int date) {
-            this.date = date;
+        public void setDate(int Date) {
+            this.Date = Date;
         }
 
         public int getType() {
@@ -490,61 +490,124 @@ public class HelloDTO {
         }
     }
 
-    //Ãß°¡
-    public static class QrcodeDTO
+    public static class AnnualLeaveDTO
     {
-        public int getEmployeeNumber() {
-            return employeeNumber;
+        private int num;
+        private int start;
+        private int end;
+
+        public int getNum() {
+            return num;
         }
 
-        public void setEmployeeNumber(int employeeNumber) {
-            this.employeeNumber = employeeNumber;
+        public void setNum(int num) {
+            this.num = num;
         }
 
-        public byte[] getQrcode() {
-            return Base64.getDecoder().decode(qrcode);
+        public int getStart() {
+            return start;
         }
 
-        public void setQrcode(String qrcode) {
-            this.qrcode = qrcode;
+        public void setStart(int start) {
+            this.start = start;
         }
-        private int employeeNumber;
 
-        private String qrcode;
+        public int getEnd() {
+            return end;
+        }
 
+        public void setEnd(int end) {
+            this.end = end;
+        }
     }
-    public static class DatetimeDTO
+
+    public static class LeaveCountDTO
     {
+        private int employeeNumber;
+        private int count;
+
         public int getEmployeeNumber() {
             return employeeNumber;
         }
 
         public void setEmployeeNumber(int employeeNumber) {
             this.employeeNumber = employeeNumber;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+    }
+
+    public static class AnnualQrcodeDTO
+    {
+        private int num;
+        private int date;
+        private int start;
+        private int end;
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
         }
 
         public int getDate() {
             return date;
         }
-
         public void setDate(int date) {
             this.date = date;
         }
 
-        public int getStart_time() {
-            return start_time;
+        public int getStart() {
+            return start;
         }
 
-        public void setStart_time(int start_time) {
-            this.start_time = start_time;
+        public void setStart(int start) {
+            this.start = start;
         }
 
-        private int employeeNumber;
+        public int getEnd() {
+            return end;
+        }
 
-        private int date;
-
-        private int start_time;
-
+        public void setEnd(int end) {
+            this.end = end;
+        }
     }
+    public static class TeamDTO
+    {
+        private int teamID;
+        private String team;
+        private String teamDOC;
 
+        public int getTeamID() {
+            return teamID;
+        }
+
+        public void setTeamID(int teamID) {
+            this.teamID = teamID;
+        }
+
+        public String getTeam() {
+            return team;
+        }
+        public void setTeam(String team) {
+            this.team = team;
+        }
+
+        public String getTeamDOC() {
+            return teamDOC;
+        }
+
+        public void setTeamDOC(String teamDOC) {
+            this.teamDOC = teamDOC;
+        }
+    }
 }
