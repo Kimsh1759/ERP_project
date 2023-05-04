@@ -20,19 +20,32 @@ namespace F_Final_Project
         private void Attendance_Load(object sender, EventArgs e)
         {
             panel3.Controls.Clear();
-
+           
             if (LoginApp.user.authority == 2)
             {
-                Attendance_Workers workers = new Attendance_Workers();
+                Attendance_Workers workers = new Attendance_Workers(LoginApp.user.id.ToString());
                 workers.TopLevel = false;
                 workers.ControlBox = false;
                 workers.Text = null;
                 workers.Parent = panel3;
                 workers.Show();
             }
-            else
+
+            else if(LoginApp.user.authority == 1)
             {
-                Attendance_Manager manager = new Attendance_Manager();
+                Attendance_Manager amod = new Attendance_Manager(this);
+                amod.Owner= this;
+                amod.TopLevel = false;
+                amod.ControlBox = false;
+                amod.Text = null;
+                amod.Parent = panel3;
+                amod.Show();
+            }
+
+            else if(LoginApp.user.authority == 0)
+            {
+                Attendance_Manager manager = new Attendance_Manager(this);
+                manager.Owner= this;
                 manager.TopLevel = false;
                 manager.ControlBox = false;
                 manager.Text = null;
@@ -40,5 +53,6 @@ namespace F_Final_Project
                 manager.Show();
             }
         }
+
     }
 }

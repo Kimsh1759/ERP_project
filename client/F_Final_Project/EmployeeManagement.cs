@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using MySql.Data.MySqlClient;
+using Microsoft.VisualBasic.FileIO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.CodeDom.Compiler;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Status;
 using Newtonsoft.Json.Linq;
 
 namespace F_Final_Project
@@ -19,111 +23,215 @@ namespace F_Final_Project
         public EmployeeManagement()
         {
             InitializeComponent();
-
-            if(LoginApp.user.authority != 0)
-            {
-                ManagementL.Text = "사원조회";
-                btnregistration.Visible = false;
-            }
         }
 
-        public static RDSserver RDs = new RDSserver();
+        int index = 1;
 
-        public static User user = new User();
+        List<string> workers_id = new List<string>();
+        List<Label> label_page = new List<Label>();
+
+        void restart_form()
+        {
+            List<JObject> obj = new List<JObject>();
+            obj = LoginApp.RDs.Readdic_database("UserInfo");
+
+            WorkerList.Items.Clear();
+
+            for(int i = 0; i < obj.Count; i++)
+            {
+                if (i < 20 * (index - 1))
+                    continue;
+
+                ListViewItem listItem = new ListViewItem(obj[i]["employeeNumber"].ToString());
+                listItem.SubItems.Add(obj[i]["name"].ToString());
+                listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(obj[i]["team"])]);
+                listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(obj[i]["JG"])]);
+                listItem.SubItems.Add(obj[i]["mail"].ToString());
+                WorkerList.Items.Add(listItem);
+
+                if (i == 20 * (index))                
+                    continue;
+            }
+            
+        }
 
         private void btnregistration_Click(object sender, EventArgs e)
         {
+
             EmployeeRegistration registration = new EmployeeRegistration();
-            
             panel2.Controls.Clear();
             registration.TopLevel = false;
             panel2.Controls.Add(registration);
-            registration.Text = null;
             registration.ControlBox = false;
-            registration.Parent = panel2;
+            registration.Parent= panel2;
             registration.Show();
-            restart();
-        }
-
-        void restart()
-        {
-            WorkerList.Items.Clear();
-            ListViewItem listItem;
-            List<JObject> list = LoginApp.RDs.Readdic_database("UserInfo");
-            foreach (JObject obj in list)
-            {
-                listItem = new ListViewItem(obj["employeeNumber"].ToString());
-                listItem.SubItems.Add(obj["name"].ToString());
-                listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(obj["team"])]);
-                listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(obj["JG"])]);
-                listItem.SubItems.Add(obj["DoE"].ToString());
-                WorkerList.Items.Add(listItem); 
-            }
+            restart_form();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            if(WorkersMenu.SelectedIndex == 0)
+             WorkerList.Items.Clear();
+             List<JObject> list = new List<JObject>();
+
+             list = LoginApp.RDs.Readdic_database("UserInfo");
+
+             ListViewItem listItem = new ListViewItem();
+
+            if (WorkersMenu.SelectedItem.ToString() == "이름")
             {
-                List<object> list = new List<object>();
-                
-                if(SearchTextbox.Text != "")
+                foreach(JObject workers in list)
                 {
-                    list = RDs.Read_database("UserInfo", SearchTextbox.Text);
-
-                    if(list.Count != 0 && list[1] == SearchTextbox.Text)
+                    if (workers["name"].ToString().Contains(SearchTextbox.Text))
                     {
-                        user.id = Convert.ToInt32(list[0]);
-                        user.name = Convert.ToString(list[1]);
-                        user.pw = Convert.ToString(list[2]);
-                        user.authority = Convert.ToInt32(list[3]);
-                        user.team = Convert.ToString(list[4]);
-                        user.JG = Convert.ToString(list[5]);
-                        user.birth = Convert.ToInt32(list[6]);
-                        user.addr = Convert.ToString(list[7]);
-                        user.tel = Convert.ToString(list[8]);
-                        user.mail = Convert.ToString(list[9]);
-                        user.DoE = Convert.ToInt32(list[10]);
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("입력한 사원의 정보가 없습니다.");
-                        SearchTextbox.Text = null;
+                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
+                        listItem.SubItems.Add(workers["name"].ToString());
+                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
+                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
+                        listItem.SubItems.Add(workers["mail"].ToString());
+                        WorkerList.Items.Add(listItem);
                     }
                 }
             }
-            else if(WorkersMenu.SelectedIndex == 1)
-            {
-                List<object> list = new List<object>();
-                if(SearchTextbox.Text != null)
-                {
 
+            else if (WorkersMenu.SelectedItem.ToString() == "사원번호")
+            {
+                foreach (JObject workers in list)
+                {
+                    if (workers["employeeNumber"].ToString().Contains(SearchTextbox.Text))
+                    {
+                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
+                        listItem.SubItems.Add(workers["name"].ToString());
+                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
+                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
+                        listItem.SubItems.Add(workers["mail"].ToString());
+                        WorkerList.Items.Add(listItem);
+                    }
                 }
             }
+
+            else if (WorkersMenu.SelectedItem.ToString() == "부서")
+            {
+                foreach (JObject workers in list)
+                {
+                    if (LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])].Contains(SearchTextbox.Text))
+                    {
+                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
+                        listItem.SubItems.Add(workers["name"].ToString());
+                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
+                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
+                        listItem.SubItems.Add(workers["mail"].ToString());
+                        WorkerList.Items.Add(listItem);
+                    }
+                }
+            }
+        }
+
+
+        private void WorkerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void EmployeeManagement_Load(object sender, EventArgs e)
         {
-            restart();
+            label_page.Add(page1);
+            label_page.Add(page2);
+            label_page.Add(page3);
+            label_page.Add(page4);
+            label_page.Add(page5);
+            label_page[0].ForeColor = Color.Blue;
+            restart_form();
         }
 
         private void WorkerList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if(user.authority==0)
+            if(LoginApp.user.authority==0)
             {
                 string id = WorkerList.SelectedItems[0].Text;
-
-                ShowWorker showWorker = new ShowWorker(Convert.ToInt32(id));
+                ShowWorker showworker = new ShowWorker(Convert.ToInt32(id));
                 panel2.Controls.Clear();
-                showWorker.TopLevel = false;
-                panel2.Controls.Add(showWorker);
-                showWorker.Text = null;
-                showWorker.ControlBox = false;
-                showWorker.Parent = panel2;
-                showWorker.Show();
-                restart();
+                showworker.TopLevel = false; 
+                panel2.Controls.Add(showworker);
+                showworker.Text = null;
+                showworker.ControlBox = false;
+                showworker.Parent = panel2;
+                showworker.Show();
             }
+        }
+
+        private void btnprevPage_Click(object sender, EventArgs e)
+        {
+
+            if (index != 1 && (index - 1) % 5 == 0)
+            {
+                index--;
+                label_page[0].ForeColor = Color.Black;
+                label_page[0].Text = Convert.ToString(Convert.ToInt32(label_page[0].Text) - 5);
+                label_page[1].ForeColor = Color.Black;
+                label_page[1].Text = Convert.ToString(Convert.ToInt32(label_page[1].Text) - 5);
+                label_page[2].ForeColor = Color.Black;
+                label_page[2].Text = Convert.ToString(Convert.ToInt32(label_page[2].Text) - 5);
+                label_page[3].ForeColor = Color.Black;
+                label_page[3].Text = Convert.ToString(Convert.ToInt32(label_page[3].Text) - 5);
+                label_page[4].ForeColor = Color.Blue;
+                label_page[4].Text = Convert.ToString(Convert.ToInt32(label_page[4].Text) - 5);
+            }
+
+            else
+            {
+                index--;
+                if(index == 0)
+                {
+                    index++;
+                }
+                label_page[(index - 1) % 5 + 1].ForeColor = Color.Black;
+                label_page[(index - 1) % 5].ForeColor = Color.Blue;
+            }
+
+            restart_form();
+
+        }
+
+        private void btnnextPage_Click(object sender, EventArgs e)
+        {
+            if ((index + 1) % 5 == 1)
+            {
+                index++;
+                label_page[0].ForeColor = Color.Blue;
+                label_page[0].Text = Convert.ToString(Convert.ToInt32(label_page[0].Text) + 5);
+                label_page[1].ForeColor = Color.Black;
+                label_page[1].Text = Convert.ToString(Convert.ToInt32(label_page[1].Text) + 5);
+                label_page[2].ForeColor = Color.Black;
+                label_page[2].Text = Convert.ToString(Convert.ToInt32(label_page[2].Text) + 5);
+                label_page[3].ForeColor = Color.Black;
+                label_page[3].Text = Convert.ToString(Convert.ToInt32(label_page[3].Text) + 5);
+                label_page[4].ForeColor = Color.Black;
+                label_page[4].Text = Convert.ToString(Convert.ToInt32(label_page[4].Text) + 5);
+            }
+
+            else
+            {
+                index++;
+                label_page[(index - 1) % 5 - 1].ForeColor = Color.Black;
+                label_page[(index - 1) % 5].ForeColor = Color.Blue;
+            }
+
+            restart_form();
+        }
+
+        private void Page_Click(object sender, EventArgs e)
+        {
+            Label page = sender as Label;
+
+            index = Convert.ToInt32(page.Text);
+            restart_form();
+
+            page1.ForeColor = Color.Black;
+            page2.ForeColor = Color.Black;
+            page3.ForeColor = Color.Black;
+            page4.ForeColor = Color.Black;
+            page5.ForeColor = Color.Black;
+            page.ForeColor = Color.Blue;
         }
     }
 

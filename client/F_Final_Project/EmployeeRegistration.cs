@@ -59,7 +59,7 @@ namespace F_Final_Project
             LoginApp.RDs.UpdateImage_database(Convert.ToInt32(list[0]), "UserInfo", "img", bImage);
 
             MessageBox.Show("사원이 등록되었습니다.");
-            this.Close();
+            //this.Close();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

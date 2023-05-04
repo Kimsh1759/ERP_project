@@ -14,6 +14,10 @@ using System.Security.Policy;
 using Mysqlx.Crud;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.AxHost;
+using Google.Protobuf.WellKnownTypes;
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace F_Final_Project
 {
@@ -118,6 +122,54 @@ namespace F_Final_Project
                     string result = client.UploadString(url, json);
                 }
             }
+            else if (tableType == "AnnualLeave")
+            {
+                string url = string.Format("{0}/AddAnnualLeave", ip);
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    var data = new { num = list[0], start = list[1], end = list[2]}; // int int int 
+
+                    string json = JsonConvert.SerializeObject(data);
+                    string result = client.UploadString(url, json);
+                }
+            }
+            else if(tableType == "LeaveCount")
+            {
+                string url = string.Format("{0}/AddLeaveCount", ip);
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    var data = new { num = list[0], count = list[1]}; // int int 
+
+                    string json = JsonConvert.SerializeObject(data);
+                    string result = client.UploadString(url, json);
+                }
+            }
+            else if(tableType == "Qrcode")
+            {
+                string url = string.Format("{0}/AddQrcode", ip);
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    var data = new { num = list[0], date = list[1], start = list[2], end = list[3] }; // int int int int
+
+                    string json = JsonConvert.SerializeObject(data);
+                    string result = client.UploadString(url, json);
+                }
+            }
+            else if(tableType == "Team")
+            {
+                string url = string.Format("{0}/AddTeam", ip);
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    var data = new { teamID = list[0], team = list[1].ToString(), teamDOC = list[2].ToString() }; // int string string
+
+                    string json = JsonConvert.SerializeObject(data);
+                    string result = client.UploadString(url, json);
+                }
+            }
         }
 
         public void Create_database(int employeeNumber, string Mdate, string Memo) // tableType =  "MyPage"
@@ -135,7 +187,7 @@ namespace F_Final_Project
             }
         }
 
-        public List<JObject> Readdic_database(string table_name, int state=0)
+        public List<JObject> Readdic_database(string table_name, int state=0, int num=0)
         {
             string url;
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -144,19 +196,25 @@ namespace F_Final_Project
             if (table_name == "NoticeBoard" || table_name == "FreeBoard")
             {
                 url = string.Format("{0}/ReadBoard?table={1}", ip, table_name);
-                list = CallApiss(url);
+                
             }
             else if(table_name == "ApplicationForLeave" || table_name == "Draft" || table_name == "journal" && state != -1)
             {
                 url = string.Format("{0}/ReadAllElectric?table={1}&state={2}", ip, table_name,state.ToString());
-                list = CallApiss(url);
+            }
+            else if(table_name == "Qrcode") // one people all attendance
+            {
+                if(state==0) 
+                    url = string.Format("{0}/ReadQRdateAll?table={1}&id={2}", ip, table_name, num.ToString());
+                else
+                    url = string.Format("{0}/ReadAllQR?table={1}&date={2}", ip, table_name, num.ToString());
             }
             else
             {
                 url = string.Format("{0}/ReadAll?table={1}", ip, table_name);
-                list = CallApiss(url);
             }
 
+            list = CallApiss(url);
 
             try
             {
@@ -205,15 +263,49 @@ namespace F_Final_Project
             return list;
         }
 
-        public JObject Read_database2(string table, string id)
+        public JObject Read_database2(string table, string id,int date=0)
         {
             JObject obj = new JObject();
             string url="";
+            if (table == "ApplicationForLeave" || table == "Draft" || table == "journal")
+            {
                 url = string.Format("{0}/ReadElectric?table={1}&id={2}", ip, table,id);
                 obj = CallApiJ(url);
-            
+            }
+            else if(table == "Qrcode")
+            {
+                url = string.Format("{0}/ReadQRdate?table={1}&id={2}&date={3}", ip, table, id, date);
+                obj = CallApiJ(url);
+            }
+            else if(table=="UserInfo")
+            {
+                url = string.Format("{0}/Read?table={1}&num={2}", ip, table, id);
+                obj = CallApiJ(url);
+            }
+            else
+            {
+                url = string.Format("{0}/Read?table={1}&num={2}", ip, table, id);
+                obj = CallApiJ(url);
+            }
 
             return obj;
+        }
+
+        public JObject ReademployeeNumber(string name)
+        {
+            JObject result=null;
+            List<JObject> list = Readdic_database("UserInfo");
+
+            foreach(JObject item in list)
+            {
+                if (item["name"].ToString() == name)
+                {
+                    result = item;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public List<object> Read_database(string table_name) // ex) table_name = "UserInfo"
@@ -476,11 +568,22 @@ namespace F_Final_Project
             string url = string.Format("{0}/Update?table={1}&column={2}&data={3}&num={4}", ip, table_name, menu, update, number.ToString());
             Dictionary<string, object> result = CallApi(url);
         }
-
-        public void UpdateBoard_database(List<object> list, string table)
+        public void UpdateTeam_database(string teamname, string change)
         {
-            Delete_database(list[6].ToString(), table);
-            Create_database(list, table);
+            int id = team_dic.FirstOrDefault(x => x.Value == teamname).Key;
+            string url = string.Format("{0}/UpdateTeam?teamID={1}&change={2}", ip, id, change);
+            Dictionary<string, object> result = CallApi(url);
+        }
+
+        public void UpdateBoard_database(List<object> list ,string table)
+        {
+                Delete_database(list[6].ToString(), table);
+                Create_database(list, table);
+        }
+        public void UpdateLeave_database(List<object> list, List<object> list2, string table)
+        {
+            Delete_database(list, table);
+            Create_database(list2, table);
         }
 
         public void Updatestate( string table, int state, string id)
@@ -507,14 +610,37 @@ namespace F_Final_Project
 
         public void Delete_database(int number, string table_name) // ex) number = employeenumber / tablename =  "UserInfo"
         {
-            string url = string.Format("{0}/Delete?table={1}&num={2}", ip, table_name, number.ToString());
-            Dictionary<string, object> result = CallApi(url);
+            if(table_name == "Team")
+            {
+                string url = string.Format("{0}/DeleteTeam?teamID={1}", ip, number.ToString());
+                Dictionary<string, object> result = CallApi(url);
+            }
+            else
+            {
+                string url = string.Format("{0}/Delete?table={1}&num={2}", ip, table_name, number.ToString());
+                Dictionary<string, object> result = CallApi(url);
+            }
         }
 
         public void Delete_database(string number, string table_name) // ex) number = board id / tablename =  "NoticeBoard" or "FreeBoard"
         {
+
             string url = string.Format("{0}/Delete?table={1}&num={2}", ip, table_name, number);
             Dictionary<string, object> result = CallApi(url);
+        }
+
+        public void Delete_database(List<object> list, string table_name) 
+        {
+            if(table_name== "AnnualLeave")
+            {
+                string url = string.Format("{0}/DeleteLeave?table={1}&num={2}&start={3}&end={4}", ip, table_name, list[0].ToString(), list[1].ToString(), list[2].ToString());
+                Dictionary<string, object> result = CallApi(url);
+            }
+            else if(table_name=="Qrcode")
+            {
+                string url = string.Format("{0}/DeleteQrcode?table={1}&num={2}&date={3}", ip, table_name, list[0].ToString(), list[1].ToString());
+                Dictionary<string, object> result = CallApi(url);
+            }
         }
 
         public Dictionary<string, object> CallApi(string url)

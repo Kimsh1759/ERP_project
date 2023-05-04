@@ -12,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace F_Final_Project
 {
-    public partial class Notice : Form
+    public partial class Notice : Form 
     {
         public Notice()
         {

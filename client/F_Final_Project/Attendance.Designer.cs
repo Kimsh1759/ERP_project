@@ -105,8 +105,8 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label AttendanceL;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Panel panel2;
     }
 }

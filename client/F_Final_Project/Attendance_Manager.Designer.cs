@@ -34,7 +34,6 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.SelectTeam = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,15 +45,17 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader6});
             this.WorkerList.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.WorkerList.GridLines = true;
             this.WorkerList.Location = new System.Drawing.Point(20, 90);
             this.WorkerList.Name = "WorkerList";
             this.WorkerList.Size = new System.Drawing.Size(520, 500);
             this.WorkerList.TabIndex = 20;
             this.WorkerList.UseCompatibleStateImageBehavior = false;
             this.WorkerList.View = System.Windows.Forms.View.Details;
+            this.WorkerList.SelectedIndexChanged += new System.EventHandler(this.WorkerList_SelectedIndexChanged);
+            this.WorkerList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.WorkerList_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -85,18 +86,10 @@
             this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader6.Width = 86;
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "비고";
-            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 86;
-            // 
             // SelectTeam
             // 
             this.SelectTeam.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SelectTeam.FormattingEnabled = true;
-            this.SelectTeam.Items.AddRange(new object[] {
-            "전체"});
             this.SelectTeam.Location = new System.Drawing.Point(339, 55);
             this.SelectTeam.Name = "SelectTeam";
             this.SelectTeam.Size = new System.Drawing.Size(120, 29);
@@ -139,7 +132,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ComboBox SelectTeam;
         private System.Windows.Forms.Button btnSearch;
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,11 @@ namespace F_Final_Project
 {
     public partial class Attendance_Workers : Form
     {
-        public Attendance_Workers()
+        public Attendance_Workers(string id)
         {
             InitializeComponent();
+            info = LoginApp.RDs.Read_database2("UserInfo", id);
         }
-
         private int dayToInt(string day)
         {
             int num;
@@ -38,10 +39,15 @@ namespace F_Final_Project
             return num;
         }
 
+        JObject info;
+        JObject cnt;
+        List<JObject> leave;
+        
         private void Attendance_Workers_Load(object sender, EventArgs e)
         {
-            DateTime date= DateTime.Now;
-            DateTime datetime = new DateTime(date.Year, date.Month, 1, new GregorianCalendar());
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            DateTime datetime = new DateTime(Int32.Parse(year), Int32.Parse(month), 1, new GregorianCalendar());
             KoreanCalendar myCal = new KoreanCalendar();
 
             List<Button> days = new List<Button> { Day1, Day2, Day3, Day4, Day5, Day6, Day7,
@@ -51,7 +57,7 @@ namespace F_Final_Project
                 Day37, Day38, Day39, Day40, Day41, Day42
             };
 
-            int DaysInMonth = myCal.GetDaysInMonth(myCal.GetYear(datetime), datetime.Month);
+            int DaysInMonth = myCal.GetDaysInMonth(myCal.GetYear(datetime), Int32.Parse(month));
 
             int num = dayToInt(myCal.GetDayOfWeek(datetime).ToString());
             for (int i = 0; i < 42; i++)
@@ -71,8 +77,55 @@ namespace F_Final_Project
                 day_num++;
             }
 
-            label_name.Text = LoginApp.user.name;
-            label_goodday.Text = "0";
+            cnt = LoginApp.RDs.Read_database2("LeaveCount", info["employeeNumber"].ToString());
+            leave = LoginApp.RDs.Readdic_database("AnnualLeave", 0, Convert.ToInt32(info["employeeNumber"].ToString()));
+
+            foreach (JObject item in leave)
+            {
+                if (Convert.ToInt32(item["employeeNumber"].ToString())==LoginApp.user.id )
+                {
+                    string str = item["start"].ToString();
+                    string subyear = str.Substring(0, 4); // year 2023
+                    string submonth = str.Substring(4, 2); // month 05
+                    string subday = str.Substring(6, 2); // day 03
+
+                    string str2 = item["end"].ToString();
+                    string subyear2 = str2.Substring(0, 4); // year 2023
+                    string submonth2 = str2.Substring(4, 2); // month 05
+                    string subday2 = str2.Substring(6, 2); // day 03
+
+                    int gap = Convert.ToInt32(str2) - Convert.ToInt32(str);
+                    if (subyear == DateTime.Now.ToString("yyyy") && submonth == DateTime.Now.ToString("MM"))
+                    {
+                        for (int i = Convert.ToInt32(subday); i <= Convert.ToInt32(subday) + gap; i++)
+                        {
+                            if (i + 1 < days.Count)
+                            {
+                                days[i].BackColor = Color.Yellow;
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            labelWorkersName.Text = info["name"].ToString();
+
+            if (cnt != null)
+            {
+                JToken value = cnt["count"];
+                if (value != null)
+                {
+                    label_leavecount.Text = cnt["count"].ToString();
+                }
+                
+            }
+            else
+            {
+                label_leavecount.Text = "0";
+            }
+
         }
     }
 }
