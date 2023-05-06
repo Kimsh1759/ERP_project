@@ -56,7 +56,7 @@ namespace F_Final_Project
             List<JObject> listD = new List<JObject>();
             List<JObject> list = new List<JObject>();
             ListViewItem listViewItem;
-            if (LoginApp.user.athority == 0)
+            if (LoginApp.user.authority == 0)
             {
                 if (btn_num == 1)
                 {
@@ -73,7 +73,7 @@ namespace F_Final_Project
                     listD = rds.Readdic_database("Draft", state);
                 }
             }
-            else if (LoginApp.user.athority == 1)
+            else if (LoginApp.user.authority == 1)
             {
                 if (btn_num == 1)
                 {
