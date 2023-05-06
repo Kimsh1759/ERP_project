@@ -28,84 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txttitle = new System.Windows.Forms.TextBox();
-            this.btnsend = new System.Windows.Forms.Button();
-            this.btncancle = new System.Windows.Forms.Button();
-            this.SelectMenu = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            txttitle = new System.Windows.Forms.TextBox();
+            btnsend = new System.Windows.Forms.Button();
+            btncancle = new System.Windows.Forms.Button();
+            SelectMenu = new System.Windows.Forms.ComboBox();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(12, 105);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(841, 594);
-            this.panel1.TabIndex = 0;
+            panel1.Location = new System.Drawing.Point(12, 105);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(841, 594);
+            panel1.TabIndex = 0;
             // 
             // txttitle
             // 
-            this.txttitle.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txttitle.Location = new System.Drawing.Point(153, 60);
-            this.txttitle.Name = "txttitle";
-            this.txttitle.Size = new System.Drawing.Size(700, 29);
-            this.txttitle.TabIndex = 2;
+            txttitle.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txttitle.Location = new System.Drawing.Point(153, 60);
+            txttitle.Name = "txttitle";
+            txttitle.Size = new System.Drawing.Size(700, 29);
+            txttitle.TabIndex = 2;
             // 
             // btnsend
             // 
-            this.btnsend.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnsend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsend.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnsend.Location = new System.Drawing.Point(885, 60);
-            this.btnsend.Name = "btnsend";
-            this.btnsend.Size = new System.Drawing.Size(92, 29);
-            this.btnsend.TabIndex = 3;
-            this.btnsend.Text = "완료";
-            this.btnsend.UseVisualStyleBackColor = false;
+            btnsend.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            btnsend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnsend.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnsend.Location = new System.Drawing.Point(885, 60);
+            btnsend.Name = "btnsend";
+            btnsend.Size = new System.Drawing.Size(92, 29);
+            btnsend.TabIndex = 3;
+            btnsend.Text = "완료";
+            btnsend.UseVisualStyleBackColor = false;
+            btnsend.Click += btnsend_Click;
             // 
             // btncancle
             // 
-            this.btncancle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btncancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btncancle.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btncancle.Location = new System.Drawing.Point(885, 106);
-            this.btncancle.Name = "btncancle";
-            this.btncancle.Size = new System.Drawing.Size(92, 29);
-            this.btncancle.TabIndex = 3;
-            this.btncancle.Text = "취소";
-            this.btncancle.UseVisualStyleBackColor = false;
+            btncancle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            btncancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btncancle.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btncancle.Location = new System.Drawing.Point(885, 106);
+            btncancle.Name = "btncancle";
+            btncancle.Size = new System.Drawing.Size(92, 29);
+            btncancle.TabIndex = 3;
+            btncancle.Text = "취소";
+            btncancle.UseVisualStyleBackColor = false;
             // 
             // SelectMenu
             // 
-            this.SelectMenu.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SelectMenu.FormattingEnabled = true;
-            this.SelectMenu.Items.AddRange(new object[] {
-            "휴가신청서",
-            "일일업무보고서",
-            "기안서"});
-            this.SelectMenu.Location = new System.Drawing.Point(12, 60);
-            this.SelectMenu.Name = "SelectMenu";
-            this.SelectMenu.Size = new System.Drawing.Size(121, 29);
-            this.SelectMenu.TabIndex = 5;
-            this.SelectMenu.Text = "결재 종류";
-            this.SelectMenu.SelectedIndexChanged += new System.EventHandler(this.SelectMenu_SelectedIndexChanged);
+            SelectMenu.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SelectMenu.FormattingEnabled = true;
+            SelectMenu.Items.AddRange(new object[] { "휴가신청서", "일일업무보고서", "기안서" });
+            SelectMenu.Location = new System.Drawing.Point(12, 60);
+            SelectMenu.Name = "SelectMenu";
+            SelectMenu.Size = new System.Drawing.Size(121, 29);
+            SelectMenu.TabIndex = 5;
+            SelectMenu.Text = "결재 종류";
+            SelectMenu.SelectedIndexChanged += SelectMenu_SelectedIndexChanged;
             // 
             // DocumentRegistration
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1024, 711);
-            this.Controls.Add(this.SelectMenu);
-            this.Controls.Add(this.btncancle);
-            this.Controls.Add(this.btnsend);
-            this.Controls.Add(this.txttitle);
-            this.Controls.Add(this.panel1);
-            this.Name = "DocumentRegistration";
-            this.Text = "DocumentRegistration";
-            this.Load += new System.EventHandler(this.DocumentRegistration_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Window;
+            ClientSize = new System.Drawing.Size(1024, 711);
+            Controls.Add(SelectMenu);
+            Controls.Add(btncancle);
+            Controls.Add(btnsend);
+            Controls.Add(txttitle);
+            Controls.Add(panel1);
+            Name = "DocumentRegistration";
+            Text = "DocumentRegistration";
+            Load += DocumentRegistration_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
