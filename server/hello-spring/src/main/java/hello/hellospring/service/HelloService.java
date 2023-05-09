@@ -10,6 +10,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
@@ -271,5 +273,33 @@ public class HelloService {
         ObjectNode jsonNode = objectMapper.createObjectNode();
         jsonNode.put("img", encoded);
         return jsonNode;
+    }
+    public String getInfoData(int employeeNumber, int PW) throws JsonProcessingException {
+        String sql = String.format("SELECT employeeNumber, PW FROM person.UserInfo WHERE employeeNumber = %d AND PW = %d", employeeNumber, PW);
+        return sqlToData(sql);
+    }
+
+    public void Updateqr(int employeeNumber, byte[] imageBytes) {
+        String sql = String.format("UPDATE person.UserInfo SET qrcode = ? WHERE employeeNumber = %d", employeeNumber);
+        jdbcTemplate.update(sql, imageBytes);
+    }
+
+    public String getId(int employeeNumber, int date) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.Qrcode WHERE employeeNumber = %d AND date = %d", employeeNumber, date);
+        return sqlToData(sql);
+    }
+
+    public String getLeave(int end_time, int num) throws JsonProcessingException {
+        String sql = String.format("UPDATE person.Qrcode SET end_time = %d WHERE num = %d", end_time, num);
+        try {
+            jdbcTemplate.update(sql);
+            return "Success";
+        } catch (Exception e) {
+            return "Failed";
+        }
+    }
+    public void InsertInfo(int employeeNumber, int date, int start_time) {
+        String sql = String.format("insert into person.Qrcode(employeeNumber, date, start_time) values(%d,%d,%d);", employeeNumber, date, start_time);
+        jdbcTemplate.update(sql);
     }
 }

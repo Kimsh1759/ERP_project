@@ -250,5 +250,34 @@ public class HelloController {
         return ResponseEntity.ok(json);
     }
 
+    @GetMapping("ReadInfo")
+    @ResponseBody
+    public String ReadInfo(@RequestParam("employeeNumber") int employeeNumber, @RequestParam("PW") int PW) throws JsonProcessingException {
+        return service.getInfoData(employeeNumber, PW);
+    }
+
+    @PostMapping("Updateqr")
+    public ResponseEntity<String> addQrcode(@RequestBody HelloDTO.QrcodeDTO qrcodeDTO) {
+        service.Updateqr(qrcodeDTO.getEmployeeNumber(), qrcodeDTO.getQrcode());
+        return ResponseEntity.ok("QR Code added successfully");
+    }
+
+    @GetMapping("Readid")
+    @ResponseBody
+    public String Readid(@RequestParam("employeeNumber") int employeeNumber, @RequestParam("date") int date) throws JsonProcessingException {
+        return service.getId(employeeNumber, date);
+    }
+
+    @GetMapping("Updateleave")
+    @ResponseBody
+    public String Updateleave(@RequestParam("end_time") int end_time, @RequestParam("num") int num) throws JsonProcessingException {
+        return service.getLeave(end_time, num);
+    }
+
+    @PostMapping("InsertInfo")
+    public ResponseEntity<String> addInfo(@RequestBody HelloDTO.DatetimeDTO datetimeDTO) {
+        service.InsertInfo(datetimeDTO.getEmployeeNumber(), datetimeDTO.getDate(), datetimeDTO.getStart_time());
+        return ResponseEntity.ok("User's attendance added successfully");
+    }
 }
 

@@ -610,4 +610,59 @@ public class HelloDTO {
             this.teamDOC = teamDOC;
         }
     }
+    public static class QrcodeDTO
+    {
+        public int getEmployeeNumber() {
+            return employeeNumber;
+        }
+
+        public void setEmployeeNumber(int employeeNumber) {
+            this.employeeNumber = employeeNumber;
+        }
+
+        public byte[] getQrcode() {
+            return Base64.getDecoder().decode(qrcode);
+        }
+
+        public void setQrcode(String qrcode) {
+            this.qrcode = qrcode;
+        }
+        private int employeeNumber;
+
+        private String qrcode;
+
+    }
+    public static class DatetimeDTO
+    {
+        public int getEmployeeNumber() {
+            return employeeNumber;
+        }
+
+        public void setEmployeeNumber(int employeeNumber) {
+            this.employeeNumber = employeeNumber;
+        }
+
+        public int getDate() {
+            return date;
+        }
+
+        public void setDate(int date) {
+            this.date = date;
+        }
+
+        public int getStart_time() {
+            return start_time;
+        }
+
+        public void setStart_time(int start_time) {
+            this.start_time = start_time;
+        }
+
+        private int employeeNumber;
+
+        private int date;
+
+        private int start_time;
+
+    }
 }
