@@ -23,8 +23,6 @@ namespace F_Final_Project
             InitializeComponent();
         }
 
-        List<string> Workers_Team = new List<string>();
-
         private void TeamManagement_Load(object sender, EventArgs e)
         {
             TeamList.Items.Clear();
