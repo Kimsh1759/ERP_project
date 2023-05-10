@@ -24,6 +24,7 @@ namespace F_Final_Project
         }
 
         string team_change_name;
+        
 
         private void TeamManagement_Load(object sender, EventArgs e)
         {
@@ -88,9 +89,8 @@ namespace F_Final_Project
             WorkersTeamChange.Visible = true;
             teamName.Text = item;
             TeamWorkerList.Items.Clear();
-            List<JObject> list = new List<JObject>();
             ListViewItem listitem = new ListViewItem();
-
+            List<JObject> list = new List<JObject>();
             list = LoginApp.RDs.Readdic_database("UserInfo");
 
             foreach (JObject worker in list)

@@ -15,7 +15,7 @@ public class HelloController {
 
     @GetMapping("ReadAll")
     @ResponseBody
-    public String hello(@RequestParam("table") String table) throws JsonProcessingException {
+    public String hello(@RequestParam("table") String table, ) throws JsonProcessingException {
         return service.getAllData(table);
     }
 

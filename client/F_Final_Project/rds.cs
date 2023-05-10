@@ -23,7 +23,7 @@ namespace F_Final_Project
 {
     public class RDSserver
     {
-        string ip = "http://13.209.6.6:8080";
+        string ip = "http://192.168.0.9:8080";
         //java - http://192.168.0.9:8080   ec2 java - http://13.209.6.6:8080
         public List<string> menutype_string = new List<string>() { "name", "PW", "addr", "tel", "mail", "img" };
         public List<string> menutype_int = new List<string>() { "employeeNumber", "authority", "team", "JG", "birth", "DoE" };
@@ -187,12 +187,11 @@ namespace F_Final_Project
             }
         }
 
-        public List<JObject> Readdic_database(string table_name, int state=0, int num=0)
+        public List<JObject> Readdic_database(string table_name, int state=0, int num=0, int page=0)
         {
             string url;
-            Dictionary<string, object> result = new Dictionary<string, object>();
-            List<Dictionary<string, object>> dic_list = new List<Dictionary<string, object>>();
             List<JObject> list = new List<JObject>();
+
             if (table_name == "NoticeBoard" || table_name == "FreeBoard")
             {
                 url = string.Format("{0}/ReadBoard?table={1}", ip, table_name);
@@ -200,7 +199,7 @@ namespace F_Final_Project
             }
             else if(table_name == "ApplicationForLeave" || table_name == "Draft" || table_name == "journal" && state != -1)
             {
-                url = string.Format("{0}/ReadAllElectric?table={1}&state={2}", ip, table_name,state.ToString());
+                url = string.Format("{0}/ReadAllElectric?table={1}&state={2}&page={3}", ip, table_name,state.ToString(),page);
             }
             else if(table_name == "Qrcode") // one people all attendance
             {
@@ -209,55 +208,42 @@ namespace F_Final_Project
                 else
                     url = string.Format("{0}/ReadAllQR?table={1}&date={2}", ip, table_name, num.ToString());
             }
+            else if(table_name=="UserInfo")
+            {
+                if(state==0)
+                    url = string.Format("{0}/ReadAll?table={1}", ip, table_name);
+                else
+                    url = string.Format("{0}/ReadUserInfo?table={1}&page={2}", ip, table_name, state);
+            }
             else
             {
-                url = string.Format("{0}/ReadAll?table={1}", ip, table_name);
+                url = string.Format("{0}/ReadAll?table={1}", ip,table_name);
             }
 
             list = CallApiss(url);
 
-            try
-            {
-                foreach (JObject i in result.Values)
-                {
-                    list.Add(i);
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-
             return list;
         }
 
-        public List<JObject> Readdic_database(string table, string name, int state,string division)
+        public List<JObject> Readdic_database(string table, string name, int state , string division="", int page=0)
         {
             string url;
-            Dictionary<string, object> result = new Dictionary<string, object>();
             List<JObject> list = new List<JObject>();
+
             if (division == "writer")
             {
-                url = string.Format("{0}/ReadDataElectricSelf?table={1}&writer={2}&state={3}", ip, table, name,state);
+                url = string.Format("{0}/ReadDataElectricSelf?table={1}&writer={2}&state={3}&page={4}", ip, table, name,state,page);
                 list = CallApiss(url);
             }
             else if(division == "team")
             {
-                url = string.Format("{0}/ReadElectricTeam?table={1}&team={2}&state={3}", ip, table, name,state);
+                url = string.Format("{0}/ReadElectricTeam?table={1}&team={2}&state={3}&page={4}", ip, table, name,state,page);
                 list = CallApiss(url);
             }
-
-            
-            try
+            else if(table == "UserInfo")
             {
-                foreach (JObject i in result.Values)
-                {
-                    list.Add(i);
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
+                url = string.Format("{0}/ReadUserInfoTeam?team={1}&page={2}", ip,team_dic.FirstOrDefault(x=>x.Value==name).Key, state);
+                list = CallApiss(url);
             }
 
             return list;
@@ -265,8 +251,9 @@ namespace F_Final_Project
 
         public JObject Read_database2(string table, string id,int date=0)
         {
-            JObject obj = new JObject();
+            JObject obj = null;
             string url="";
+
             if (table == "ApplicationForLeave" || table == "Draft" || table == "journal")
             {
                 url = string.Format("{0}/ReadElectric?table={1}&id={2}", ip, table,id);

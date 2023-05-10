@@ -50,6 +50,7 @@ public class HelloService {
 
     // Read
     public String getAllData(String table) throws JsonProcessingException {
+        if()
         String sql = String.format("SELECT * FROM %s",table);
         return sqlToDataAll(sql);
     }
