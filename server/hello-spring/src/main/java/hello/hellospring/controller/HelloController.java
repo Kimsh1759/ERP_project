@@ -25,10 +25,10 @@ public class HelloController {
 //        return service.getEmployeeNumber(name);
 //    }
 
-    @GetMapping("ReadAllElectric")
+    @GetMapping("ReadAllElectric") //TODO
     @ResponseBody
-    public String ReadAllElectric(@RequestParam("table") String table, @RequestParam("state") int state) throws JsonProcessingException {
-        return service.getAllDataElectric(table, state);
+    public String ReadAllElectric(@RequestParam("table") String table, @RequestParam("state") int state, @RequestParam("page") int page) throws JsonProcessingException {
+        return service.getAllDataElectric(table, state, page);
     }
 
     @GetMapping("ReadElectric")
@@ -37,16 +37,16 @@ public class HelloController {
         return service.getElectric(table, id);
     }
 
-    @GetMapping("ReadDataElectricSelf")
+    @GetMapping("ReadDataElectricSelf") //TODO
     @ResponseBody
-    public String ReadDataElectricSelf(@RequestParam("table") String table, @RequestParam("writer") String writer, @RequestParam("state") int state) throws JsonProcessingException
+    public String ReadDataElectricSelf(@RequestParam("table") String table, @RequestParam("writer") String writer, @RequestParam("state") int state, @RequestParam("page") int page) throws JsonProcessingException
     {
-        return service.getAllDataElectricSelf(table, writer, state);
+        return service.getAllDataElectricSelf(table, writer, state, page);
     }
-    @GetMapping("ReadElectricTeam")
+    @GetMapping("ReadElectricTeam") //TODO
     @ResponseBody
-    public String ReadElectricTeam(@RequestParam("table") String table, @RequestParam("team") String team, @RequestParam("state") int state) throws JsonProcessingException {
-        return service.getALLElectricTeam(table, team, state);
+    public String ReadElectricTeam(@RequestParam("table") String table, @RequestParam("team") String team, @RequestParam("state") int state, @RequestParam("page") int page) throws JsonProcessingException {
+        return service.getALLElectricTeam(table, team, state, page);
     }
 
     @GetMapping("Read")
@@ -279,5 +279,19 @@ public class HelloController {
         service.InsertInfo(datetimeDTO.getEmployeeNumber(), datetimeDTO.getDate(), datetimeDTO.getStart_time());
         return ResponseEntity.ok("User's attendance added successfully");
     }
+
+    // 박쥐
+    @GetMapping("ReadUserInfoTeam")
+    @ResponseBody
+    public String readUserInfoTeam(@RequestParam("team") int team, @RequestParam("page") int page) throws JsonProcessingException {
+        return this.service.ReadUserInfoTeam(team, page);
+    }
+
+    @GetMapping("ReadUserInfo")
+    @ResponseBody
+    public String readUserInfo(@RequestParam("page") int page) throws JsonProcessingException {
+        return service.getUserInfo(page);
+    }
+
 }
 

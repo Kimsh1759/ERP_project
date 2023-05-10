@@ -10,8 +10,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
@@ -59,59 +57,13 @@ public class HelloService {
 //        return sqlToData(sql);
 //    }
 
-    public String getAllDataElectric(String table, int state, int page) throws JsonProcessingException {
-        String sql;
-        if(state == 1)
-        {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE state = %d or state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE state = %d or state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE state = %d or state = %d\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",state,state+1,state,state+1,state,state+1, (page-1)*20);
-        }
-        else {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE state = %d\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",state, state, state, (page-1)*20);
-        }
+    public String getAllDataElectric(String table, int state) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.%s where state = %d",table, state);
         return sqlToDataAll(sql);
     }
 
-    public String getAllDataElectricSelf(String table, String writer, int state, int page) throws JsonProcessingException {
-        String sql;
-        if(state == 1)
-        {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE writer = \"%s\" and (state = %d or state = %d)\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE writer = \"%s\" and (state = %d or state = %d)\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE writer = \"%s\" and (state = %d or state = %d)\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",writer, state,state+1,writer,  state,state+1,writer,  state,state+1,(page-1)*20);
-        }
-        else {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE writer = \"%s\" and state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE writer = \"%s\" and state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE writer = \"%s\" and state = %d\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",writer, state,writer, state,writer, state, (page-1)*20);
-        }
+    public String getAllDataElectricSelf(String table, String writer, int state) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM person.%s where writer = \"%s\" and state = %d",table, writer, state);
         return sqlToDataAll(sql);
     }
 
@@ -134,34 +86,10 @@ public class HelloService {
         String sql = String.format("SELECT * FROM person.%s where date= %d;",table, id);
         return sqlToDataAll(sql);
     }
-////////////////////TODO
-    public String getALLElectricTeam(String table, String team, int state, int page) throws JsonProcessingException
+
+    public String getALLElectricTeam(String table, String team, int state) throws JsonProcessingException
     {
-        String sql;
-        if(state == 1)
-        {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE team = \"%s\" and (state = %d or state = %d)\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE team = \"%s\" and  (state = %d or state = %d)\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE team = \"%s\" and (state = %d or state = %d)\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",team, state,state +1,team, state,state +1,team,state,state+1,(page-1)*20);
-        }
-        else
-        {
-            sql = String.format("SELECT id, writer, title, date, type \n" +
-                    "FROM (\n" +
-                    "    SELECT id, writer, title, date, type FROM ApplicationForLeave WHERE team = \"%s\" and state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM Draft WHERE team = \"%s\" and state = %d\n" +
-                    "    UNION\n" +
-                    "    SELECT id, writer, title, date, type FROM journal WHERE team = \"%s\" and state = %d\n" +
-                    ") AS t\n" +
-                    "ORDER BY date DESC LIMIT %d,20;",team, state,team, state,team, state, (page-1)*20);
-        }
+        String sql = String.format("SELECT * FROM person.%s where team = \"%s\" and state = %d",table, team, state);
         return sqlToDataAll(sql);
     }
 
@@ -343,42 +271,5 @@ public class HelloService {
         ObjectNode jsonNode = objectMapper.createObjectNode();
         jsonNode.put("img", encoded);
         return jsonNode;
-    }
-    public String getInfoData(int employeeNumber, int PW) throws JsonProcessingException {
-        String sql = String.format("SELECT employeeNumber, PW FROM person.UserInfo WHERE employeeNumber = %d AND PW = %d", employeeNumber, PW);
-        return sqlToData(sql);
-    }
-
-    public void Updateqr(int employeeNumber, byte[] imageBytes) {
-        String sql = String.format("UPDATE person.UserInfo SET qrcode = ? WHERE employeeNumber = %d", employeeNumber);
-        jdbcTemplate.update(sql, imageBytes);
-    }
-
-    public String getId(int employeeNumber, int date) throws JsonProcessingException {
-        String sql = String.format("SELECT * FROM person.Qrcode WHERE employeeNumber = %d AND date = %d", employeeNumber, date);
-        return sqlToData(sql);
-    }
-
-    public String getLeave(int end_time, int num) throws JsonProcessingException {
-        String sql = String.format("UPDATE person.Qrcode SET end_time = %d WHERE num = %d", end_time, num);
-        try {
-            jdbcTemplate.update(sql);
-            return "Success";
-        } catch (Exception e) {
-            return "Failed";
-        }
-    }
-    public void InsertInfo(int employeeNumber, int date, int start_time) {
-        String sql = String.format("insert into person.Qrcode(employeeNumber, date, start_time) values(%d,%d,%d);", employeeNumber, date, start_time);
-        jdbcTemplate.update(sql);
-    }
-    // 박쥐
-    public String ReadUserInfoTeam(int team, int page) throws JsonProcessingException {
-        String sql = String.format("SELECT * FROM person.UserInfo WHERE team = %d ORDER BY employeeNumber LIMIT %d, 20" , team, (page-1)*20);
-        return sqlToDataAll(sql);
-    }
-    public String getUserInfo(int page) throws JsonProcessingException {
-        String sql = String.format("SELECT * FROM person.UserInfo order by employeeNumber LIMIT %d,20", (page-1)*20);
-        return sqlToDataAll(sql);
     }
 }

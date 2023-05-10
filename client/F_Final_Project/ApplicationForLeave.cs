@@ -34,7 +34,6 @@ namespace F_Final_Project
             JObject obj = new JObject();
             if (listViewClick)
             {
-                // 여기부터
                 obj = rds.Read_database2("ApplicationForLeave", docId);
                 WorkersName.Text = obj["writer"].ToString();
                 WorkersTeam.Text = obj["team"].ToString();
