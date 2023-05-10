@@ -133,7 +133,6 @@
             this.WorkerList.TabIndex = 18;
             this.WorkerList.UseCompatibleStateImageBehavior = false;
             this.WorkerList.View = System.Windows.Forms.View.Details;
-            this.WorkerList.SelectedIndexChanged += new System.EventHandler(this.WorkerList_SelectedIndexChanged);
             this.WorkerList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.WorkerList_MouseDoubleClick);
             // 
             // columnHeader1

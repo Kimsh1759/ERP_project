@@ -15,20 +15,6 @@ namespace F_Final_Project
 {
     public partial class ShowWorker : Form
     {
-        List<object> list = new List<object>();
-        string file_path;
-        public ShowWorker(int id)
-        {
-            InitializeComponent();
-
-            list = LoginApp.RDs.Read_database("UserInfo", id);
-            if (LoginApp.user.img != null)
-            {
-                workersprofile.Image = new Bitmap(new MemoryStream(LoginApp.RDs.ReadImage_database("UserInfo", id)));
-            }
-
-
-        }
         TextBox name = new TextBox();
         TextBox employeeNumber = new TextBox();
         TextBox tel = new TextBox();
@@ -39,6 +25,21 @@ namespace F_Final_Project
         ComboBox team = new ComboBox();
         ComboBox JG = new ComboBox();
         ComboBox authority = new ComboBox();
+
+        List<object> list = new List<object>();
+        string file_path;
+
+        public ShowWorker(int id) // id == employeeNumber
+        {
+            InitializeComponent();
+
+            list = LoginApp.RDs.Read_database("UserInfo", id);
+
+            if (LoginApp.user.img != null)
+            {
+                workersprofile.Image = new Bitmap(new MemoryStream(LoginApp.RDs.ReadImage_database("UserInfo", id)));
+            }
+        }
 
         void modify()
         {
@@ -124,6 +125,7 @@ namespace F_Final_Project
             tableLayoutPanel2.Controls.Remove(tableLayoutPanel2.GetControlFromPosition(2, 1));
             tableLayoutPanel2.Controls.Add(authority, 2, 1);
         }
+
         void save()
         {
             // employeeNumber - text
@@ -200,7 +202,6 @@ namespace F_Final_Project
             MessageBox.Show("수정 완료되었습니다.");
         }
 
-
         private void btnmodify_Click(object sender, EventArgs e)
         {
             if (btnmodify.Text == "수정")
@@ -209,7 +210,6 @@ namespace F_Final_Project
                 btn_imagefind.Visible = true;
                 btn_imagedelete.Visible = true;
                 modify();
-                
             }
             else
             {
@@ -217,7 +217,6 @@ namespace F_Final_Project
                 btn_imagefind.Visible = false;
                 btn_imagedelete.Visible = false;
                 save();
-
             }
         }
 

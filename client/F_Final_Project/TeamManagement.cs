@@ -23,7 +23,8 @@ namespace F_Final_Project
             InitializeComponent();
         }
 
-        List<string> Workers_Team = new List<string>();
+        string team_change_name;
+        
 
         private void TeamManagement_Load(object sender, EventArgs e)
         {
@@ -49,7 +50,6 @@ namespace F_Final_Project
             else
             {
                 TeamList.Items.Add(TextTeam.Text);
-                int i = LoginApp.RDs.team_dic.Count;
                 string name = TextTeam.Text;
                 var str = "abcdefghijklmnopqrstuvwxyz";
                 string doc;
@@ -62,13 +62,10 @@ namespace F_Final_Project
                     else
                         break;
                 }
-                List<object> list = new List<object>() { i,name,doc };
+                List<object> list = new List<object>() { LoginApp.RDs.team_dic.Count, name,doc };
                 LoginApp.RDs.Create_database(list, "Team");
                 MessageBox.Show("부서 추가 완료했습니다.");
             }
-            
-            
-            
             
             TextTeam.Text = string.Empty;
         }
@@ -81,25 +78,19 @@ namespace F_Final_Project
             MessageBox.Show("부서가 삭제되었습니다.");
             
         }
-        string team_change_name;
+
         private void TeamList_Click(object sender, EventArgs e)
         {
             string item = TeamList.SelectedItem.ToString();
             team_change_name = item;
             teamName.Visible = true;
-
             TeamWorkerList.Visible = true;
-
             WorkersL.Visible = true;
-
             WorkersTeamChange.Visible = true;
-
             teamName.Text = item;
-
             TeamWorkerList.Items.Clear();
-            List<JObject> list = new List<JObject>();
             ListViewItem listitem = new ListViewItem();
-
+            List<JObject> list = new List<JObject>();
             list = LoginApp.RDs.Readdic_database("UserInfo");
 
             foreach (JObject worker in list)
@@ -163,7 +154,6 @@ namespace F_Final_Project
                 var item = e.Data.GetData(typeof(ListViewItem)) as ListViewItem;
                 WorkersTeamChange.Items.Add(item.Clone() as ListViewItem);
                 TeamWorkerList.Items.Remove(item);
-                WorkersTeamChange.Items.Remove(item);
             }
         }
 
@@ -175,14 +165,7 @@ namespace F_Final_Project
                 TeamWorkerList.Items.Add(item.Clone() as ListViewItem);
                 WorkersTeamChange.Items.Remove(item);
                 LoginApp.RDs.Update_database(Convert.ToInt32(item.Text), "UserInfo", "team", LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == team_change_name).Key.ToString());
-                //TeamWorkerList.Items.Remove(item);
-
             }
-        }
-
-        private void WorkersTeamChange_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

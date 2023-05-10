@@ -16,18 +16,17 @@ namespace F_Final_Project
 {
     public partial class EmployeeRegistration : Form
     {
+        string file_path;
+        string save_birth;
+        string save_DoE;
+
         public EmployeeRegistration()
         {
             InitializeComponent();
         }
 
-        string file_path;
-        string save_birth;
-        string save_DoE;
-
         private void EmployeeRegistration_Load(object sender, EventArgs e)
         {
-           
             foreach(string name in LoginApp.RDs.team_dic.Values)
             {
                 combo_team.Items.Add(name);
@@ -36,7 +35,7 @@ namespace F_Final_Project
 
         private void btn_end_Click(object sender, EventArgs e)
         {
-            List<object> list = new List<object>()
+            List<object> userdata = new List<object>()
             {   text_ID.Text,
                 text_name.Text,
                 Convert.ToInt32(text_PW.Text),
@@ -50,16 +49,16 @@ namespace F_Final_Project
                 save_DoE
             };
 
-            LoginApp.RDs.Create_database(list, "UserInfo");
+            LoginApp.RDs.Create_database(userdata, "UserInfo");
 
             FileStream fs = new FileStream(file_path, FileMode.Open, FileAccess.Read);  // file_path: 이미지 위치
             byte[] bImage = new byte[fs.Length];
             fs.Read(bImage, 0, (int)fs.Length);
             fs.Close();
-            LoginApp.RDs.UpdateImage_database(Convert.ToInt32(list[0]), "UserInfo", "img", bImage);
+            LoginApp.RDs.UpdateImage_database(Convert.ToInt32(userdata[0]), "UserInfo", "img", bImage);
 
             MessageBox.Show("사원이 등록되었습니다.");
-            //this.Close();
+            this.Dispose();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -69,7 +68,7 @@ namespace F_Final_Project
             {
                 control.Text = "";
             }
-            this.Close();
+            this.Dispose();
         }
 
         private void btn_imageload_Click(object sender, EventArgs e)
@@ -92,14 +91,14 @@ namespace F_Final_Project
         {
             save_birth = date_birth.Value.ToString();
             save_birth = Regex.Replace(save_birth, @"\D", "");
-            save_birth = save_birth.Substring(2, 6);
+            save_birth = save_birth.Substring(2, 6);  // ex) 981111
         }
 
         private void date_DoE_ValueChanged(object sender, EventArgs e)
         {
             save_DoE = date_DoE.Value.ToString();
             save_DoE = Regex.Replace(save_DoE, @"\D", "");
-            save_DoE = save_DoE.Substring(0, 8);
+            save_DoE = save_DoE.Substring(0, 8); // ex) 20230505
         }
 
        

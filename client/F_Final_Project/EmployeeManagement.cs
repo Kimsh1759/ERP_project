@@ -26,38 +26,27 @@ namespace F_Final_Project
         }
 
         int index = 1;
-
-        List<string> workers_id = new List<string>();
         List<Label> label_page = new List<Label>();
 
         void restart_form()
         {
             List<JObject> obj = new List<JObject>();
-            obj = LoginApp.RDs.Readdic_database("UserInfo");
-
+            obj = LoginApp.RDs.Readdic_database("UserInfo",index);
             WorkerList.Items.Clear();
 
-            for(int i = 0; i < obj.Count; i++)
+            foreach(JObject worker in obj)
             {
-                if (i < 20 * (index - 1))
-                    continue;
-
-                ListViewItem listItem = new ListViewItem(obj[i]["employeeNumber"].ToString());
-                listItem.SubItems.Add(obj[i]["name"].ToString());
-                listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(obj[i]["team"])]);
-                listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(obj[i]["JG"])]);
-                listItem.SubItems.Add(obj[i]["mail"].ToString());
+                ListViewItem listItem = new ListViewItem(worker["employeeNumber"].ToString());
+                listItem.SubItems.Add(worker["name"].ToString());
+                listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(worker["team"])]);
+                listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(worker["JG"])]);
+                listItem.SubItems.Add(worker["mail"].ToString());
                 WorkerList.Items.Add(listItem);
-
-                if (i == 20 * (index))                
-                    continue;
             }
-            
         }
 
         private void btnregistration_Click(object sender, EventArgs e)
         {
-
             EmployeeRegistration registration = new EmployeeRegistration();
             panel2.Controls.Clear();
             registration.TopLevel = false;
@@ -71,65 +60,56 @@ namespace F_Final_Project
         private void BtnSearch_Click(object sender, EventArgs e)
         {
              WorkerList.Items.Clear();
-             List<JObject> list = new List<JObject>();
 
-             list = LoginApp.RDs.Readdic_database("UserInfo");
-
-             ListViewItem listItem = new ListViewItem();
+            JObject workers = new JObject();
 
             if (WorkersMenu.SelectedItem.ToString() == "이름")
             {
-                foreach(JObject workers in list)
+                workers = LoginApp.RDs.ReademployeeNumber(SearchTextbox.Text);
+                if (workers != null)
                 {
-                    if (workers["name"].ToString().Contains(SearchTextbox.Text))
-                    {
-                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
-                        listItem.SubItems.Add(workers["name"].ToString());
-                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
-                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
-                        listItem.SubItems.Add(workers["mail"].ToString());
-                        WorkerList.Items.Add(listItem);
-                    }
+                    ListViewItem listItem = new ListViewItem(workers["employeeNumber"].ToString());
+                    listItem.SubItems.Add(workers["name"].ToString());
+                    listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
+                    listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
+                    listItem.SubItems.Add(workers["mail"].ToString());
+                    WorkerList.Items.Add(listItem);
                 }
             }
 
             else if (WorkersMenu.SelectedItem.ToString() == "사원번호")
             {
-                foreach (JObject workers in list)
+                workers = LoginApp.RDs.Read_database2("UserInfo", SearchTextbox.Text);
+                if(workers.Count != 0)
                 {
-                    if (workers["employeeNumber"].ToString().Contains(SearchTextbox.Text))
-                    {
-                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
-                        listItem.SubItems.Add(workers["name"].ToString());
-                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
-                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
-                        listItem.SubItems.Add(workers["mail"].ToString());
-                        WorkerList.Items.Add(listItem);
-                    }
+                    ListViewItem listItem = new ListViewItem(workers["employeeNumber"].ToString());
+                    listItem.SubItems.Add(workers["name"].ToString());
+                    listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
+                    listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
+                    listItem.SubItems.Add(workers["mail"].ToString());
+                    WorkerList.Items.Add(listItem);
                 }
             }
 
             else if (WorkersMenu.SelectedItem.ToString() == "부서")
             {
-                foreach (JObject workers in list)
+                if(LoginApp.RDs.team_dic.Values.Contains(SearchTextbox.Text))
                 {
-                    if (LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])].Contains(SearchTextbox.Text))
+                    List<JObject> list = LoginApp.RDs.Readdic_database("UserInfo", SearchTextbox.Text,index);
+                    foreach (JObject worker in list)
                     {
-                        listItem = new ListViewItem(workers["employeeNumber"].ToString());
-                        listItem.SubItems.Add(workers["name"].ToString());
-                        listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(workers["team"])]);
-                        listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(workers["JG"])]);
-                        listItem.SubItems.Add(workers["mail"].ToString());
-                        WorkerList.Items.Add(listItem);
+                        if (LoginApp.RDs.team_dic[Convert.ToInt32(worker["team"])].Contains(SearchTextbox.Text))
+                        {
+                            ListViewItem listItem = new ListViewItem(worker["employeeNumber"].ToString());
+                            listItem.SubItems.Add(worker["name"].ToString());
+                            listItem.SubItems.Add(LoginApp.RDs.team_dic[Convert.ToInt32(worker["team"])]);
+                            listItem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(worker["JG"])]);
+                            listItem.SubItems.Add(worker["mail"].ToString());
+                            WorkerList.Items.Add(listItem);
+                        }
                     }
                 }
             }
-        }
-
-
-        private void WorkerList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void EmployeeManagement_Load(object sender, EventArgs e)
@@ -161,7 +141,6 @@ namespace F_Final_Project
 
         private void btnprevPage_Click(object sender, EventArgs e)
         {
-
             if (index != 1 && (index - 1) % 5 == 0)
             {
                 index--;
@@ -189,7 +168,6 @@ namespace F_Final_Project
             }
 
             restart_form();
-
         }
 
         private void btnnextPage_Click(object sender, EventArgs e)
