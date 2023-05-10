@@ -19,11 +19,9 @@ namespace F_Final_Project
         string ip = "http://localhost:8080";
         public static RDSserver rds = new RDSserver();
         int state;
-        public int page = 0;
+        public int page;
         int btn_num;
         bool approval;
-        int lastPage;
-        int lastitem;
         public Ongoingfile(int state, int btn_num, bool approval)
         {
             InitializeComponent();
@@ -34,140 +32,76 @@ namespace F_Final_Project
 
         private void Ongoingfile_Load(object sender, EventArgs e)
         {
-            readFile(state);
+            page = 1;
+            readFile(state,page);
+            pageColor(page);
         }
 
         private void PreviousPage_Click(object sender, EventArgs e)
         {
-            --page;
-            readFile(state);
+            if (page == 1)
+                page = 1;
+            else
+            {
+                --page;
+                pageColor(page, 1);
+            }
+            readFile(state, page);
         }
 
         private void NextPage_Click(object sender, EventArgs e)
         {
             ++page;
-            readFile(state);
+            readFile(state, page);
+            pageColor(page, 2);
         }
-        public void readFile(int state)
+        public void readFile(int state, int page)
         {
             DocumentList.Items.Clear();
-            List<JObject> listA = new List<JObject>();
-            List<JObject> listJ = new List<JObject>();
-            List<JObject> listD = new List<JObject>();
             List<JObject> list = new List<JObject>();
             ListViewItem listViewItem;
             if (LoginApp.user.authority == 0)
             {
-                if (btn_num == 1)
-                {
-                    // 다불러와
-                    listA = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
-                    listJ = rds.Readdic_database("journal", LoginApp.user.name, state, "writer");
-                    listD = rds.Readdic_database("Draft", LoginApp.user.name, state, "writer");
-                }
-                else if (btn_num == 2)
-                {
-                    // 다불러와
-                    listA = rds.Readdic_database("ApplicationForLeave", state);
-                    listJ = rds.Readdic_database("journal", state);
-                    listD = rds.Readdic_database("Draft", state);
-                }
+                if (btn_num == 1)// 다불러와
+                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page);
+                else if (btn_num == 2)// 다불러와
+                    list = rds.Readdic_database("ApplicationForLeave", state,0, page);
             }
-            else if (LoginApp.user.authority == 1)
+            else if (LoginApp.user.authority == 1) // 권한 1 부장 -> 자기가 쓴것만 보면 됨 state 통해서 승인 미승인 바꾸면 됨
             {
-                if (btn_num == 1)
-                {
-                    // 권한 1 부장 -> 자기가 쓴것만 보면 됨 state 통해서 승인 미승인 바꾸면 됨
-                    listA = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer"); 
-                    listJ = rds.Readdic_database("journal", LoginApp.user.name, state, "writer");
-                    listD = rds.Readdic_database("Draft", LoginApp.user.name, state, "writer");
-                    if (state == 1)
-                    {
-                        listA.AddRange(rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state + 1, "writer"));
-                        listJ.AddRange(rds.Readdic_database("journal", LoginApp.user.team, state + 1, "writer"));
-                        listD.AddRange(rds.Readdic_database("Draft", LoginApp.user.team, state + 1, "writer"));
-                    }
-                }
-                else if (btn_num == 2)
-                {
-                    listA = rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state, "team");
-                    listJ = rds.Readdic_database("journal", LoginApp.user.team, state, "team");
-                    listD = rds.Readdic_database("Draft", LoginApp.user.team, state, "team");
-                    if (state == 1)
-                    {
-                        listA.AddRange(rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state + 1, "team"));
-                        listJ.AddRange(rds.Readdic_database("journal", LoginApp.user.team, state + 1, "team"));
-                        listD.AddRange(rds.Readdic_database("Draft", LoginApp.user.team, state + 1, "team"));
-                    }
-                    // 권한 1 부장 -> 자기팀꺼 불러오기 state 통해서 승인 미승인 바꾸면 됨
-                    
-                }
+                if (btn_num == 1)             
+                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page); 
+                else if (btn_num == 2) // 권한 1 부장 -> 자기팀꺼 불러오기 state 통해서 승인 미승인 바꾸면 됨   
+                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state, "team", page);
             }
             else
             {
-                if (btn_num == 1)
-                {
-                    // 권한 2 일반 사원 -> 자기가 쓴것만 보면 됨
-                    listA = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
-                    listJ = rds.Readdic_database("journal", LoginApp.user.name, state, "writer");
-                    listD = rds.Readdic_database("Draft", LoginApp.user.name, state, "writer");
-                    if (state == 1)
-                    {
-                        listA.AddRange(rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state + 1, "writer"));
-                        listJ.AddRange(rds.Readdic_database("journal", LoginApp.user.team, state + 1, "writer"));
-                        listD.AddRange(rds.Readdic_database("Draft", LoginApp.user.team, state + 1, "writer"));
-                    }
-                }
+                if (btn_num == 1)  // 권한 2 일반 사원 -> 자기가 쓴것만 보면 됨
+                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
             }
-            list.AddRange(listA);
-            list.AddRange(listJ);
-            list.AddRange(listD);
-            lastitem = list.Count % 20;
-            lastPage = list.Count / 20;
-            if (page == lastPage)
-            {
-                if (page == 0)
-                {
-                    PreviousPage.Visible = false;
-                    NextPage.Visible = false;
-                }    
-                else
-                {
-                    NextPage.Visible = false;
-                    PreviousPage.Visible = true;
-                }               
-                for (int i = page * 20; i < page * 20+ lastitem; i++)
-                {
-                    JObject obj = list[i];
-                    listViewItem = new ListViewItem(obj["id"].ToString());
-                    listViewItem.SubItems.Add(obj["writer"].ToString());
-                    listViewItem.SubItems.Add(obj["title"].ToString());
-                    listViewItem.SubItems.Add(Convert.ToInt32(obj["date"]).ToString());
-                    listViewItem.SubItems.Add(typeReturn(Convert.ToInt32(obj["type"])));
-                    DocumentList.Items.Add(listViewItem);
-                }
-           
-            }
-            else if(page < lastPage)
-            {
-                if(page == 0)
-                    PreviousPage.Visible = false;
-                else
-                    PreviousPage.Visible = true;
 
-                for (int i = page * 20; i < page * 20 + 20; i++)
-                {
-                    JObject obj = list[i];
-                    listViewItem = new ListViewItem(obj["id"].ToString());
-                    listViewItem.SubItems.Add(obj["writer"].ToString());
-                    listViewItem.SubItems.Add(obj["title"].ToString());
-                    listViewItem.SubItems.Add(Convert.ToInt32(obj["date"]).ToString());
-                    listViewItem.SubItems.Add(typeReturn(Convert.ToInt32(obj["type"])));
-                    DocumentList.Items.Add(listViewItem);
-                }
-                
-                NextPage.Visible = true;
+            for (int i = 0; i < list.Count; i++)
+            {
+                JObject obj = list[i];
+                listViewItem = new ListViewItem(obj["id"].ToString());
+                listViewItem.SubItems.Add(obj["writer"].ToString());
+                listViewItem.SubItems.Add(obj["title"].ToString());
+                listViewItem.SubItems.Add(Convert.ToInt32(obj["date"]).ToString());
+                listViewItem.SubItems.Add(typeReturn(Convert.ToInt32(obj["type"])));
+                DocumentList.Items.Add(listViewItem);
             }
+        }
+
+        public void pageColor(int page, int next=0)
+        {
+            List<Label> labels = new List<Label>() { Page1, Page2,Page3,Page4,Page5 };
+            int pageNum = (page - 1) / 5;   
+            for(int i = 0; i < 5; i++)
+            {
+                labels[i].Text = (i + 1 + pageNum * 5).ToString();
+                labels[i].ForeColor = Color.Black;
+            }           
+            labels[(page - 1) % 5].ForeColor = Color.DodgerBlue;
         }
 
         public string typeReturn(int type)
