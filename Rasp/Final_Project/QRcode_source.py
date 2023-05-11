@@ -1,6 +1,6 @@
 import pygame, pygame_gui, requests
 import cv2, numpy as np
-from pyzbar.pyzbar import decode
+# from pyzbar.pyzbar import decode
 from datetime import datetime
 from PIL import Image
 from img_encode import Img_encode
