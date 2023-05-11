@@ -141,8 +141,8 @@ public class HelloController {
 
     @GetMapping("ReadBoard")
     @ResponseBody
-    public String ReadBoard(@RequestParam("table") String table) throws JsonProcessingException {
-        return service.getBoard(table);
+    public String ReadBoard(@RequestParam("table") String table, @RequestParam("page") int page) throws JsonProcessingException {
+        return service.getBoard(table,page);
     }
 
     @GetMapping("ReadElectronicPayment")
@@ -291,6 +291,12 @@ public class HelloController {
     @ResponseBody
     public String readUserInfo(@RequestParam("page") int page) throws JsonProcessingException {
         return service.getUserInfo(page);
+    }
+
+    @GetMapping("SearchBoard")
+    @ResponseBody
+    public String SearchBoard(@RequestParam("table") String table, @RequestParam("division") String division,@RequestParam("str") String str,@RequestParam("page") int page) throws JsonProcessingException {
+        return service.getSearchBoard(table,division,str,page);
     }
 
 }

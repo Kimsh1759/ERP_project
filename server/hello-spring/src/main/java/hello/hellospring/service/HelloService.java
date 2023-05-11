@@ -245,10 +245,11 @@ public class HelloService {
         jdbcTemplate.update(sql);
     }
 
-    public String getBoard(String table) throws JsonProcessingException {
-        String sql = String.format("SELECT * FROM %s", table);
+    public String getBoard(String table, int page) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM %s order by wdate desc limit %d,20", table, (page-1)*20);
         return sqlToDataAll(sql);
     }
+
 
     public String getBoardContent(String table, String id) throws JsonProcessingException {
         String sql = String.format("SELECT * FROM %s WHERE id = \"%s\"", table, id);
@@ -379,6 +380,11 @@ public class HelloService {
     }
     public String getUserInfo(int page) throws JsonProcessingException {
         String sql = String.format("SELECT * FROM person.UserInfo order by employeeNumber LIMIT %d,20", (page-1)*20);
+        return sqlToDataAll(sql);
+    }
+
+    public String getSearchBoard(String table, String division,String str, int page) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM %s where %s like \"%%%s%%\" order by wdate desc limit %d,20", table,division,str ,(page-1)*20);
         return sqlToDataAll(sql);
     }
 }
