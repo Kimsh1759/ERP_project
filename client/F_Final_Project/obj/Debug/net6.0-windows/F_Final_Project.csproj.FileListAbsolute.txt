@@ -207,3 +207,4 @@ C:\PJH\FinalProject\ERP_project\client\F_Final_Project\obj\Debug\net6.0-windows\
 C:\PJH\FinalProject\ERP_project\client\F_Final_Project\obj\Debug\net6.0-windows\F_Final_Project.pdb
 C:\PJH\FinalProject\ERP_project\client\F_Final_Project\obj\Debug\net6.0-windows\F_Final_Project.genruntimeconfig.cache
 C:\PJH\FinalProject\ERP_project\client\F_Final_Project\obj\Debug\net6.0-windows\ref\F_Final_Project.dll
+C:\ksh\ERP_project\client\F_Final_Project\obj\Debug\net6.0-windows\F_Final_Project.Login.resources

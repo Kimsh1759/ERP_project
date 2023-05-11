@@ -12,20 +12,8 @@ namespace F_Final_Project
 {
     public partial class MainForm : Form
     {
-        public MainForm()
-        {
-            InitializeComponent();
-
-            if(LoginApp.user.authority != 0)
-            {
-                EmployeeHome.Text = "사원조회";
-            }
-            else
-            {
-                teamhome.Visible = true;
-            }
-        }
-
+        User user = new User();
+        LoginApp app;
         MyPage myPage = new MyPage();
         Notice notice = new Notice();
         Post post = new Post();
@@ -33,10 +21,42 @@ namespace F_Final_Project
         Attendance attendance = new Attendance();
         EmployeeManagement employee = new EmployeeManagement();
         TeamManagement team = new TeamManagement();
+        public MainForm(LoginApp loginApp)
+        {
+            InitializeComponent();
+            if (user.authority != 0)
+            {
+                EmployeeHome.Text = "사원조회";
+                TeamHome.Visible = false;
+            }
+            this.app = loginApp;
+        }
+        public MainForm()
+        {
+            InitializeComponent();
+            if (user.authority != 0)
+            {
+                EmployeeHome.Text = "사원조회";
+                TeamHome.Visible = false;
+            }
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            panel1.Controls.Clear();
+            MyPageHome.ForeColor = Color.DarkOrange;
+            NoticeHome.ForeColor = Color.White;
+            PostHome.ForeColor = Color.White;
+            DocumentHome.ForeColor = Color.White;
+            AttendanceHome.ForeColor = Color.White;
+            EmployeeHome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
+            myPage.TopLevel = false;
+            Controls.Add(myPage);
+            myPage.Text = null;
+            myPage.ControlBox = false;
+            myPage.Parent = panel1;
+            myPage.Show();
         }
 
         private void MyPageHome_Click(object sender, EventArgs e)
@@ -48,7 +68,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
             myPage.TopLevel = false;
             Controls.Add(myPage);
             myPage.Text = null;
@@ -66,7 +86,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor= Color.White;
+            TeamHome.ForeColor = Color.White;
             notice.TopLevel = false;
             Controls.Add(notice);
             notice.Text = null;
@@ -84,7 +104,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
             post.TopLevel = false;
             Controls.Add(post);
             post.Text = null;
@@ -102,7 +122,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.DarkOrange;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
             document.TopLevel = false;
             Controls.Add(document);
             document.Text = null;
@@ -120,7 +140,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.DarkOrange;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
             attendance.TopLevel = false;
             Controls.Add(attendance);
             attendance.Text = null;
@@ -138,7 +158,7 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.DarkOrange;
-            teamhome.ForeColor = Color.White;
+            TeamHome.ForeColor = Color.White;
             employee.TopLevel = false;
             Controls.Add(employee);
             employee.Text = null;
@@ -147,7 +167,7 @@ namespace F_Final_Project
             employee.Show();
         }
 
-        private void teamhome_Click(object sender, EventArgs e)
+        private void TeamHome_Click(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
             MyPageHome.ForeColor = Color.White;
@@ -156,13 +176,24 @@ namespace F_Final_Project
             DocumentHome.ForeColor = Color.White;
             AttendanceHome.ForeColor = Color.White;
             EmployeeHome.ForeColor = Color.White;
-            teamhome.ForeColor = Color.DarkOrange;
+            TeamHome.ForeColor = Color.DarkOrange;
             team.TopLevel = false;
             Controls.Add(team);
             team.Text = null;
             team.ControlBox = false;
             team.Parent = panel1;
             team.Show();
+        }
+
+        private void BtnLogOut_Click(object sender, EventArgs e)
+        {
+            Login login = new Login(app);
+            app.panel1.Controls.Clear();
+            login.TopLevel = false;
+            login.ControlBox = false;
+            login.Text = null;
+            login.Parent = app.panel1;
+            login.Show();
         }
     }
 }

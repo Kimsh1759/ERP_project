@@ -18,6 +18,7 @@ using F_Final_Project;
 using Microsoft.VisualBasic.Logging;
 using MySqlX.XDevAPI;
 using Mysqlx.Crud;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace F_Final_Project
 {
@@ -27,12 +28,12 @@ namespace F_Final_Project
         List<object> list = new List<object>();
         List<string> memoList = new List<string>();
         string buttonNumber;
-        
+        string year;
+        string month;
 
         public MyPage()
-        {
+        {        
             InitializeComponent();
-
             list = LoginApp.RDs.Read_database("UserInfo", LoginApp.user.id); //로그인 정보를 불러온다.
             NameL.Text = LoginApp.user.name;
             TelNum.Text = LoginApp.user.tel;
@@ -99,44 +100,10 @@ namespace F_Final_Project
             updateButton.Visible = true;
         }
 
-        private void YearC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string year = YearC.SelectedItem.ToString();
-            string month = MonthC.SelectedItem.ToString();
-            DateTime datetime = new DateTime(Int32.Parse(year), Int32.Parse(month), 1, new GregorianCalendar());
-            KoreanCalendar myCal = new KoreanCalendar();
-
-            List<Button> days = new List<Button> { Day1, Day2, Day3, Day4, Day5, Day6, Day7,
-                Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15, Day16,
-                Day17, Day18, Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26,
-                Day27, Day28, Day29, Day30, Day31, Day32, Day33, Day34, Day35, Day36,
-                Day37, Day38, Day39, Day40, Day41, Day42
-            };
-
-            int DaysInMonth = myCal.GetDaysInMonth(myCal.GetYear(datetime), Int32.Parse(month));
-            int num = dayToInt(myCal.GetDayOfWeek(datetime).ToString());
-            for (int i = 0; i < 42; i++)
-            {
-                updateButton.Visible = false;
-            }
-
-            int day_num = 1;
-            for (int i = num - 1; i < DaysInMonth + num - 1; i++)
-            {
-                days[i].Visible = true;
-
-                if (day_num < 10)
-                    days[i].Text = " " + day_num.ToString();
-                else
-                    days[i].Text = day_num.ToString();
-                day_num++;
-            }
-        }
-
         private void MonthC_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string year = YearC.SelectedItem.ToString();
-            string month = MonthC.SelectedItem.ToString();
+            year = YearC.SelectedItem.ToString();
+            month = MonthC.SelectedItem.ToString();
             DateTime datetime = new DateTime(Int32.Parse(year), Int32.Parse(month), 1, new GregorianCalendar());
             KoreanCalendar myCal = new KoreanCalendar();
 
@@ -173,7 +140,6 @@ namespace F_Final_Project
             string year = YearC.SelectedItem.ToString();
             string month = MonthC.SelectedItem.ToString();
             LoginApp.RDs.Create_database(LoginApp.user.id, buttonNumber, TxtMemo.Text);
-
         }
 
         private void MyPage_Load(object sender, EventArgs e)

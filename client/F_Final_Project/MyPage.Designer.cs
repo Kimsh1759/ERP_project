@@ -437,7 +437,6 @@
             this.YearC.Size = new System.Drawing.Size(80, 29);
             this.YearC.TabIndex = 420;
             this.YearC.Text = "2023";
-            this.YearC.SelectedIndexChanged += new System.EventHandler(this.YearC_SelectedIndexChanged);
             // 
             // Day3
             // 
