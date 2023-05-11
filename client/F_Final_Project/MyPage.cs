@@ -141,10 +141,5 @@ namespace F_Final_Project
             string month = MonthC.SelectedItem.ToString();
             LoginApp.RDs.Create_database(LoginApp.user.id, buttonNumber, TxtMemo.Text);
         }
-
-        private void MyPage_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

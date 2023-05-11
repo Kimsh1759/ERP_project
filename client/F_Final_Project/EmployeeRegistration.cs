@@ -91,7 +91,7 @@ namespace F_Final_Project
         {
             save_birth = date_birth.Value.ToString();
             save_birth = Regex.Replace(save_birth, @"\D", "");
-            save_birth = save_birth.Substring(2, 6);  // ex) 981111
+            save_birth = save_birth.Substring(0, 8);  // ex) 981111
         }
 
         private void date_DoE_ValueChanged(object sender, EventArgs e)

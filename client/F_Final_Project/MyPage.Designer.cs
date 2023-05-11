@@ -1344,7 +1344,6 @@
             this.Controls.Add(this.Logo);
             this.Name = "MyPage";
             this.Text = "MyPage";
-            this.Load += new System.EventHandler(this.MyPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.memopanel.ResumeLayout(false);
