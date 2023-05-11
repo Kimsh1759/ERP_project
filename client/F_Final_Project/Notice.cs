@@ -16,82 +16,56 @@ namespace F_Final_Project
     {
         public Notice()
         {
+            List<JObject> AllList = LoginApp.RDs.Readdic_database("NoticeBoard");
+            foreach (JObject obj in AllList)
+            {
+                notice_id.Add(obj["id"].ToString());
+            }
             InitializeComponent();
         }
+
+        public static List<string> notice_id = new List<string>();
         List<JObject> list = new List<JObject>();
-        List<string> notice_id = new List<string>();
-        List<Label> label_page = new List<Label>();
+        List<Label> label_page = new List<Label>(); 
         string mode = "";
         int index = 1;
-        int doc = 0;
 
         void restart_form()
         {
             NoticeList.Items.Clear();
-            notice_id.Clear();
-            List<JObject> list2 = new List<JObject>();
-            list2 = LoginApp.RDs.Readdic_database("NoticeBoard");
-            list = list2.OrderByDescending(item => item["wdate"]).ToList();
-            int i = 0;
-            doc = 0;
-            if (LoginApp.user.authority == 0)
-                Btnregistration.Visible = true;
-            else
-                Btnregistration.Visible = false;
-
-            ListViewItem listItem = new ListViewItem();
-            List<JObject> list3 = new List<JObject>();
-            foreach (JObject item in list)
+            list.Clear();
+            if(mode == "title")
             {
-                if (mode == "title")
-                {
-                    if (item["title"].ToString().Contains(SearchTextbox.Text))
-                    {
-                        doc++;
-                        list3.Add(item);
-                    }
-                }
-                else if (mode == "division")
-                {
-                    if (item["division"].ToString() == SearchTextbox.Text)
-                    {
-                        doc++;
-                        list3.Add(item);
-                    }
-                }
-                else
-                {
-                    doc++;
-                    list3.Add(item);
-                }
+                list = LoginApp.RDs.Search_database("NoticeBoard", "title", SearchTextbox.Text, index);
+            }
+            else if(mode == "division")
+            {
+                list = LoginApp.RDs.Search_database("NoticeBoard", "division", SearchTextbox.Text, index);
+            }
+            else
+            {
+                list = LoginApp.RDs.Readdic_database("NoticeBoard",index);
             }
 
-            foreach (JObject item in list3)
+            foreach (JObject item in list)
             {
-                i++;
-                notice_id.Add(item["id"].ToString()); // 문서 id 리스트 추가
-                if (i <= (index - 1) * 20)
-                {
-                    continue;
-                }
-
+                ListViewItem listItem = new ListViewItem();
                 listItem = new ListViewItem(item["id"].ToString());
                 listItem.SubItems.Add(item["title"].ToString());
                 listItem.SubItems.Add(item["name"].ToString());
                 listItem.SubItems.Add(item["wdate"].ToString());
                 listItem.SubItems.Add(item["division"].ToString());
                 NoticeList.Items.Add(listItem);
-                
-                if (i % (index * 20) == 0)
-                    break;
             }
-
-            label_doctext.Text = "총 " + doc.ToString() + "개의 게시물";
+            if (LoginApp.user.authority == 0)
+                Btnregistration.Visible = true;
+            else
+                Btnregistration.Visible = false;
         }
 
         private void Btnregistration_Click(object sender, EventArgs e)
         {
-            NoticeCreate registration = new NoticeCreate(notice_id);
+            NoticeCreate registration = new NoticeCreate();
             registration.ShowDialog();
             restart_form();
         }
@@ -207,6 +181,13 @@ namespace F_Final_Project
         {
             if (search_option.SelectedItem.ToString() == "전체")
             {
+                index = 1;
+                for (int i = 0; i < label_page.Count; i++)
+                {
+                    label_page[i].ForeColor = Color.Black;
+                    label_page[i].Text = (index + i).ToString();
+                }
+                Page1.ForeColor = Color.Blue;
                 SearchTextbox.Text = "";
                 mode = "";
                 restart_form();

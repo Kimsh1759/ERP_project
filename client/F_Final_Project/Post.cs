@@ -15,98 +15,77 @@ namespace F_Final_Project
     {
         public Post()
         {
+            List<JObject> AllList = LoginApp.RDs.Readdic_database("FreeBoard");
+            foreach (JObject obj in AllList)
+            {
+                Free_id.Add(obj["id"].ToString());
+            }
             InitializeComponent();
         }
+
+        public static List<string> Free_id = new List<string>();
         List<JObject> list = new List<JObject>();
-        List<string> Free_id = new List<string>();
         List<Label> label_page = new List<Label>();
         string mode = "";
         int index = 1;
-        int doc = 0;
+
         void restart_form()
         {
             PostList.Items.Clear();
-            Free_id.Clear();
-            List<JObject> list2 = new List<JObject>();
-            list2 = LoginApp.RDs.Readdic_database("FreeBoard");
-            list = list2.OrderByDescending(item => item["wdate"]).ToList();
-            int i = 0;
-            doc = 0;
-            ListViewItem listItem = new ListViewItem();
-            List<JObject> list3 = new List<JObject>();
-
-            foreach (JObject item in list)
+            list.Clear();
+            if(LoginApp.user.authority==0)
             {
                 if (mode == "title")
                 {
-                    if (LoginApp.user.authority == 0 || LoginApp.user.team == item["division"].ToString() || item["division"].ToString() == "자유")
-                    {
-                        if (item["title"].ToString().Contains(SearchTextbox.Text))
-                        {
-                            doc++;
-                            list3.Add(item);
-                        }
-                    }
-                }
-                else if (mode == "writer")
-                {
-                    if (LoginApp.user.authority == 0 || LoginApp.user.team == item["division"].ToString() || item["division"].ToString() == "자유")
-                    {
-                        if (item["name"].ToString().Contains(SearchTextbox.Text))
-                        {
-                            doc++;
-                            list3.Add(item);
-                        }
-                    }
+                    list = LoginApp.RDs.Search_database("FreeBoard", "title", SearchTextbox.Text, index);
                 }
                 else if (mode == "team")
                 {
-                    if (LoginApp.user.authority == 0 || LoginApp.user.team == item["division"].ToString() || item["division"].ToString() == "자유")
-                    {
-                        if (item["division"].ToString() == search_option.SelectedItem.ToString())
-                        {
-                            doc++;
-                            list3.Add(item);
-                        }
-                    }
+                    list = LoginApp.RDs.Search_database("FreeBoard", "division", search_option.SelectedItem.ToString(), index);
+                }
+                else if(mode == "writer")
+                {
+                    list = LoginApp.RDs.Search_database("FreeBoard", "name", SearchTextbox.Text, index);
                 }
                 else
                 {
-                    if (LoginApp.user.authority == 0 || LoginApp.user.team == item["division"].ToString() || item["division"].ToString() == "자유")
-                    {
-                        doc++;
-                        list3.Add(item);
-                    }
+                    list = LoginApp.RDs.Readdic_database("FreeBoard", index);
+                }
+            }
+            else
+            {
+                if (mode == "title")
+                {
+                    list = LoginApp.RDs.Search_database("FreeBoard", "title", SearchTextbox.Text ,index, LoginApp.user.team);
+                }
+                else if (mode == "writer")
+                {
+                    list = LoginApp.RDs.Search_database("FreeBoard", "name", SearchTextbox.Text, index, LoginApp.user.team);
+                }
+                else if (mode == "team")
+                {
+                    list = LoginApp.RDs.Search_database("FreeBoard", "division", search_option.SelectedItem.ToString(), index, LoginApp.user.team);
+                }
+                else
+                {
+                    list = LoginApp.RDs.Readdic_database("FreeBoard",LoginApp.RDs.team_dic.FirstOrDefault(x=>x.Value==LoginApp.user.team).Key ,index);
                 }
             }
 
-            foreach (JObject item in list3)
+            foreach (JObject item in list)
             {
-                i++;
-                Free_id.Add(item["id"].ToString()); // 문서 id 리스트 추가
-                if (i <= (index - 1) * 20)
-                {
-                    continue;
-                }
-
-                listItem = new ListViewItem(item["id"].ToString());
+                ListViewItem listItem = new ListViewItem(item["id"].ToString());
                 listItem.SubItems.Add(item["title"].ToString());
                 listItem.SubItems.Add(item["name"].ToString());
                 listItem.SubItems.Add(item["wdate"].ToString());
                 listItem.SubItems.Add(item["division"].ToString());
                 PostList.Items.Add(listItem);
-
-                if (i % (index * 20) == 0 )
-                    break;
             }
-
-            label_doctext.Text = "총 "+doc.ToString()+"개의 게시물";
         }
-
 
         private void Btnregistration_Click(object sender, EventArgs e)
         {
-            PostCreate registration = new PostCreate(Free_id);
+            PostCreate registration = new PostCreate();
             registration.ShowDialog();
             restart_form();
         }
@@ -242,6 +221,13 @@ namespace F_Final_Project
         {
             if (search_option.SelectedItem.ToString() == "전체")
             {
+                index = 1;
+                for (int i = 0; i < label_page.Count; i++)
+                {
+                    label_page[i].ForeColor = Color.Black;
+                    label_page[i].Text = (index + i).ToString();
+                }
+                Page1.ForeColor = Color.Blue;
                 SearchTextbox.Text = "";
                 mode = "";
                 restart_form();

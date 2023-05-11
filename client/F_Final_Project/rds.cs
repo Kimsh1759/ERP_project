@@ -53,12 +53,7 @@ namespace F_Final_Project
             {6, "대리" },
             {7, "사원" },
         };
-        public Dictionary<int, string> team_dic = new Dictionary<int, string>()
-        {
-            {0, "인사" },
-            {1, "영업" },
-            {2, "개발" }
-        };
+        public Dictionary<int, string> team_dic = new Dictionary<int, string>();
         public Dictionary<string, string> teamDoc_dic = new Dictionary<string, string>();
         public Dictionary<int, string> authority_dic = new Dictionary<int ,string>()
         {
@@ -187,15 +182,48 @@ namespace F_Final_Project
             }
         }
 
+        public List<JObject> Search_database(string table, string division, string str, int page,string team="")
+        {
+            List<JObject> obj= new List<JObject>();
+            string url="";
+            if (table == "NoticeBoard")
+            {
+                url = string.Format("{0}/SearchBoard?table={1}&division={2}&str={3}&page={4}", ip, table,division,str,page);
+            }
+            else if(table == "FreeBoard")
+            {
+                if(team=="")
+                {
+                    url = string.Format("{0}/SearchBoard?table={1}&division={2}&str={3}&page={4}", ip, table, division, str, page);
+                }
+                else
+                {
+                    url = string.Format("{0}/SearchFreeBoard?table={1}&division={2}&str={3}&page={4}&team={5}", ip, table, division, str, page,team);
+                }
+            }
+            obj = CallApiss(url);
+            return obj;
+        }
+
         public List<JObject> Readdic_database(string table_name, int state=0, int num=0, int page=0)
         {
             string url;
             List<JObject> list = new List<JObject>();
 
-            if (table_name == "NoticeBoard" || table_name == "FreeBoard")
+            if (table_name == "NoticeBoard")
             {
-                url = string.Format("{0}/ReadBoard?table={1}", ip, table_name);
-                
+                url = string.Format("{0}/ReadBoard?table={1}&page={2}", ip, table_name,state);
+            }
+            else if(table_name == "FreeBoard")
+            {
+                if(num==0)
+                {
+                    url = string.Format("{0}/ReadBoard?table={1}&page={2}", ip, table_name, state);
+                }
+                else
+                {
+                    url = string.Format("{0}/ReadFreeBoard?table={1}&team={2}&page={3}", ip, table_name, team_dic[state] ,num);
+                }
             }
             else if(table_name == "ApplicationForLeave" || table_name == "Draft" || table_name == "journal" && state != -1)
             {
@@ -240,6 +268,7 @@ namespace F_Final_Project
                 url = string.Format("{0}/ReadElectricTeam?table={1}&team={2}&state={3}&page={4}", ip, table, name,state,page);
                 list = CallApiss(url);
             }
+
             else if(table == "UserInfo")
             {
                 url = string.Format("{0}/ReadUserInfoTeam?team={1}&page={2}", ip,team_dic.FirstOrDefault(x=>x.Value==name).Key, state);
@@ -562,11 +591,6 @@ namespace F_Final_Project
             Dictionary<string, object> result = CallApi(url);
         }
 
-        public void UpdateBoard_database(List<object> list ,string table)
-        {
-                Delete_database(list[6].ToString(), table);
-                Create_database(list, table);
-        }
         public void UpdateLeave_database(List<object> list, List<object> list2, string table)
         {
             Delete_database(list, table);

@@ -25,10 +25,10 @@ namespace F_Final_Project
         public AttendanceBrowse(string id)
         {
             InitializeComponent();
-            num = id;
-            info = LoginApp.RDs.Read_database2("UserInfo", num);
+            info = LoginApp.RDs.Read_database2("UserInfo", id);
             labelWorksName.Text = info["name"].ToString();
         }
+
         void restart()
         {
             listView1.Items.Clear();

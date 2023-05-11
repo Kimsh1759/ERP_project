@@ -12,38 +12,23 @@ namespace F_Final_Project
 {
     public partial class NoticeCreate : Form
     {
-        public NoticeCreate(List<string> list)
+        public NoticeCreate()
         {
-            notice_id.Clear();
-            notice_id = list;
             InitializeComponent();
         }
 
-        List<string> notice_id = new List<string>();
-
         private void btncancle_Click(object sender, EventArgs e)
         {
-            foreach(Control control in this.Controls)
-            {
-                control.Text = "";
-            }
-            introduction.Text = "머리말";
             this.Dispose();
         }
 
         private void Btnregistration_Click(object sender, EventArgs e)
         {
-            List<object> list = new List<object>();
-            list.Add(LoginApp.user.id);
-            list.Add(LoginApp.user.name);
-            list.Add(txtTitle.Text);
-            list.Add(Substance.Text);
             DateTime dateTime = DateTime.Now;
             string date = dateTime.ToString("yyyy") + dateTime.ToString("MM") + dateTime.ToString("dd");
-            list.Add(Convert.ToInt32(date));
-            list.Add(introduction.SelectedItem.ToString());
             Random random = new Random();
             string str = "";
+
             while(true)
             {
                 if(introduction.SelectedItem.ToString() == "일반")
@@ -58,18 +43,28 @@ namespace F_Final_Project
                 {
                     str += "C"+ Convert.ToString(random.Next() % 1000000);
                 }
-                if (notice_id.Contains(str))
+                if (Notice.notice_id.Contains(str))
                 {
                     str = "";
                     continue;
                 }
                 else
                 {
-                    list.Add(str);
+                    List<object> list = new List<object>()
+                    {
+                        LoginApp.user.id,
+                        LoginApp.user.name,
+                        txtTitle.Text,
+                        Substance.Text,
+                        Convert.ToInt32(date),
+                        introduction.SelectedItem.ToString(),
+                        str
+                    };
+                    Notice.notice_id.Add(str);
+                    LoginApp.RDs.Create_database(list,"NoticeBoard");
                     break;
                 }
             }
-            LoginApp.RDs.Create_database(list,"NoticeBoard");
             this.Dispose();
         }
     }

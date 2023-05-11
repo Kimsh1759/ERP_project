@@ -12,38 +12,23 @@ namespace F_Final_Project
 {
     public partial class PostCreate : Form
     {
-        public PostCreate(List<string> list)
+        public PostCreate()
         {
-            Free_id.Clear();
-            Free_id = list;
             InitializeComponent();
         }
 
-        List<string> Free_id = new List<string>();
-
         private void btncancle_Click(object sender, EventArgs e)
         {
-            foreach (Control control in this.Controls)
-            {
-                control.Text = "";
-            }
-            introduction.Text = "머리말";
             this.Dispose();
         }
 
         private void Btnregistration_Click(object sender, EventArgs e)
         {
-            List<object> list = new List<object>();
-            list.Add(LoginApp.user.id);
-            list.Add(LoginApp.user.name);
-            list.Add(txtTitle.Text);
-            list.Add(Substance.Text);
             DateTime dateTime = DateTime.Now;
             string date = dateTime.ToString("yyyy") + dateTime.ToString("MM") + dateTime.ToString("dd");
-            list.Add(Convert.ToInt32(date));
-            list.Add(introduction.SelectedItem.ToString());
             Random random = new Random();
             string str = "";
+
             while (true)
             {
                 if (introduction.SelectedItem.ToString() == "자유")
@@ -55,23 +40,30 @@ namespace F_Final_Project
                     str += LoginApp.RDs.teamDoc_dic[introduction.SelectedItem.ToString()]+ Convert.ToString(random.Next() % 1000000);
                 }
 
-                if (Free_id.Contains(str))
+                if (Post.Free_id.Contains(str))
                 {
                     str = "";
                     continue;
                 }
                 else
                 {
-                    list.Add(str);
+                    List<object> list = new List<object>()
+                    {
+                        LoginApp.user.id,
+                        LoginApp.user.name,
+                        txtTitle.Text,
+                        Substance.Text,
+                        Convert.ToInt32(date),
+                        introduction.SelectedItem.ToString(),
+                        str
+                    };
+                    Post.Free_id.Add(str);
+                    LoginApp.RDs.Create_database(list, "FreeBoard");
                     break;
                 }
             }
-            LoginApp.RDs.Create_database(list, "FreeBoard");
-            introduction.Items.Clear();
             this.Dispose();
         }
-
-        
 
         private void PostCreate_Load(object sender, EventArgs e)
         {
