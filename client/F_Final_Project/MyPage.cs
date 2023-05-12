@@ -110,9 +110,11 @@ namespace F_Final_Project
             date = year + month;
 
             memoList.Clear();
-
-            buttonNumber = date + ((Button)sender).Text;
-            list= LoginApp.RDs.Read_database("MyPage", LoginApp.user.id, buttonNumber);
+            if ( Convert.ToInt32(((Button)sender).Text) < 10 )
+                buttonNumber = date + "0" +((Button)sender).Text.Trim();
+            else
+                buttonNumber = date + ((Button)sender).Text;
+            list = LoginApp.RDs.Read_database("MyPage", LoginApp.user.id, buttonNumber);
             foreach(var str in list)
             {
                 TxtMemo.Text += str.ToString();
@@ -157,8 +159,11 @@ namespace F_Final_Project
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("저장되었습니다.");
+
             string year = YearC.SelectedItem.ToString();
             string month = MonthC.SelectedItem.ToString();
+
             LoginApp.RDs.Create_database(LoginApp.user.id, buttonNumber, TxtMemo.Text);
         }
 
