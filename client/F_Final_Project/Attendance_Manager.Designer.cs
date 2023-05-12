@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Attendance_Manager));
             this.WorkerList = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -50,7 +51,7 @@
             this.WorkerList.GridLines = true;
             this.WorkerList.Location = new System.Drawing.Point(20, 90);
             this.WorkerList.Name = "WorkerList";
-            this.WorkerList.Size = new System.Drawing.Size(520, 500);
+            this.WorkerList.Size = new System.Drawing.Size(520, 508);
             this.WorkerList.TabIndex = 20;
             this.WorkerList.UseCompatibleStateImageBehavior = false;
             this.WorkerList.View = System.Windows.Forms.View.Details;
@@ -90,21 +91,23 @@
             // 
             this.SelectTeam.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SelectTeam.FormattingEnabled = true;
-            this.SelectTeam.Location = new System.Drawing.Point(339, 55);
+            this.SelectTeam.Location = new System.Drawing.Point(364, 44);
             this.SelectTeam.Name = "SelectTeam";
             this.SelectTeam.Size = new System.Drawing.Size(120, 29);
             this.SelectTeam.TabIndex = 21;
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.SystemColors.Menu;
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSearch.Location = new System.Drawing.Point(465, 55);
+            this.btnSearch.Location = new System.Drawing.Point(490, 34);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 29);
+            this.btnSearch.Size = new System.Drawing.Size(50, 50);
             this.btnSearch.TabIndex = 22;
-            this.btnSearch.Text = "조회";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 

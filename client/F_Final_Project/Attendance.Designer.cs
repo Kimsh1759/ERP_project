@@ -50,7 +50,7 @@
             // 
             this.AttendanceL.AutoSize = true;
             this.AttendanceL.Font = new System.Drawing.Font("휴먼모음T", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.AttendanceL.ForeColor = System.Drawing.Color.DarkCyan;
+            this.AttendanceL.ForeColor = System.Drawing.SystemColors.WindowText;
             this.AttendanceL.Location = new System.Drawing.Point(12, 23);
             this.AttendanceL.Name = "AttendanceL";
             this.AttendanceL.Size = new System.Drawing.Size(179, 53);
@@ -59,7 +59,7 @@
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(650, 100);
+            this.panel2.Location = new System.Drawing.Point(634, 100);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(580, 700);
             this.panel2.TabIndex = 27;
@@ -67,16 +67,16 @@
             // Logo
             // 
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(1102, 11);
+            this.Logo.Location = new System.Drawing.Point(1147, 2);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(135, 65);
+            this.Logo.Size = new System.Drawing.Size(85, 78);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 41;
             this.Logo.TabStop = false;
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(12, 100);
+            this.panel3.Location = new System.Drawing.Point(36, 100);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(580, 700);
             this.panel3.TabIndex = 42;

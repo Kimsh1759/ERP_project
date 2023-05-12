@@ -29,103 +29,109 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            TextL = new System.Windows.Forms.Label();
-            Click_LogIN = new System.Windows.Forms.Button();
-            InputPW = new System.Windows.Forms.TextBox();
-            InputID = new System.Windows.Forms.TextBox();
-            PW = new System.Windows.Forms.Label();
-            ID = new System.Windows.Forms.Label();
-            Logo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
-            SuspendLayout();
+            this.TextL = new System.Windows.Forms.Label();
+            this.Click_LogIN = new System.Windows.Forms.Button();
+            this.InputPW = new System.Windows.Forms.TextBox();
+            this.InputID = new System.Windows.Forms.TextBox();
+            this.PW = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.Label();
+            this.Logo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
+            this.SuspendLayout();
             // 
             // TextL
             // 
-            TextL.AutoSize = true;
-            TextL.Font = new System.Drawing.Font("Palatino Linotype", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            TextL.Location = new System.Drawing.Point(732, 132);
-            TextL.Name = "TextL";
-            TextL.Size = new System.Drawing.Size(511, 87);
-            TextL.TabIndex = 27;
-            TextL.Text = "Login To Access";
+            this.TextL.AutoSize = true;
+            this.TextL.Font = new System.Drawing.Font("Palatino Linotype", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TextL.Location = new System.Drawing.Point(732, 132);
+            this.TextL.Name = "TextL";
+            this.TextL.Size = new System.Drawing.Size(0, 87);
+            this.TextL.TabIndex = 27;
             // 
             // Click_LogIN
             // 
-            Click_LogIN.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            Click_LogIN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            Click_LogIN.Font = new System.Drawing.Font("휴먼둥근헤드라인", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            Click_LogIN.Location = new System.Drawing.Point(836, 639);
-            Click_LogIN.Name = "Click_LogIN";
-            Click_LogIN.Size = new System.Drawing.Size(250, 50);
-            Click_LogIN.TabIndex = 26;
-            Click_LogIN.Text = "LogIn";
-            Click_LogIN.UseVisualStyleBackColor = false;
-            Click_LogIN.Click += Click_LogIN_Click;
+            this.Click_LogIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.Click_LogIN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Click_LogIN.Font = new System.Drawing.Font("Yu Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Click_LogIN.ForeColor = System.Drawing.Color.White;
+            this.Click_LogIN.Location = new System.Drawing.Point(517, 696);
+            this.Click_LogIN.Name = "Click_LogIN";
+            this.Click_LogIN.Size = new System.Drawing.Size(250, 50);
+            this.Click_LogIN.TabIndex = 26;
+            this.Click_LogIN.Text = "로그인";
+            this.Click_LogIN.UseVisualStyleBackColor = false;
+            this.Click_LogIN.Click += new System.EventHandler(this.Click_LogIN_Click);
             // 
             // InputPW
             // 
-            InputPW.Font = new System.Drawing.Font("맑은 고딕", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            InputPW.Location = new System.Drawing.Point(749, 489);
-            InputPW.Name = "InputPW";
-            InputPW.Size = new System.Drawing.Size(494, 43);
-            InputPW.TabIndex = 25;
-            InputPW.UseSystemPasswordChar = true;
+            this.InputPW.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.InputPW.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.InputPW.Font = new System.Drawing.Font("맑은 고딕", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.InputPW.Location = new System.Drawing.Point(411, 584);
+            this.InputPW.Name = "InputPW";
+            this.InputPW.Size = new System.Drawing.Size(494, 36);
+            this.InputPW.TabIndex = 25;
+            this.InputPW.UseSystemPasswordChar = true;
             // 
             // InputID
             // 
-            InputID.Font = new System.Drawing.Font("맑은 고딕", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            InputID.Location = new System.Drawing.Point(749, 366);
-            InputID.Name = "InputID";
-            InputID.Size = new System.Drawing.Size(494, 43);
-            InputID.TabIndex = 24;
+            this.InputID.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.InputID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.InputID.Font = new System.Drawing.Font("맑은 고딕", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.InputID.Location = new System.Drawing.Point(411, 461);
+            this.InputID.Name = "InputID";
+            this.InputID.Size = new System.Drawing.Size(494, 36);
+            this.InputID.TabIndex = 24;
             // 
             // PW
             // 
-            PW.AutoSize = true;
-            PW.Font = new System.Drawing.Font("맑은 고딕", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            PW.Location = new System.Drawing.Point(666, 489);
-            PW.Name = "PW";
-            PW.Size = new System.Drawing.Size(72, 45);
-            PW.TabIndex = 23;
-            PW.Text = "PW";
+            this.PW.AutoSize = true;
+            this.PW.Font = new System.Drawing.Font("맑은 고딕", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PW.Location = new System.Drawing.Point(328, 579);
+            this.PW.Name = "PW";
+            this.PW.Size = new System.Drawing.Size(72, 45);
+            this.PW.TabIndex = 23;
+            this.PW.Text = "PW";
             // 
             // ID
             // 
-            ID.AutoSize = true;
-            ID.Font = new System.Drawing.Font("맑은 고딕", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            ID.Location = new System.Drawing.Point(671, 366);
-            ID.Name = "ID";
-            ID.Size = new System.Drawing.Size(54, 45);
-            ID.TabIndex = 22;
-            ID.Text = "ID";
+            this.ID.AutoSize = true;
+            this.ID.Font = new System.Drawing.Font("맑은 고딕", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ID.Location = new System.Drawing.Point(333, 456);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(54, 45);
+            this.ID.TabIndex = 22;
+            this.ID.Text = "ID";
             // 
             // Logo
             // 
-            Logo.Image = (System.Drawing.Image)resources.GetObject("Logo.Image");
-            Logo.Location = new System.Drawing.Point(22, 139);
-            Logo.Name = "Logo";
-            Logo.Size = new System.Drawing.Size(600, 550);
-            Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            Logo.TabIndex = 21;
-            Logo.TabStop = false;
+            this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
+            this.Logo.Location = new System.Drawing.Point(464, 46);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(350, 350);
+            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo.TabIndex = 21;
+            this.Logo.TabStop = false;
             // 
             // Login
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1264, 921);
-            Controls.Add(TextL);
-            Controls.Add(Click_LogIN);
-            Controls.Add(InputPW);
-            Controls.Add(InputID);
-            Controls.Add(PW);
-            Controls.Add(ID);
-            Controls.Add(Logo);
-            Name = "Login";
-            Text = "Login";
-            ((System.ComponentModel.ISupportInitialize)Logo).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.TextL);
+            this.Controls.Add(this.Click_LogIN);
+            this.Controls.Add(this.InputPW);
+            this.Controls.Add(this.InputID);
+            this.Controls.Add(this.PW);
+            this.Controls.Add(this.ID);
+            this.Controls.Add(this.Logo);
+            this.Name = "Login";
+            this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

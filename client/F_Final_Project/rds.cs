@@ -23,7 +23,7 @@ namespace F_Final_Project
 {
     public class RDSserver
     {
-        string ip = "http://192.168.0.9:8080";
+        string ip = "http://13.209.6.6:8080";
         //java - http://192.168.0.9:8080   ec2 java - http://13.209.6.6:8080
 
         public RDSserver()

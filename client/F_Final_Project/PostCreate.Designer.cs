@@ -83,24 +83,30 @@
             // 
             // Btnregistration
             // 
+            this.Btnregistration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.Btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btnregistration.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Btnregistration.ForeColor = System.Drawing.SystemColors.Window;
             this.Btnregistration.Location = new System.Drawing.Point(12, 12);
             this.Btnregistration.Name = "Btnregistration";
             this.Btnregistration.Size = new System.Drawing.Size(48, 23);
             this.Btnregistration.TabIndex = 30;
             this.Btnregistration.Text = "완료";
-            this.Btnregistration.UseVisualStyleBackColor = true;
+            this.Btnregistration.UseVisualStyleBackColor = false;
             this.Btnregistration.Click += new System.EventHandler(this.Btnregistration_Click);
             // 
             // btncancle
             // 
+            this.btncancle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.btncancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btncancle.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btncancle.ForeColor = System.Drawing.SystemColors.Window;
             this.btncancle.Location = new System.Drawing.Point(66, 12);
             this.btncancle.Name = "btncancle";
             this.btncancle.Size = new System.Drawing.Size(48, 23);
             this.btncancle.TabIndex = 31;
             this.btncancle.Text = "취소";
-            this.btncancle.UseVisualStyleBackColor = true;
+            this.btncancle.UseVisualStyleBackColor = false;
             this.btncancle.Click += new System.EventHandler(this.btncancle_Click);
             // 
             // PostCreate

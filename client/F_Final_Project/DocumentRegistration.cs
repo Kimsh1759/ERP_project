@@ -253,5 +253,10 @@ namespace F_Final_Project
             }
             return id;
         }
+
+        private void btncancle_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

@@ -119,7 +119,7 @@ namespace F_Final_Project
             label_page.Add(page3);
             label_page.Add(page4);
             label_page.Add(page5);
-            label_page[0].ForeColor = Color.Blue;
+            label_page[0].ForeColor = Color.DodgerBlue;
             restart_form();
         }
 
@@ -152,7 +152,7 @@ namespace F_Final_Project
                 label_page[2].Text = Convert.ToString(Convert.ToInt32(label_page[2].Text) - 5);
                 label_page[3].ForeColor = Color.Black;
                 label_page[3].Text = Convert.ToString(Convert.ToInt32(label_page[3].Text) - 5);
-                label_page[4].ForeColor = Color.Blue;
+                label_page[4].ForeColor = Color.DodgerBlue;
                 label_page[4].Text = Convert.ToString(Convert.ToInt32(label_page[4].Text) - 5);
             }
 
@@ -175,7 +175,7 @@ namespace F_Final_Project
             if ((index + 1) % 5 == 1)
             {
                 index++;
-                label_page[0].ForeColor = Color.Blue;
+                label_page[0].ForeColor = Color.DodgerBlue;
                 label_page[0].Text = Convert.ToString(Convert.ToInt32(label_page[0].Text) + 5);
                 label_page[1].ForeColor = Color.Black;
                 label_page[1].Text = Convert.ToString(Convert.ToInt32(label_page[1].Text) + 5);
@@ -191,7 +191,7 @@ namespace F_Final_Project
             {
                 index++;
                 label_page[(index - 1) % 5 - 1].ForeColor = Color.Black;
-                label_page[(index - 1) % 5].ForeColor = Color.Blue;
+                label_page[(index - 1) % 5].ForeColor = Color.DodgerBlue;
             }
 
             restart_form();
@@ -209,7 +209,7 @@ namespace F_Final_Project
             page3.ForeColor = Color.Black;
             page4.ForeColor = Color.Black;
             page5.ForeColor = Color.Black;
-            page.ForeColor = Color.Blue;
+            page.ForeColor = Color.DodgerBlue;
         }
     }
 

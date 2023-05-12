@@ -19,6 +19,7 @@ using Microsoft.VisualBasic.Logging;
 using MySqlX.XDevAPI;
 using Mysqlx.Crud;
 using Microsoft.VisualBasic.ApplicationServices;
+using Mysqlx.Resultset;
 
 namespace F_Final_Project
 {
@@ -27,6 +28,7 @@ namespace F_Final_Project
     {
         List<object> list = new List<object>();
         List<string> memoList = new List<string>();
+        List<Button> days;
         string buttonNumber;
         string year;
         string month;
@@ -34,6 +36,16 @@ namespace F_Final_Project
         public MyPage()
         {        
             InitializeComponent();
+
+            days = new List<Button> { Day1, Day2, Day3, Day4, Day5, Day6, Day7,
+                Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15, Day16,
+                Day17, Day18, Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26,
+                Day27, Day28, Day29, Day30, Day31, Day32, Day33, Day34, Day35, Day36,
+                Day37, Day38, Day39, Day40, Day41, Day42
+            };
+
+            DateTime now = DateTime.Now;
+
             list = LoginApp.RDs.Read_database("UserInfo", LoginApp.user.id); //로그인 정보를 불러온다.
             NameL.Text = LoginApp.user.name;
             TelNum.Text = LoginApp.user.tel;
@@ -50,8 +62,8 @@ namespace F_Final_Project
                 Profile.Image = new Bitmap(new MemoryStream(LoginApp.user.img));
             }
 
-            YearC.SelectedItem = 2023;
-            MonthC.SelectedItem = 1;
+            YearC.SelectedItem = now.Year.ToString();
+            MonthC.SelectedItem = now.Month.ToString();
         }
 
         private int dayToInt(string day)
@@ -76,6 +88,15 @@ namespace F_Final_Project
 
         private void Click_Memo(object sender, EventArgs e)
         {
+            Button Day = sender as Button;
+
+            foreach (Button button in days)
+            {
+                button.BackColor = Color.White;
+            }
+
+            Day.BackColor = Color.LightGray;
+
             TxtMemo.Clear();
             string date;
             string month;
@@ -102,17 +123,16 @@ namespace F_Final_Project
 
         private void MonthC_SelectedIndexChanged(object sender, EventArgs e)
         {
+            foreach(Button button in days)
+            {
+                button.BackColor= Color.White;
+            }
+
             year = YearC.SelectedItem.ToString();
             month = MonthC.SelectedItem.ToString();
             DateTime datetime = new DateTime(Int32.Parse(year), Int32.Parse(month), 1, new GregorianCalendar());
             KoreanCalendar myCal = new KoreanCalendar();
 
-            List<Button> days = new List<Button> { Day1, Day2, Day3, Day4, Day5, Day6, Day7,
-                Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15, Day16,
-                Day17, Day18, Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26,
-                Day27, Day28, Day29, Day30, Day31, Day32, Day33, Day34, Day35, Day36,
-                Day37, Day38, Day39, Day40, Day41, Day42
-            };
 
             int DaysInMonth = myCal.GetDaysInMonth(myCal.GetYear(datetime), Int32.Parse(month));
 
@@ -140,6 +160,27 @@ namespace F_Final_Project
             string year = YearC.SelectedItem.ToString();
             string month = MonthC.SelectedItem.ToString();
             LoginApp.RDs.Create_database(LoginApp.user.id, buttonNumber, TxtMemo.Text);
+        }
+
+        private void MyPage_Load(object sender, EventArgs e)
+        {
+            
+            DateTime now = DateTime.Now;
+            TimeView.Text = now.ToString("yyyy.MM.dd");
+            updateButton.Visible = false;
+
+            Day1.ForeColor = Color.Red;
+            Day7.ForeColor = Color.Blue;
+            Day8.ForeColor = Color.Red;
+            Day14.ForeColor = Color.Blue;
+            Day15.ForeColor = Color.Red;
+            Day21.ForeColor = Color.Blue;
+            Day22.ForeColor = Color.Red;
+            Day28.ForeColor = Color.Blue;
+            Day29.ForeColor = Color.Red;
+            Day35.ForeColor = Color.Blue;
+            Day36.ForeColor = Color.Red;
+            Day42.ForeColor = Color.Blue;
         }
     }
 }

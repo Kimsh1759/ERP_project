@@ -53,18 +53,22 @@
             // 
             // btnmodify
             // 
+            this.btnmodify.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.btnmodify.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnmodify.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnmodify.ForeColor = System.Drawing.SystemColors.Window;
             this.btnmodify.Location = new System.Drawing.Point(120, 12);
             this.btnmodify.Name = "btnmodify";
             this.btnmodify.Size = new System.Drawing.Size(48, 23);
             this.btnmodify.TabIndex = 1;
             this.btnmodify.Text = "수정";
-            this.btnmodify.UseVisualStyleBackColor = true;
+            this.btnmodify.UseVisualStyleBackColor = false;
             this.btnmodify.Visible = false;
             this.btnmodify.Click += new System.EventHandler(this.btnmodify_Click);
             // 
             // Substance
             // 
+            this.Substance.BackColor = System.Drawing.SystemColors.Window;
             this.Substance.Location = new System.Drawing.Point(12, 142);
             this.Substance.Name = "Substance";
             this.Substance.ReadOnly = true;
@@ -81,25 +85,31 @@
             // 
             // btndelete
             // 
+            this.btndelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.btndelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btndelete.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btndelete.ForeColor = System.Drawing.SystemColors.Window;
             this.btndelete.Location = new System.Drawing.Point(66, 12);
             this.btndelete.Name = "btndelete";
             this.btndelete.Size = new System.Drawing.Size(48, 23);
             this.btndelete.TabIndex = 5;
             this.btndelete.Text = "삭제";
-            this.btndelete.UseVisualStyleBackColor = true;
+            this.btndelete.UseVisualStyleBackColor = false;
             this.btndelete.Visible = false;
             this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
             // 
             // btncheck
             // 
+            this.btncheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.btncheck.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btncheck.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btncheck.ForeColor = System.Drawing.SystemColors.Window;
             this.btncheck.Location = new System.Drawing.Point(12, 12);
             this.btncheck.Name = "btncheck";
             this.btncheck.Size = new System.Drawing.Size(48, 23);
             this.btncheck.TabIndex = 1;
             this.btncheck.Text = "확인";
-            this.btncheck.UseVisualStyleBackColor = true;
+            this.btncheck.UseVisualStyleBackColor = false;
             this.btncheck.Click += new System.EventHandler(this.btncheck_Click);
             // 
             // tableLayoutPanel1

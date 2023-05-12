@@ -55,17 +55,16 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.label_doctext = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // Logo
             // 
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(1145, 12);
+            this.Logo.Location = new System.Drawing.Point(1147, 2);
             this.Logo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(92, 65);
+            this.Logo.Size = new System.Drawing.Size(85, 78);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 7;
             this.Logo.TabStop = false;
@@ -83,7 +82,7 @@
             // 
             this.PostL.AutoSize = true;
             this.PostL.Font = new System.Drawing.Font("휴먼모음T", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PostL.ForeColor = System.Drawing.Color.DarkBlue;
+            this.PostL.ForeColor = System.Drawing.SystemColors.WindowText;
             this.PostL.Location = new System.Drawing.Point(12, 24);
             this.PostL.Name = "PostL";
             this.PostL.Size = new System.Drawing.Size(218, 53);
@@ -93,30 +92,33 @@
             // SearchTextbox
             // 
             this.SearchTextbox.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SearchTextbox.Location = new System.Drawing.Point(226, 100);
+            this.SearchTextbox.Location = new System.Drawing.Point(197, 100);
             this.SearchTextbox.Name = "SearchTextbox";
-            this.SearchTextbox.Size = new System.Drawing.Size(793, 35);
+            this.SearchTextbox.Size = new System.Drawing.Size(909, 35);
             this.SearchTextbox.TabIndex = 12;
             // 
             // BtnSearch
             // 
-            this.BtnSearch.BackColor = System.Drawing.Color.GhostWhite;
+            this.BtnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.BtnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnSearch.BackgroundImage")));
+            this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnSearch.FlatAppearance.BorderSize = 0;
             this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnSearch.Location = new System.Drawing.Point(1070, 100);
+            this.BtnSearch.Location = new System.Drawing.Point(1130, 97);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(100, 35);
+            this.BtnSearch.Size = new System.Drawing.Size(40, 40);
             this.BtnSearch.TabIndex = 14;
-            this.BtnSearch.Text = "검색";
             this.BtnSearch.UseVisualStyleBackColor = false;
             this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // Btnregistration
             // 
-            this.Btnregistration.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btnregistration.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Btnregistration.Location = new System.Drawing.Point(1095, 771);
+            this.Btnregistration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
+            this.Btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Btnregistration.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Btnregistration.ForeColor = System.Drawing.SystemColors.Window;
+            this.Btnregistration.Location = new System.Drawing.Point(1095, 750);
             this.Btnregistration.Name = "Btnregistration";
             this.Btnregistration.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Btnregistration.Size = new System.Drawing.Size(75, 50);
@@ -130,7 +132,7 @@
             this.Page5.AutoSize = true;
             this.Page5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Page5.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Page5.Location = new System.Drawing.Point(477, 783);
+            this.Page5.Location = new System.Drawing.Point(740, 762);
             this.Page5.Name = "Page5";
             this.Page5.Size = new System.Drawing.Size(25, 30);
             this.Page5.TabIndex = 38;
@@ -142,7 +144,7 @@
             this.Page4.AutoSize = true;
             this.Page4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Page4.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Page4.Location = new System.Drawing.Point(415, 783);
+            this.Page4.Location = new System.Drawing.Point(678, 762);
             this.Page4.Name = "Page4";
             this.Page4.Size = new System.Drawing.Size(25, 30);
             this.Page4.TabIndex = 39;
@@ -154,7 +156,7 @@
             this.Page3.AutoSize = true;
             this.Page3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Page3.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Page3.Location = new System.Drawing.Point(355, 783);
+            this.Page3.Location = new System.Drawing.Point(618, 762);
             this.Page3.Name = "Page3";
             this.Page3.Size = new System.Drawing.Size(25, 30);
             this.Page3.TabIndex = 40;
@@ -166,7 +168,7 @@
             this.Page2.AutoSize = true;
             this.Page2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Page2.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Page2.Location = new System.Drawing.Point(295, 783);
+            this.Page2.Location = new System.Drawing.Point(558, 762);
             this.Page2.Name = "Page2";
             this.Page2.Size = new System.Drawing.Size(25, 30);
             this.Page2.TabIndex = 41;
@@ -178,7 +180,7 @@
             this.Page1.AutoSize = true;
             this.Page1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Page1.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Page1.Location = new System.Drawing.Point(240, 783);
+            this.Page1.Location = new System.Drawing.Point(503, 762);
             this.Page1.Name = "Page1";
             this.Page1.Size = new System.Drawing.Size(25, 30);
             this.Page1.TabIndex = 42;
@@ -187,27 +189,31 @@
             // 
             // NextPage
             // 
-            this.NextPage.BackColor = System.Drawing.Color.AliceBlue;
+            this.NextPage.BackColor = System.Drawing.Color.Transparent;
+            this.NextPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NextPage.BackgroundImage")));
+            this.NextPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.NextPage.FlatAppearance.BorderSize = 0;
             this.NextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NextPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NextPage.Location = new System.Drawing.Point(520, 771);
+            this.NextPage.Location = new System.Drawing.Point(783, 750);
             this.NextPage.Name = "NextPage";
-            this.NextPage.Size = new System.Drawing.Size(149, 50);
+            this.NextPage.Size = new System.Drawing.Size(50, 50);
             this.NextPage.TabIndex = 36;
-            this.NextPage.Text = "다음 페이지";
             this.NextPage.UseVisualStyleBackColor = false;
             this.NextPage.Click += new System.EventHandler(this.NextPage_Click);
             // 
             // PreviousPage
             // 
-            this.PreviousPage.BackColor = System.Drawing.Color.AliceBlue;
+            this.PreviousPage.BackColor = System.Drawing.Color.Transparent;
+            this.PreviousPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PreviousPage.BackgroundImage")));
+            this.PreviousPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PreviousPage.FlatAppearance.BorderSize = 0;
             this.PreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PreviousPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PreviousPage.Location = new System.Drawing.Point(70, 771);
+            this.PreviousPage.Location = new System.Drawing.Point(432, 750);
             this.PreviousPage.Name = "PreviousPage";
-            this.PreviousPage.Size = new System.Drawing.Size(149, 50);
+            this.PreviousPage.Size = new System.Drawing.Size(50, 50);
             this.PreviousPage.TabIndex = 37;
-            this.PreviousPage.Text = "이전 페이지";
             this.PreviousPage.UseVisualStyleBackColor = false;
             this.PreviousPage.Click += new System.EventHandler(this.PreviousPage_Click);
             // 
@@ -234,16 +240,16 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.PostList.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PostList.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.PostList.GridLines = true;
             this.PostList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.PostList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.PostList.Location = new System.Drawing.Point(70, 141);
+            this.PostList.Location = new System.Drawing.Point(70, 169);
             this.PostList.MultiSelect = false;
             this.PostList.Name = "PostList";
             this.PostList.Scrollable = false;
-            this.PostList.Size = new System.Drawing.Size(1100, 624);
+            this.PostList.Size = new System.Drawing.Size(1100, 530);
             this.PostList.TabIndex = 10;
             this.PostList.TileSize = new System.Drawing.Size(10, 10);
             this.PostList.UseCompatibleStateImageBehavior = false;
@@ -279,23 +285,12 @@
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader5.Width = 110;
             // 
-            // label_doctext
-            // 
-            this.label_doctext.AutoSize = true;
-            this.label_doctext.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_doctext.Location = new System.Drawing.Point(760, 785);
-            this.label_doctext.Name = "label_doctext";
-            this.label_doctext.Size = new System.Drawing.Size(41, 30);
-            this.label_doctext.TabIndex = 45;
-            this.label_doctext.Text = "총 ";
-            // 
             // Post
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1244, 849);
-            this.Controls.Add(this.label_doctext);
             this.Controls.Add(this.PostList);
             this.Controls.Add(this.search_option);
             this.Controls.Add(this.Btnregistration);
@@ -342,6 +337,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.Label label_doctext;
     }
 }

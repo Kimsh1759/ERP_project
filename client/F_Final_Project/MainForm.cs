@@ -179,12 +179,17 @@ namespace F_Final_Project
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
             Login login = new Login(app);
-            app.panel1.Controls.Clear();
-            login.TopLevel = false;
-            login.ControlBox = false;
-            login.Text = null;
-            login.Parent = app.panel1;
-            login.Show();
+            DialogResult dia = MessageBox.Show("로그아웃 하시겠습니까?", "로그아웃", MessageBoxButtons.OKCancel);
+
+            if (dia == DialogResult.OK)
+            {
+                app.panel1.Controls.Clear();
+                login.TopLevel = false;
+                login.ControlBox = false;
+                login.Text = null;
+                login.Parent = app.panel1;
+                login.Show();
+            }
         }
     }
 }

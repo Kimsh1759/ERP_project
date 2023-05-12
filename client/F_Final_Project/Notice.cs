@@ -77,7 +77,7 @@ namespace F_Final_Project
             label_page.Add(Page3);
             label_page.Add(Page4);
             label_page.Add(Page5);
-            label_page[0].ForeColor = Color.Blue;
+            label_page[0].ForeColor = Color.DodgerBlue;
             restart_form();
         }
 
@@ -124,7 +124,7 @@ namespace F_Final_Project
                 label_page[2].Text = Convert.ToString(Convert.ToInt32(label_page[2].Text) - 5);
                 label_page[3].ForeColor = Color.Black;
                 label_page[3].Text = Convert.ToString(Convert.ToInt32(label_page[3].Text) - 5);
-                label_page[4].ForeColor = Color.Blue;
+                label_page[4].ForeColor = Color.DodgerBlue;
                 label_page[4].Text = Convert.ToString(Convert.ToInt32(label_page[4].Text) - 5);
             }
             else
@@ -143,7 +143,7 @@ namespace F_Final_Project
              if ((index + 1) % 5 == 1)
             {
                 index++;
-                label_page[0].ForeColor = Color.Blue;
+                label_page[0].ForeColor = Color.DodgerBlue;
                 label_page[0].Text = Convert.ToString(Convert.ToInt32(label_page[0].Text) + 5);
                 label_page[1].ForeColor = Color.Black;
                 label_page[1].Text = Convert.ToString(Convert.ToInt32(label_page[1].Text) + 5);
@@ -158,7 +158,7 @@ namespace F_Final_Project
             {
                 index++;
                 label_page[(index - 1) % 5 -1].ForeColor= Color.Black;
-                label_page[(index-1)%5].ForeColor= Color.Blue;
+                label_page[(index-1)%5].ForeColor= Color.DodgerBlue;
             }
             restart_form();
         }
@@ -171,7 +171,7 @@ namespace F_Final_Project
             Page3.ForeColor = Color.Black;
             Page4.ForeColor = Color.Black;
             Page5.ForeColor = Color.Black;
-            label.ForeColor = Color.Blue;
+            label.ForeColor = Color.DodgerBlue;
             
             index = Convert.ToInt32(label.Text);
             restart_form();
@@ -187,7 +187,7 @@ namespace F_Final_Project
                     label_page[i].ForeColor = Color.Black;
                     label_page[i].Text = (index + i).ToString();
                 }
-                Page1.ForeColor = Color.Blue;
+                Page1.ForeColor = Color.DodgerBlue;
                 SearchTextbox.Text = "";
                 mode = "";
                 restart_form();

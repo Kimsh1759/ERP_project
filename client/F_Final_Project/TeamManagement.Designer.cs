@@ -76,9 +76,9 @@
             // Logo
             // 
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(1102, 9);
+            this.Logo.Location = new System.Drawing.Point(1147, 2);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(135, 65);
+            this.Logo.Size = new System.Drawing.Size(85, 78);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 38;
             this.Logo.TabStop = false;
@@ -88,19 +88,19 @@
             this.TeamList.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TeamList.FormattingEnabled = true;
             this.TeamList.ItemHeight = 21;
-            this.TeamList.Location = new System.Drawing.Point(12, 130);
+            this.TeamList.Location = new System.Drawing.Point(12, 193);
             this.TeamList.Name = "TeamList";
-            this.TeamList.Size = new System.Drawing.Size(350, 550);
+            this.TeamList.Size = new System.Drawing.Size(350, 487);
             this.TeamList.TabIndex = 39;
             this.TeamList.Click += new System.EventHandler(this.TeamList_Click);
             // 
             // TeamListL
             // 
             this.TeamListL.AutoSize = true;
-            this.TeamListL.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TeamListL.Location = new System.Drawing.Point(15, 106);
+            this.TeamListL.Font = new System.Drawing.Font("휴먼모음T", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TeamListL.Location = new System.Drawing.Point(12, 130);
             this.TeamListL.Name = "TeamListL";
-            this.TeamListL.Size = new System.Drawing.Size(118, 21);
+            this.TeamListL.Size = new System.Drawing.Size(229, 39);
             this.TeamListL.TabIndex = 40;
             this.TeamListL.Text = "현재 부서 목록";
             // 
@@ -124,9 +124,10 @@
             // 
             // btnDeleteTeam
             // 
-            this.btnDeleteTeam.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.btnDeleteTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
             this.btnDeleteTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteTeam.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteTeam.ForeColor = System.Drawing.SystemColors.Window;
             this.btnDeleteTeam.Location = new System.Drawing.Point(277, 765);
             this.btnDeleteTeam.Name = "btnDeleteTeam";
             this.btnDeleteTeam.Size = new System.Drawing.Size(85, 35);
@@ -137,9 +138,10 @@
             // 
             // btnConfirmTeam
             // 
-            this.btnConfirmTeam.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.btnConfirmTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
             this.btnConfirmTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmTeam.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConfirmTeam.ForeColor = System.Drawing.SystemColors.Window;
             this.btnConfirmTeam.Location = new System.Drawing.Point(186, 765);
             this.btnConfirmTeam.Name = "btnConfirmTeam";
             this.btnConfirmTeam.Size = new System.Drawing.Size(85, 35);
@@ -150,9 +152,10 @@
             // 
             // btnAddTeam
             // 
-            this.btnAddTeam.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.btnAddTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
             this.btnAddTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTeam.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddTeam.ForeColor = System.Drawing.SystemColors.Window;
             this.btnAddTeam.Location = new System.Drawing.Point(95, 765);
             this.btnAddTeam.Name = "btnAddTeam";
             this.btnAddTeam.Size = new System.Drawing.Size(85, 35);

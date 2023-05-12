@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("0");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeManagement));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("0");
             this.panel1 = new System.Windows.Forms.Panel();
             this.ManagementL = new System.Windows.Forms.Label();
             this.WorkersMenu = new System.Windows.Forms.ComboBox();
@@ -67,7 +67,7 @@
             // 
             this.ManagementL.AutoSize = true;
             this.ManagementL.Font = new System.Drawing.Font("휴먼모음T", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ManagementL.ForeColor = System.Drawing.Color.Brown;
+            this.ManagementL.ForeColor = System.Drawing.SystemColors.WindowText;
             this.ManagementL.Location = new System.Drawing.Point(13, 23);
             this.ManagementL.Name = "ManagementL";
             this.ManagementL.Size = new System.Drawing.Size(179, 53);
@@ -99,19 +99,21 @@
             this.SearchTextbox.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchTextbox.Location = new System.Drawing.Point(139, 97);
             this.SearchTextbox.Name = "SearchTextbox";
-            this.SearchTextbox.Size = new System.Drawing.Size(361, 33);
+            this.SearchTextbox.Size = new System.Drawing.Size(406, 33);
             this.SearchTextbox.TabIndex = 16;
             // 
             // BtnSearch
             // 
-            this.BtnSearch.BackColor = System.Drawing.Color.GhostWhite;
+            this.BtnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.BtnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnSearch.BackgroundImage")));
+            this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnSearch.FlatAppearance.BorderSize = 0;
             this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSearch.Font = new System.Drawing.Font("함초롬돋움", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnSearch.Location = new System.Drawing.Point(506, 97);
+            this.BtnSearch.Location = new System.Drawing.Point(551, 90);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(85, 33);
+            this.BtnSearch.Size = new System.Drawing.Size(40, 40);
             this.BtnSearch.TabIndex = 17;
-            this.BtnSearch.Text = "검색";
             this.BtnSearch.UseVisualStyleBackColor = false;
             this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
@@ -124,12 +126,13 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.WorkerList.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.WorkerList.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.WorkerList.GridLines = true;
             this.WorkerList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.WorkerList.Location = new System.Drawing.Point(11, 136);
             this.WorkerList.Name = "WorkerList";
-            this.WorkerList.Size = new System.Drawing.Size(580, 665);
+            this.WorkerList.Size = new System.Drawing.Size(580, 617);
             this.WorkerList.TabIndex = 18;
             this.WorkerList.UseCompatibleStateImageBehavior = false;
             this.WorkerList.View = System.Windows.Forms.View.Details;
@@ -166,14 +169,16 @@
             // 
             // btnprevPage
             // 
-            this.btnprevPage.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnprevPage.BackColor = System.Drawing.Color.Transparent;
+            this.btnprevPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnprevPage.BackgroundImage")));
+            this.btnprevPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnprevPage.FlatAppearance.BorderSize = 0;
             this.btnprevPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnprevPage.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnprevPage.Location = new System.Drawing.Point(12, 809);
+            this.btnprevPage.Location = new System.Drawing.Point(205, 778);
             this.btnprevPage.Name = "btnprevPage";
-            this.btnprevPage.Size = new System.Drawing.Size(56, 30);
+            this.btnprevPage.Size = new System.Drawing.Size(30, 30);
             this.btnprevPage.TabIndex = 17;
-            this.btnprevPage.Text = "이전";
             this.btnprevPage.UseVisualStyleBackColor = false;
             this.btnprevPage.Click += new System.EventHandler(this.btnprevPage_Click);
             // 
@@ -182,7 +187,7 @@
             this.page1.AutoSize = true;
             this.page1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.page1.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.page1.Location = new System.Drawing.Point(84, 812);
+            this.page1.Location = new System.Drawing.Point(241, 781);
             this.page1.Name = "page1";
             this.page1.Size = new System.Drawing.Size(23, 25);
             this.page1.TabIndex = 19;
@@ -194,7 +199,7 @@
             this.page2.AutoSize = true;
             this.page2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.page2.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.page2.Location = new System.Drawing.Point(109, 812);
+            this.page2.Location = new System.Drawing.Point(266, 781);
             this.page2.Name = "page2";
             this.page2.Size = new System.Drawing.Size(23, 25);
             this.page2.TabIndex = 19;
@@ -206,7 +211,7 @@
             this.page3.AutoSize = true;
             this.page3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.page3.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.page3.Location = new System.Drawing.Point(134, 812);
+            this.page3.Location = new System.Drawing.Point(291, 781);
             this.page3.Name = "page3";
             this.page3.Size = new System.Drawing.Size(23, 25);
             this.page3.TabIndex = 19;
@@ -218,7 +223,7 @@
             this.page4.AutoSize = true;
             this.page4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.page4.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.page4.Location = new System.Drawing.Point(159, 812);
+            this.page4.Location = new System.Drawing.Point(316, 781);
             this.page4.Name = "page4";
             this.page4.Size = new System.Drawing.Size(23, 25);
             this.page4.TabIndex = 19;
@@ -230,7 +235,7 @@
             this.page5.AutoSize = true;
             this.page5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.page5.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.page5.Location = new System.Drawing.Point(183, 812);
+            this.page5.Location = new System.Drawing.Point(340, 781);
             this.page5.Name = "page5";
             this.page5.Size = new System.Drawing.Size(23, 25);
             this.page5.TabIndex = 19;
@@ -239,26 +244,30 @@
             // 
             // btnnextPage
             // 
-            this.btnnextPage.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnnextPage.BackColor = System.Drawing.Color.Transparent;
+            this.btnnextPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnnextPage.BackgroundImage")));
+            this.btnnextPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnnextPage.FlatAppearance.BorderSize = 0;
             this.btnnextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnextPage.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnnextPage.Location = new System.Drawing.Point(218, 809);
+            this.btnnextPage.Location = new System.Drawing.Point(369, 778);
             this.btnnextPage.Name = "btnnextPage";
-            this.btnnextPage.Size = new System.Drawing.Size(56, 30);
+            this.btnnextPage.Size = new System.Drawing.Size(30, 30);
             this.btnnextPage.TabIndex = 17;
-            this.btnnextPage.Text = "다음";
             this.btnnextPage.UseVisualStyleBackColor = false;
             this.btnnextPage.Click += new System.EventHandler(this.btnnextPage_Click);
             // 
             // btnregistration
             // 
-            this.btnregistration.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnregistration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(80)))), ((int)(((byte)(82)))));
             this.btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnregistration.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnregistration.Location = new System.Drawing.Point(535, 809);
+            this.btnregistration.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnregistration.Location = new System.Drawing.Point(535, 778);
             this.btnregistration.Name = "btnregistration";
             this.btnregistration.Size = new System.Drawing.Size(56, 30);
             this.btnregistration.TabIndex = 17;
+            this.btnregistration.TabStop = false;
             this.btnregistration.Text = "등록";
             this.btnregistration.UseVisualStyleBackColor = false;
             this.btnregistration.Click += new System.EventHandler(this.btnregistration_Click);
@@ -266,9 +275,9 @@
             // Logo
             // 
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(1103, 11);
+            this.Logo.Location = new System.Drawing.Point(1147, 2);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(135, 65);
+            this.Logo.Size = new System.Drawing.Size(85, 78);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 20;
             this.Logo.TabStop = false;
