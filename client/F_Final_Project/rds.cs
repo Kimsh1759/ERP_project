@@ -25,8 +25,6 @@ namespace F_Final_Project
     {
         string ip = "http://192.168.0.9:8080";
         //java - http://192.168.0.9:8080   ec2 java - http://13.209.6.6:8080
-        public List<string> menutype_string = new List<string>() { "name", "PW", "addr", "tel", "mail", "img" };
-        public List<string> menutype_int = new List<string>() { "employeeNumber", "authority", "team", "JG", "birth", "DoE" };
 
         public RDSserver()
         {
@@ -61,8 +59,6 @@ namespace F_Final_Project
             {1,"팀장급" },
             {0 , "관리자" }
         };
-
-
 
         // database C.R.U.D
         public void Create_database(List<object> list, string tableType) // tableType =  "UserInfo"
@@ -167,7 +163,7 @@ namespace F_Final_Project
             }
         }
 
-        public void Create_database(int employeeNumber, string Mdate, string Memo) // tableType =  "MyPage"
+        public void Create_database(int employeeNumber, string Mdate, string Memo) // MyPage memo Create
         {
             string url = string.Format("{0}/AddMemo", ip);
 
@@ -182,7 +178,7 @@ namespace F_Final_Project
             }
         }
 
-        public List<JObject> Search_database(string table, string division, string str, int page,string team="")
+        public List<JObject> Search_database(string table, string division, string str, int page,string team="") // Board SearchRead
         {
             List<JObject> obj= new List<JObject>();
             string url="";
@@ -201,11 +197,11 @@ namespace F_Final_Project
                     url = string.Format("{0}/SearchFreeBoard?table={1}&division={2}&str={3}&page={4}&team={5}", ip, table, division, str, page,team);
                 }
             }
-            obj = CallApiss(url);
+            obj = CallApis(url);
             return obj;
         }
 
-        public List<JObject> Readdic_database(string table_name, int state=0, int num=0, int page=0)
+        public List<JObject> Readdic_database(string table_name, int state=0, int num=0, int page=0)  // Board Read
         {
             string url;
             List<JObject> list = new List<JObject>();
@@ -248,12 +244,12 @@ namespace F_Final_Project
                 url = string.Format("{0}/ReadAll?table={1}", ip,table_name);
             }
 
-            list = CallApiss(url);
+            list = CallApis(url);
 
             return list;
         }
 
-        public List<JObject> Readdic_database(string table, string name, int state , string division="", int page=0)
+        public List<JObject> Readdic_database(string table, string name, int state , string division="", int page=0) // Electric, UserInfo team Read
         {
             string url;
             List<JObject> list = new List<JObject>();
@@ -261,24 +257,24 @@ namespace F_Final_Project
             if (division == "writer")
             {
                 url = string.Format("{0}/ReadDataElectricSelf?table={1}&writer={2}&state={3}&page={4}", ip, table, name,state,page);
-                list = CallApiss(url);
+                list = CallApis(url);
             }
             else if(division == "team")
             {
                 url = string.Format("{0}/ReadElectricTeam?table={1}&team={2}&state={3}&page={4}", ip, table, name,state,page);
-                list = CallApiss(url);
+                list = CallApis(url);
             }
 
             else if(table == "UserInfo")
             {
                 url = string.Format("{0}/ReadUserInfoTeam?team={1}&page={2}", ip,team_dic.FirstOrDefault(x=>x.Value==name).Key, state);
-                list = CallApiss(url);
+                list = CallApis(url);
             }
 
             return list;
         }
 
-        public JObject Read_database2(string table, string id,int date=0)
+        public JObject Read_database2(string table, string id,int date=0) // Electric search Read, UserInfo one Read
         {
             JObject obj = null;
             string url="";
@@ -291,11 +287,6 @@ namespace F_Final_Project
             else if(table == "Qrcode")
             {
                 url = string.Format("{0}/ReadQRdate?table={1}&id={2}&date={3}", ip, table, id, date);
-                obj = CallApiJ(url);
-            }
-            else if(table=="UserInfo")
-            {
-                url = string.Format("{0}/Read?table={1}&num={2}", ip, table, id);
                 obj = CallApiJ(url);
             }
             else
@@ -320,121 +311,23 @@ namespace F_Final_Project
                     break;
                 }
             }
-
             return result;
         }
 
-        public List<object> Read_database(string table_name) // ex) table_name = "UserInfo"
+        public List<object> Read_database(string table_name, int num, string Mdate = null) // use form: ShowWorker, Login, MyPage
         {
+            List<object> list = new List<object>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+
             string url;
-            Dictionary<string, object> result = new Dictionary<string, object>();
-            List<object> list = new List<object>();
-            List<Dictionary<string, object>> dic_list = new List<Dictionary<string, object>>();
-
-            if (table_name == "NoticeBoard" || table_name == "FreeBoard")
-            {
-                url = string.Format("{0}/ReadBoard?table={1}", ip, table_name);
-                dic_list = CallApis(url);
-            }
-            else
-            {
-                url = string.Format("{0}/ReadAll?table={1}", ip, table_name);
-                result = CallApi(url);
-            }
-
-
-            try
-            {
-                if (table_name == "UserInfo")
-                {
-                    foreach (JObject i in result.Values)
-                    {
-                        list.Add(i["employeeNumber"]);
-                        list.Add(i["name"]);
-                        list.Add(i["PW"]);
-                        list.Add(i["authority"]);
-                        list.Add(team_dic[(int)i["team"]]);
-                        list.Add(JG_dic[(int)i["JG"]]);
-                        list.Add(i["birth"]);
-                        list.Add(i["addr"]);
-                        list.Add(i["tel"]);
-                        list.Add(i["mail"]);
-                        list.Add(i["DoE"]);
-                    }
-                }
-                else if (table_name == "MyPage")
-                {
-                    foreach (JObject i in result.Values)
-                    {
-                        list.Add(i["memo"]);
-                    }
-                }
-                else if (table_name == "ElectronicPayment")
-                {
-                    foreach (JObject i in result.Values)
-                    {
-                        list.Add(i["employeeNumber"]);
-                        list.Add(i["docTitle"]);
-                        list.Add(i["docContent"]);
-                        list.Add(i["docState"]);
-                    }
-                }
-                else if (table_name == "NoticeBoard")
-                {
-                    foreach (var i in dic_list)
-                    {
-                        list.Add(i["name"]);
-                        list.Add(i["title"]);
-                        list.Add(i["wdate"]);
-                        list.Add(i["division"]);
-                        list.Add(i["id"]);
-                    }
-                }
-                else if (table_name == "FreeBoard")
-                {
-                    foreach (var i in dic_list)
-                    {
-                        list.Add(i["name"]);
-                        list.Add(i["title"]);
-                        list.Add(i["wdate"]);
-                        list.Add(i["division"]);
-                        list.Add(i["id"]);
-                    }
-                }
-                else if (table_name == "FreeBoard")
-                {
-                    foreach (var i in dic_list)
-                    {
-                        list.Add(i["name"]);
-                        list.Add(i["title"]);
-                        list.Add(i["wdate"]);
-                        list.Add(i["division"]);
-                        list.Add(i["id"]);
-                    }
-                }
-
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            return list;
-        }
-        // Read_database 오버로딩
-        public List<object> Read_database(string table_name, int num, string Mdate = null) // ex) table_name = "UserInfo" num=employeeNumber
-        {
-            List<object> list = new List<object>();
-            Dictionary<string, object> result = new Dictionary<string, object>();
-
-            string url = string.Format("{0}/Read?table={1}&num={2}", ip, table_name, num.ToString());
 
             if (table_name == "MyPage")
             {
                 url = string.Format("{0}/ReadMemo?table=MyPage&num={1}&date={2}", ip, num.ToString(), Mdate);
             }
-            else if (table_name == "NoticeBoard" || table_name == "FreeBoard")
+            else
             {
-                url = string.Format("{0}/ReadBoardContent?table={1}&id={2}", ip, table_name, num.ToString());
+                url = string.Format("{0}/Read?table={1}&num={2}", ip, table_name, num.ToString());
             }
             result = CallApi(url);
 
@@ -503,7 +396,7 @@ namespace F_Final_Project
             return list;
         }
 
-        public List<object> Read_database(string table_name, string num) // ex) table_name = "UserInfo" num=employeeNumber
+        public List<object> Read_database(string table_name, string num) // use form: PostBrowse, NoticeBrowse
         {
             List<object> list = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -589,12 +482,6 @@ namespace F_Final_Project
             int id = team_dic.FirstOrDefault(x => x.Value == teamname).Key;
             string url = string.Format("{0}/UpdateTeam?teamID={1}&change={2}", ip, id, change);
             Dictionary<string, object> result = CallApi(url);
-        }
-
-        public void UpdateLeave_database(List<object> list, List<object> list2, string table)
-        {
-            Delete_database(list, table);
-            Create_database(list2, table);
         }
 
         public void Updatestate( string table, int state, string id)
@@ -691,49 +578,7 @@ namespace F_Final_Project
 
         }
 
-        public List<Dictionary<string, object>> CallApis(string url)
-        {
-            // HTTP 요청 생성
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.ContentType = "application/json";
-            List<Dictionary<string, object>> dic_list = new List<Dictionary<string, object>>();
-            Dictionary<string, object> result;
-            try
-            {
-                // API 호출 및 응답 처리
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        // 응답 데이터를 JSON 형식으로 Deserialize
-
-                        Stream responseStream = response.GetResponseStream();
-                        StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                        string jsonContent = reader.ReadToEnd();
-                        dic_list = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonContent);
-
-                    }
-                    else
-                    {
-                        // 에러 처리
-                        throw new Exception($"API 호출에 실패하였습니다. 상태 코드: {response.StatusCode}");
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                List<Dictionary<string, object>> a = new List<Dictionary<string, object>>();
-                return a;
-            }
-
-
-            return dic_list;
-
-        }
-
-        public List<JObject> CallApiss(string url)
+        public List<JObject> CallApis(string url)
         {
             // HTTP 요청 생성
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

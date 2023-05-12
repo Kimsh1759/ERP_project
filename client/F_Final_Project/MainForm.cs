@@ -11,8 +11,7 @@ using System.Windows.Forms;
 namespace F_Final_Project
 {
     public partial class MainForm : Form
-    {
-        User user = new User();
+    {        
         LoginApp app;
         MyPage myPage = new MyPage();
         Notice notice = new Notice();
@@ -21,28 +20,20 @@ namespace F_Final_Project
         Attendance attendance = new Attendance();
         EmployeeManagement employee = new EmployeeManagement();
         TeamManagement team = new TeamManagement();
+
         public MainForm(LoginApp loginApp)
         {
             InitializeComponent();
-            if (user.authority != 0)
-            {
-                EmployeeHome.Text = "사원조회";
-                TeamHome.Visible = false;
-            }
             this.app = loginApp;
-        }
-        public MainForm()
-        {
-            InitializeComponent();
-            if (user.authority != 0)
-            {
-                EmployeeHome.Text = "사원조회";
-                TeamHome.Visible = false;
-            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            if (LoginApp.user.authority != 0)
+            {
+                EmployeeHome.Text = "사원조회";
+                TeamHome.Visible = false;
+            }
             panel1.Controls.Clear();
             MyPageHome.ForeColor = Color.DarkOrange;
             NoticeHome.ForeColor = Color.White;

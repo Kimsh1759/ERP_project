@@ -15,7 +15,6 @@ namespace F_Final_Project
     {
         LoginApp loginApp;
 
-        public static RDSserver RDs = new RDSserver();
         public Login(LoginApp loginApp)
         {
             this.loginApp = loginApp;
@@ -29,7 +28,7 @@ namespace F_Final_Project
             if (InputID.Text != "")
             {
 
-                list = RDs.Read_database("UserInfo", Convert.ToInt32(InputID.Text));
+                list = LoginApp.RDs.Read_database("UserInfo", Convert.ToInt32(InputID.Text));
 
                 if (list.Count != 0 && Convert.ToString(list[0]) == (InputID.Text)) //InputID TextBox에 입력한 사원번호가 있다는 조건 선언
                 {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MySqlX.XDevAPI.Relational;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -95,7 +96,8 @@ namespace F_Final_Project
                 list2.Add(Convert.ToInt32(listView1.SelectedItems[0].SubItems[0].Text));
                 list2.Add(Convert.ToInt32(text_start.Text.Replace(":", "")));
                 list2.Add(Convert.ToInt32(text_end.Text.Replace(":", "")));
-                LoginApp.RDs.UpdateLeave_database(list,list2,"Qrcode" );
+                LoginApp.RDs.Delete_database(list, "Qrcode");
+                LoginApp.RDs.Create_database(list2, "Qrcode");
                 text_start.Text = "";
                 text_end.Text = "";
                 restart();
