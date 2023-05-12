@@ -109,7 +109,6 @@
             this.Page5.Size = new System.Drawing.Size(23, 25);
             this.Page5.TabIndex = 37;
             this.Page5.Text = "5";
-            this.Page5.Click += new System.EventHandler(this.Page_Click);
             // 
             // Page4
             // 
@@ -120,7 +119,6 @@
             this.Page4.Size = new System.Drawing.Size(23, 25);
             this.Page4.TabIndex = 38;
             this.Page4.Text = "4";
-            this.Page4.Click += new System.EventHandler(this.Page_Click);
             // 
             // Page3
             // 
@@ -131,7 +129,6 @@
             this.Page3.Size = new System.Drawing.Size(23, 25);
             this.Page3.TabIndex = 39;
             this.Page3.Text = "3";
-            this.Page3.Click += new System.EventHandler(this.Page_Click);
             // 
             // Page2
             // 
@@ -142,7 +139,6 @@
             this.Page2.Size = new System.Drawing.Size(23, 25);
             this.Page2.TabIndex = 40;
             this.Page2.Text = "2";
-            this.Page2.Click += new System.EventHandler(this.Page_Click);
             // 
             // Page1
             // 
@@ -153,7 +149,6 @@
             this.Page1.Size = new System.Drawing.Size(23, 25);
             this.Page1.TabIndex = 41;
             this.Page1.Text = "1";
-            this.Page1.Click += new System.EventHandler(this.Page_Click);
             // 
             // NextPage
             // 
