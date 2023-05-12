@@ -299,5 +299,16 @@ public class HelloController {
         return service.getSearchBoard(table,division,str,page);
     }
 
+    @GetMapping("ReadFreeBoard")
+    @ResponseBody
+    public String ReadFreeBoard(@RequestParam("table") String table, @RequestParam("team") String team, @RequestParam("page") int page) throws JsonProcessingException {
+        return service.getFreeBoard(table,team,page);
+    }
+    @GetMapping("SearchFreeBoard")
+    @ResponseBody
+    public String SearchFreeBoard(@RequestParam("table") String table, @RequestParam("division") String division,@RequestParam("str") String str,@RequestParam("page") int page, @RequestParam("team") String team) throws JsonProcessingException {
+        return service.getSearchFreeBoard(table,division,str,page,team);
+    }
+
 }
 

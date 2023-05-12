@@ -387,4 +387,13 @@ public class HelloService {
         String sql = String.format("SELECT * FROM %s where %s like \"%%%s%%\" order by wdate desc limit %d,20", table,division,str ,(page-1)*20);
         return sqlToDataAll(sql);
     }
+    public String getFreeBoard(String table, String team, int page) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM %s where division= \"자유\" or division=\"%s\" order by wdate desc limit %d,20", table, team, (page-1)*20);
+        return sqlToDataAll(sql);
+    }
+
+    public String getSearchFreeBoard(String table, String division,String str, int page, String team) throws JsonProcessingException {
+        String sql = String.format("SELECT * FROM %s where %s like \"%%%s%%\" and (division=\"자유\" or division=\"%s\") order by wdate desc limit %d,20", table,division,str, team ,(page-1)*20);
+        return sqlToDataAll(sql);
+    }
 }
