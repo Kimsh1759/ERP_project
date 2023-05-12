@@ -187,5 +187,6 @@ namespace F_Final_Project
             Day36.ForeColor = Color.Red;
             Day42.ForeColor = Color.Blue;
         }
+
     }
 }
