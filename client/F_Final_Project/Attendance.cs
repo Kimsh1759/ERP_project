@@ -29,6 +29,15 @@ namespace F_Final_Project
                 workers.Text = null;
                 workers.Parent = panel3;
                 workers.Show();
+
+                AttendanceBrowse showWorker = new AttendanceBrowse(LoginApp.user.id.ToString());
+                panel2.Controls.Clear();
+                showWorker.TopLevel = false;
+                panel2.Controls.Add(showWorker);
+                showWorker.Text = null;
+                showWorker.ControlBox = false;
+                showWorker.Parent = panel2;
+                showWorker.Show();
             }
 
             else if(LoginApp.user.authority == 1)
