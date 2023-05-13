@@ -63,6 +63,8 @@ namespace F_Final_Project
                         break;
                 }
                 List<object> list = new List<object>() { LoginApp.RDs.team_dic.Count, name,doc };
+                LoginApp.RDs.teamDoc_dic.Add(name, doc);
+                LoginApp.RDs.team_dic.Add(LoginApp.RDs.team_dic.Count,name);
                 LoginApp.RDs.Create_database(list, "Team");
                 MessageBox.Show("부서 추가 완료했습니다.");
             }
@@ -74,41 +76,19 @@ namespace F_Final_Project
         {
 
             LoginApp.RDs.Delete_database(LoginApp.RDs.team_dic.FirstOrDefault(x=>x.Value== TeamList.SelectedItem.ToString()).Key , "Team");
+            LoginApp.RDs.teamDoc_dic.Remove(TeamList.SelectedItem.ToString());
+            LoginApp.RDs.team_dic.Remove(LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == TeamList.SelectedItem.ToString()).Key);
             TeamList.Items.RemoveAt(TeamList.SelectedIndex);
             MessageBox.Show("부서가 삭제되었습니다.");
             
         }
 
-        private void TeamList_Click(object sender, EventArgs e)
-        {
-            string item = TeamList.SelectedItem.ToString();
-            team_change_name = item;
-            teamName.Visible = true;
-            TeamWorkerList.Visible = true;
-            WorkersL.Visible = true;
-            WorkersTeamChange.Visible = true;
-            teamName.Text = item;
-            TeamWorkerList.Items.Clear();
-            ListViewItem listitem = new ListViewItem();
-            List<JObject> list = new List<JObject>();
-            list = LoginApp.RDs.Readdic_database("UserInfo");
-
-            foreach (JObject worker in list)
-            {
-                if (LoginApp.RDs.team_dic[Convert.ToInt32(worker["team"])].Contains(teamName.Text))
-                {
-                    listitem = new ListViewItem(worker["employeeNumber"].ToString());
-                    listitem.SubItems.Add(worker["name"].ToString());
-                    listitem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(worker["JG"])]);
-                    TeamWorkerList.Items.Add(listitem);
-                }
-            }
-
-        }
-
         private void btnConfirmTeam_Click(object sender, EventArgs e)
         {
-            LoginApp.RDs.UpdateTeam_database(TeamList.SelectedItem.ToString(), TextTeam.Text);
+            LoginApp.RDs.UpdateTeam_database(team_change_name, TextTeam.Text);
+            LoginApp.RDs.teamDoc_dic.Add(TextTeam.Text, LoginApp.RDs.teamDoc_dic[TeamList.Items[TeamList.SelectedIndex].ToString()]);
+            LoginApp.RDs.teamDoc_dic.Remove(TeamList.Items[TeamList.SelectedIndex].ToString());
+            LoginApp.RDs.team_dic[LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == TeamList.Items[TeamList.SelectedIndex].ToString()).Key] = TextTeam.Text;
             TeamList.Items[TeamList.SelectedIndex] = TextTeam.Text;
             MessageBox.Show("부서 수정 완료했습니다.");
         }
@@ -165,6 +145,35 @@ namespace F_Final_Project
                 TeamWorkerList.Items.Add(item.Clone() as ListViewItem);
                 WorkersTeamChange.Items.Remove(item);
                 LoginApp.RDs.Update_database(Convert.ToInt32(item.Text), "UserInfo", "team", LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == team_change_name).Key.ToString());
+            }
+        }
+
+        private void TeamList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TeamList.Items.Count > 0 && TeamList.SelectedItem != null)
+            {
+                string item = TeamList.SelectedItem.ToString();
+                team_change_name = item;
+                teamName.Visible = true;
+                TeamWorkerList.Visible = true;
+                WorkersL.Visible = true;
+                WorkersTeamChange.Visible = true;
+                teamName.Text = item;
+                TeamWorkerList.Items.Clear();
+                ListViewItem listitem = new ListViewItem();
+                List<JObject> list = new List<JObject>();
+                list = LoginApp.RDs.Readdic_database("UserInfo");
+
+                foreach (JObject worker in list)
+                {
+                    if (LoginApp.RDs.team_dic[Convert.ToInt32(worker["team"])].Contains(teamName.Text))
+                    {
+                        listitem = new ListViewItem(worker["employeeNumber"].ToString());
+                        listitem.SubItems.Add(worker["name"].ToString());
+                        listitem.SubItems.Add(LoginApp.RDs.JG_dic[Convert.ToInt32(worker["JG"])]);
+                        TeamWorkerList.Items.Add(listitem);
+                    }
+                }
             }
         }
     }

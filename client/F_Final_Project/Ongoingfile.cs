@@ -16,8 +16,6 @@ namespace F_Final_Project
 {
     public partial class Ongoingfile : Form
     {
-        string ip = "http://localhost:8080";
-        public static RDSserver rds = new RDSserver();
         int state;
         public int page;
         int btn_num;
@@ -63,21 +61,21 @@ namespace F_Final_Project
             if (LoginApp.user.authority == 0)
             {
                 if (btn_num == 1)// 다불러와
-                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page);
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page);
                 else if (btn_num == 2)// 다불러와
-                    list = rds.Readdic_database("ApplicationForLeave", state,0, page);
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", state,0, page);
             }
             else if (LoginApp.user.authority == 1) // 권한 1 부장 -> 자기가 쓴것만 보면 됨 state 통해서 승인 미승인 바꾸면 됨
             {
                 if (btn_num == 1)             
-                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page); 
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page); 
                 else if (btn_num == 2) // 권한 1 부장 -> 자기팀꺼 불러오기 state 통해서 승인 미승인 바꾸면 됨   
-                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.team, state, "team", page);
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.team, state, "team", page);
             }
             else
             {
                 if (btn_num == 1)  // 권한 2 일반 사원 -> 자기가 쓴것만 보면 됨
-                    list = rds.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
             }
 
             for (int i = 0; i < list.Count; i++)

@@ -34,15 +34,15 @@ namespace F_Final_Project
                 Random random= new Random();
                 while (true)
                 {
-                    if (introduction.SelectedItem.ToString() == "일반")
+                    if (introduction.Text == "일반")
                     {
                         str += "B" + Convert.ToString(random.Next() % 1000000);
                     }
-                    else if (introduction.SelectedItem.ToString() == "긴급")
+                    else if (introduction.Text == "긴급")
                     {
                         str += "A" + Convert.ToString(random.Next() % 1000000);
                     }
-                    else if (introduction.SelectedItem.ToString() == "안내")
+                    else if (introduction.Text == "안내")
                     {
                         str += "C" + Convert.ToString(random.Next() % 1000000);
                     }

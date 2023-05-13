@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamManagement));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("0");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("0");
             this.panel1 = new System.Windows.Forms.Panel();
             this.TeamManagementL = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
@@ -92,7 +92,7 @@
             this.TeamList.Name = "TeamList";
             this.TeamList.Size = new System.Drawing.Size(350, 487);
             this.TeamList.TabIndex = 39;
-            this.TeamList.Click += new System.EventHandler(this.TeamList_Click);
+            this.TeamList.SelectedIndexChanged += new System.EventHandler(this.TeamList_SelectedIndexChanged);
             // 
             // TeamListL
             // 
@@ -173,7 +173,7 @@
             this.columnHeader3});
             this.TeamWorkerList.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.TeamWorkerList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.TeamWorkerList.Location = new System.Drawing.Point(376, 192);
             this.TeamWorkerList.Name = "TeamWorkerList";
             this.TeamWorkerList.Size = new System.Drawing.Size(420, 567);

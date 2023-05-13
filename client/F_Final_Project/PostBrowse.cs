@@ -27,20 +27,20 @@ namespace F_Final_Project
             board_data[2] = label_title.Text;
             board_data[3] = Substance.Text;
             board_data[4] = Convert.ToInt32(dateTime.ToString("yyyy") + dateTime.ToString("MM") + dateTime.ToString("dd"));
-            board_data[5] = label_division.Text;
+            board_data[5] = introduction.Text;
             if (board_data[5]!=label_division.Text)
             {
                 while (true)
                 {
                     string str = "";
                     Random random = new Random();
-                    if (introduction.SelectedItem.ToString() == "자유")
+                    if (introduction.Text == "자유")
                     {
                         str += "F" + Convert.ToString(random.Next() % 1000000);
                     }
                     else
                     {
-                        str += LoginApp.RDs.teamDoc_dic[introduction.SelectedItem.ToString()] + Convert.ToString(random.Next() % 1000000);
+                        str += LoginApp.RDs.teamDoc_dic[introduction.Text] + Convert.ToString(random.Next() % 1000000);
                     }
                     if (Post.Free_id.Contains(str))
                     {
