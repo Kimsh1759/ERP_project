@@ -92,6 +92,7 @@
             this.SelectMenu.Size = new System.Drawing.Size(121, 29);
             this.SelectMenu.TabIndex = 5;
             this.SelectMenu.Text = "결재 종류";
+            this.SelectMenu.SelectedIndexChanged += new System.EventHandler(this.SelectMenu_SelectedIndexChanged);
             // 
             // DocumentRegistration
             // 
