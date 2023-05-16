@@ -45,18 +45,36 @@ namespace F_Final_Project
                 string str2 = item["end_time"].ToString();
                 if (str != null || str != "")
                 {
-                    for (int i = 2; i < str.Length; i += 3)
+                    if(str.Length < 6)
                     {
-                        str = str.Insert(i, ":");
-
+                        for (int i = 1; i < str.Length; i += 3)
+                        {
+                            str = str.Insert(i, ":");
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 2; i < str.Length; i += 3)
+                        {
+                            str = str.Insert(i, ":");
+                        }
                     }
                 }
                 if (str2 != null || str2 != "")
                 {
-                    for (int i = 2; i < str2.Length; i += 3)
+                    if(str2.Length < 6)
                     {
-                        str2 = str2.Insert(i, ":");
-
+                        for (int i = 1; i < str2.Length; i += 3)
+                        {
+                            str2 = str2.Insert(i, ":");
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 2; i < str2.Length; i += 3)
+                        {
+                            str2 = str2.Insert(i, ":");
+                        }
                     }
                 }
                 item2.SubItems.Add(str);
