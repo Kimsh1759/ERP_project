@@ -78,6 +78,8 @@ namespace F_Final_Project
             label_page.Add(Page4);
             label_page.Add(Page5);
             label_page[0].ForeColor = Color.DodgerBlue;
+            search_option.SelectedIndex= 0;
+            search_option.Text = "전체";
             restart_form();
         }
 

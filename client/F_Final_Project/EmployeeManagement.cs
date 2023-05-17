@@ -120,6 +120,8 @@ namespace F_Final_Project
             label_page.Add(page4);
             label_page.Add(page5);
             label_page[0].ForeColor = Color.DodgerBlue;
+            WorkersMenu.SelectedIndex = 0;
+            WorkersMenu.Text = "이름";
             restart_form();
         }
 

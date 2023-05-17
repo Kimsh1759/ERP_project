@@ -35,7 +35,7 @@ namespace F_Final_Project
 
             list = LoginApp.RDs.Read_database("UserInfo", id);
 
-            if (LoginApp.user.img != null)
+            if (list != null)
             {
                 workersprofile.Image = new Bitmap(new MemoryStream(LoginApp.RDs.ReadImage_database("UserInfo", id)));
             }

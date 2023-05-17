@@ -114,6 +114,9 @@ namespace F_Final_Project
             else
                 search_option.Items.Add(LoginApp.user.team);
 
+            search_option.SelectedIndex = 0;
+            search_option.Text = "전체";
+
             restart_form();
         }
 

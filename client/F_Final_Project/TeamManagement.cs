@@ -23,7 +23,7 @@ namespace F_Final_Project
             InitializeComponent();
         }
 
-        string team_change_name;
+        string team_change_name="";
         
 
         private void TeamManagement_Load(object sender, EventArgs e)
@@ -46,6 +46,10 @@ namespace F_Final_Project
             if(LoginApp.RDs.team_dic.Values.Contains(TextTeam.Text))
             {
                 MessageBox.Show("중복된 부서입니다.");
+            }
+            else if(TextTeam.Text == "" || TextTeam.Text == null)
+            {
+                MessageBox.Show("잘못된 부서명입니다.");
             }
             else
             {
@@ -85,12 +89,19 @@ namespace F_Final_Project
 
         private void btnConfirmTeam_Click(object sender, EventArgs e)
         {
-            LoginApp.RDs.UpdateTeam_database(team_change_name, TextTeam.Text);
-            LoginApp.RDs.teamDoc_dic.Add(TextTeam.Text, LoginApp.RDs.teamDoc_dic[TeamList.Items[TeamList.SelectedIndex].ToString()]);
-            LoginApp.RDs.teamDoc_dic.Remove(TeamList.Items[TeamList.SelectedIndex].ToString());
-            LoginApp.RDs.team_dic[LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == TeamList.Items[TeamList.SelectedIndex].ToString()).Key] = TextTeam.Text;
-            TeamList.Items[TeamList.SelectedIndex] = TextTeam.Text;
-            MessageBox.Show("부서 수정 완료했습니다.");
+            if (TextTeam.Text == "" || TextTeam.Text == null)
+            {
+                MessageBox.Show("잘못된 부서명입니다.");
+            }
+            else
+            {
+                LoginApp.RDs.UpdateTeam_database(team_change_name, TextTeam.Text);
+                LoginApp.RDs.teamDoc_dic.Add(TextTeam.Text, LoginApp.RDs.teamDoc_dic[TeamList.Items[TeamList.SelectedIndex].ToString()]);
+                LoginApp.RDs.teamDoc_dic.Remove(TeamList.Items[TeamList.SelectedIndex].ToString());
+                LoginApp.RDs.team_dic[LoginApp.RDs.team_dic.FirstOrDefault(x => x.Value == TeamList.Items[TeamList.SelectedIndex].ToString()).Key] = TextTeam.Text;
+                TeamList.Items[TeamList.SelectedIndex] = TextTeam.Text;
+                MessageBox.Show("부서 수정 완료했습니다.");
+            }
         }
 
         private void WorkersTeamChange_ItemDrag(object sender, ItemDragEventArgs e)
