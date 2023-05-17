@@ -24,7 +24,7 @@ namespace F_Final_Project
         BusinessWorkReport businessWorkReport = new BusinessWorkReport();
         Draft draft = new Draft();
         RDSserver rds = new RDSserver();
-        string ip = "http://localhost:8080";
+        string ip = "http://13.209.6.6:8080";
         List<string> idList = new List<string>();
         public DocumentRegistration()
         {
@@ -45,7 +45,6 @@ namespace F_Final_Project
             applicationForLeave.ControlBox = false;
             applicationForLeave.Parent = panel1;
             applicationForLeave.Show();
-
         }
 
         private void btnforWork_Click(object sender, EventArgs e)

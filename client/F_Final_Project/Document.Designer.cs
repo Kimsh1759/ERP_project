@@ -29,184 +29,187 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Document));
-            this.Logo = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.DocumentL = new System.Windows.Forms.Label();
-            this.SelectPanel = new System.Windows.Forms.Panel();
-            this.btnfinishedfile = new System.Windows.Forms.Button();
-            this.btnongoingfile = new System.Windows.Forms.Button();
-            this.btnregistration = new System.Windows.Forms.Button();
-            this.btnfinish = new System.Windows.Forms.Button();
-            this.btnongoing = new System.Windows.Forms.Button();
-            this.manegersmenu = new System.Windows.Forms.Label();
-            this.workersmenu = new System.Windows.Forms.Label();
-            this.panel = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
-            this.SelectPanel.SuspendLayout();
-            this.SuspendLayout();
+            Logo = new System.Windows.Forms.PictureBox();
+            panel1 = new System.Windows.Forms.Panel();
+            DocumentL = new System.Windows.Forms.Label();
+            SelectPanel = new System.Windows.Forms.Panel();
+            btnfinishedfile = new System.Windows.Forms.Button();
+            btnongoingfile = new System.Windows.Forms.Button();
+            btnregistration = new System.Windows.Forms.Button();
+            btnfinish = new System.Windows.Forms.Button();
+            btnongoing = new System.Windows.Forms.Button();
+            manegersmenu = new System.Windows.Forms.Label();
+            workersmenu = new System.Windows.Forms.Label();
+            panel = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
+            SelectPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // Logo
             // 
-            this.Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Logo.BackgroundImage")));
-            this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(1147, 2);
-            this.Logo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(85, 78);
-            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Logo.TabIndex = 7;
-            this.Logo.TabStop = false;
+            Logo.BackgroundImage = (System.Drawing.Image)resources.GetObject("Logo.BackgroundImage");
+            Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            Logo.Image = (System.Drawing.Image)resources.GetObject("Logo.Image");
+            Logo.Location = new System.Drawing.Point(1147, 2);
+            Logo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Logo.Name = "Logo";
+            Logo.Size = new System.Drawing.Size(85, 78);
+            Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            Logo.TabIndex = 7;
+            Logo.TabStop = false;
             // 
             // panel1
             // 
-            this.panel1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.panel1.BackColor = System.Drawing.SystemColors.WindowText;
-            this.panel1.Location = new System.Drawing.Point(12, 82);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1225, 1);
-            this.panel1.TabIndex = 9;
+            panel1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            panel1.BackColor = System.Drawing.SystemColors.WindowText;
+            panel1.Location = new System.Drawing.Point(12, 82);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1225, 1);
+            panel1.TabIndex = 9;
             // 
             // DocumentL
             // 
-            this.DocumentL.AutoSize = true;
-            this.DocumentL.Font = new System.Drawing.Font("휴먼모음T", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DocumentL.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.DocumentL.Location = new System.Drawing.Point(12, 24);
-            this.DocumentL.Name = "DocumentL";
-            this.DocumentL.Size = new System.Drawing.Size(179, 53);
-            this.DocumentL.TabIndex = 11;
-            this.DocumentL.Text = "전자결재";
+            DocumentL.AutoSize = true;
+            DocumentL.Font = new System.Drawing.Font("휴먼모음T", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DocumentL.ForeColor = System.Drawing.SystemColors.WindowText;
+            DocumentL.Location = new System.Drawing.Point(12, 24);
+            DocumentL.Name = "DocumentL";
+            DocumentL.Size = new System.Drawing.Size(179, 53);
+            DocumentL.TabIndex = 11;
+            DocumentL.Text = "전자결재";
             // 
             // SelectPanel
             // 
-            this.SelectPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(40)))), ((int)(((byte)(45)))));
-            this.SelectPanel.Controls.Add(this.btnfinishedfile);
-            this.SelectPanel.Controls.Add(this.btnongoingfile);
-            this.SelectPanel.Controls.Add(this.btnregistration);
-            this.SelectPanel.Controls.Add(this.btnfinish);
-            this.SelectPanel.Controls.Add(this.btnongoing);
-            this.SelectPanel.Controls.Add(this.manegersmenu);
-            this.SelectPanel.Controls.Add(this.workersmenu);
-            this.SelectPanel.Location = new System.Drawing.Point(12, 89);
-            this.SelectPanel.Name = "SelectPanel";
-            this.SelectPanel.Size = new System.Drawing.Size(180, 750);
-            this.SelectPanel.TabIndex = 12;
+            SelectPanel.BackColor = System.Drawing.Color.FromArgb(33, 40, 45);
+            SelectPanel.Controls.Add(btnfinishedfile);
+            SelectPanel.Controls.Add(btnongoingfile);
+            SelectPanel.Controls.Add(btnregistration);
+            SelectPanel.Controls.Add(btnfinish);
+            SelectPanel.Controls.Add(btnongoing);
+            SelectPanel.Controls.Add(manegersmenu);
+            SelectPanel.Controls.Add(workersmenu);
+            SelectPanel.Location = new System.Drawing.Point(12, 89);
+            SelectPanel.Name = "SelectPanel";
+            SelectPanel.Size = new System.Drawing.Size(180, 750);
+            SelectPanel.TabIndex = 12;
             // 
             // btnfinishedfile
             // 
-            this.btnfinishedfile.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnfinishedfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnfinishedfile.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnfinishedfile.Location = new System.Drawing.Point(23, 335);
-            this.btnfinishedfile.Name = "btnfinishedfile";
-            this.btnfinishedfile.Size = new System.Drawing.Size(130, 30);
-            this.btnfinishedfile.TabIndex = 1;
-            this.btnfinishedfile.Text = "완료된 문서";
-            this.btnfinishedfile.UseVisualStyleBackColor = false;
-            this.btnfinishedfile.Click += new System.EventHandler(this.btnfinishedfile_Click);
+            btnfinishedfile.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnfinishedfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnfinishedfile.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnfinishedfile.Location = new System.Drawing.Point(23, 335);
+            btnfinishedfile.Name = "btnfinishedfile";
+            btnfinishedfile.Size = new System.Drawing.Size(130, 30);
+            btnfinishedfile.TabIndex = 1;
+            btnfinishedfile.Text = "완료된 문서";
+            btnfinishedfile.UseVisualStyleBackColor = false;
+            btnfinishedfile.Visible = false;
+            btnfinishedfile.Click += btnfinishedfile_Click;
             // 
             // btnongoingfile
             // 
-            this.btnongoingfile.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnongoingfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnongoingfile.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnongoingfile.Location = new System.Drawing.Point(23, 293);
-            this.btnongoingfile.Name = "btnongoingfile";
-            this.btnongoingfile.Size = new System.Drawing.Size(130, 30);
-            this.btnongoingfile.TabIndex = 1;
-            this.btnongoingfile.Text = "진행중인 문서";
-            this.btnongoingfile.UseVisualStyleBackColor = false;
-            this.btnongoingfile.Click += new System.EventHandler(this.btnongoingfile_Click);
+            btnongoingfile.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnongoingfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnongoingfile.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnongoingfile.Location = new System.Drawing.Point(23, 293);
+            btnongoingfile.Name = "btnongoingfile";
+            btnongoingfile.Size = new System.Drawing.Size(130, 30);
+            btnongoingfile.TabIndex = 1;
+            btnongoingfile.Text = "진행중인 문서";
+            btnongoingfile.UseVisualStyleBackColor = false;
+            btnongoingfile.Visible = false;
+            btnongoingfile.Click += btnongoingfile_Click;
             // 
             // btnregistration
             // 
-            this.btnregistration.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnregistration.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnregistration.Location = new System.Drawing.Point(23, 157);
-            this.btnregistration.Name = "btnregistration";
-            this.btnregistration.Size = new System.Drawing.Size(130, 30);
-            this.btnregistration.TabIndex = 1;
-            this.btnregistration.Text = "작성";
-            this.btnregistration.UseVisualStyleBackColor = false;
-            this.btnregistration.Click += new System.EventHandler(this.btnregistration_Click);
+            btnregistration.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnregistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnregistration.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnregistration.Location = new System.Drawing.Point(23, 157);
+            btnregistration.Name = "btnregistration";
+            btnregistration.Size = new System.Drawing.Size(130, 30);
+            btnregistration.TabIndex = 1;
+            btnregistration.Text = "작성";
+            btnregistration.UseVisualStyleBackColor = false;
+            btnregistration.Click += btnregistration_Click;
             // 
             // btnfinish
             // 
-            this.btnfinish.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnfinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnfinish.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnfinish.Location = new System.Drawing.Point(23, 115);
-            this.btnfinish.Name = "btnfinish";
-            this.btnfinish.Size = new System.Drawing.Size(130, 30);
-            this.btnfinish.TabIndex = 1;
-            this.btnfinish.Text = "완료";
-            this.btnfinish.UseVisualStyleBackColor = false;
-            this.btnfinish.Click += new System.EventHandler(this.btnfinish_Click);
+            btnfinish.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnfinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnfinish.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnfinish.Location = new System.Drawing.Point(23, 115);
+            btnfinish.Name = "btnfinish";
+            btnfinish.Size = new System.Drawing.Size(130, 30);
+            btnfinish.TabIndex = 1;
+            btnfinish.Text = "완료";
+            btnfinish.UseVisualStyleBackColor = false;
+            btnfinish.Click += btnfinish_Click;
             // 
             // btnongoing
             // 
-            this.btnongoing.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnongoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnongoing.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnongoing.Location = new System.Drawing.Point(23, 72);
-            this.btnongoing.Name = "btnongoing";
-            this.btnongoing.Size = new System.Drawing.Size(130, 30);
-            this.btnongoing.TabIndex = 1;
-            this.btnongoing.Text = "진행중";
-            this.btnongoing.UseVisualStyleBackColor = false;
-            this.btnongoing.Click += new System.EventHandler(this.btnongoing_Click);
+            btnongoing.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnongoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnongoing.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnongoing.Location = new System.Drawing.Point(23, 72);
+            btnongoing.Name = "btnongoing";
+            btnongoing.Size = new System.Drawing.Size(130, 30);
+            btnongoing.TabIndex = 1;
+            btnongoing.Text = "진행중";
+            btnongoing.UseVisualStyleBackColor = false;
+            btnongoing.Click += btnongoing_Click;
             // 
             // manegersmenu
             // 
-            this.manegersmenu.AutoSize = true;
-            this.manegersmenu.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.manegersmenu.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.manegersmenu.Location = new System.Drawing.Point(66, 255);
-            this.manegersmenu.Name = "manegersmenu";
-            this.manegersmenu.Size = new System.Drawing.Size(39, 20);
-            this.manegersmenu.TabIndex = 0;
-            this.manegersmenu.Text = "승인";
+            manegersmenu.AutoSize = true;
+            manegersmenu.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            manegersmenu.ForeColor = System.Drawing.SystemColors.HighlightText;
+            manegersmenu.Location = new System.Drawing.Point(66, 255);
+            manegersmenu.Name = "manegersmenu";
+            manegersmenu.Size = new System.Drawing.Size(39, 20);
+            manegersmenu.TabIndex = 0;
+            manegersmenu.Text = "승인";
+            manegersmenu.Visible = false;
             // 
             // workersmenu
             // 
-            this.workersmenu.AutoSize = true;
-            this.workersmenu.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.workersmenu.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.workersmenu.Location = new System.Drawing.Point(66, 37);
-            this.workersmenu.Name = "workersmenu";
-            this.workersmenu.Size = new System.Drawing.Size(42, 21);
-            this.workersmenu.TabIndex = 0;
-            this.workersmenu.Text = "결재";
+            workersmenu.AutoSize = true;
+            workersmenu.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            workersmenu.ForeColor = System.Drawing.SystemColors.HighlightText;
+            workersmenu.Location = new System.Drawing.Point(66, 37);
+            workersmenu.Name = "workersmenu";
+            workersmenu.Size = new System.Drawing.Size(42, 21);
+            workersmenu.TabIndex = 0;
+            workersmenu.Text = "결재";
             // 
             // panel
             // 
-            this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel.Location = new System.Drawing.Point(197, 89);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1040, 750);
-            this.panel.TabIndex = 13;
+            panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel.Location = new System.Drawing.Point(197, 89);
+            panel.Name = "panel";
+            panel.Size = new System.Drawing.Size(1040, 750);
+            panel.TabIndex = 13;
             // 
             // Document
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1244, 849);
-            this.Controls.Add(this.panel);
-            this.Controls.Add(this.SelectPanel);
-            this.Controls.Add(this.DocumentL);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Logo);
-            this.Name = "Document";
-            this.Text = "Document";
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
-            this.SelectPanel.ResumeLayout(false);
-            this.SelectPanel.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Window;
+            ClientSize = new System.Drawing.Size(1244, 849);
+            Controls.Add(panel);
+            Controls.Add(SelectPanel);
+            Controls.Add(DocumentL);
+            Controls.Add(panel1);
+            Controls.Add(Logo);
+            Name = "Document";
+            Text = "Document";
+            Load += Document_Load;
+            ((System.ComponentModel.ISupportInitialize)Logo).EndInit();
+            SelectPanel.ResumeLayout(false);
+            SelectPanel.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

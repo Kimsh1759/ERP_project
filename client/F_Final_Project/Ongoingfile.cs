@@ -75,7 +75,7 @@ namespace F_Final_Project
             else
             {
                 if (btn_num == 1)  // 권한 2 일반 사원 -> 자기가 쓴것만 보면 됨
-                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer");
+                    list = LoginApp.RDs.Readdic_database("ApplicationForLeave", LoginApp.user.name, state, "writer", page);
             }
 
             for (int i = 0; i < list.Count; i++)

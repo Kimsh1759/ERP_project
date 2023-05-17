@@ -58,7 +58,7 @@ namespace F_Final_Project
 
         private void btnfinishedfile_Click(object sender, EventArgs e)
         {
-           
+
             loadlist(1, 2, false);
         }
 
