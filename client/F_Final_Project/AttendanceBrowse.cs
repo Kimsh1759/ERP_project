@@ -90,7 +90,9 @@ namespace F_Final_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(button1.Text=="수정")
+            text_start.Text = text_start.Text.Trim();
+            text_end.Text = text_end.Text.Trim();
+            if (button1.Text == "수정" && listView1.SelectedItems.Count != 0)
             {
                 button1.Text = "저장";
                 text_start.Visible = true;
@@ -100,7 +102,7 @@ namespace F_Final_Project
                 text_start.Text = listView1.SelectedItems[0].SubItems[1].Text;
                 text_end.Text = listView1.SelectedItems[0].SubItems[2].Text;
             }
-            else if(button1.Text=="저장")
+            else if(button1.Text=="저장"&& text_check(text_start.Text)&& text_check(text_end.Text))
             {
                 button1.Text = "수정";
                 text_start.Visible = false;
@@ -113,8 +115,8 @@ namespace F_Final_Project
                 List<object> list2 = new List<object>();
                 list2.Add(Convert.ToInt32(num));
                 list2.Add(Convert.ToInt32(listView1.SelectedItems[0].SubItems[0].Text));
-                list2.Add(Convert.ToInt32(text_start.Text.Replace(":", "")));
-                list2.Add(Convert.ToInt32(text_end.Text.Replace(":", "")));
+                list2.Add(text_start.Text!=""?Convert.ToInt32(text_start.Text.Replace(":", "")):null);
+                list2.Add(text_end.Text!=""?Convert.ToInt32(text_end.Text.Replace(":", "")):null);
                 LoginApp.RDs.Delete_database(list, "Qrcode");
                 LoginApp.RDs.Create_database(list2, "Qrcode");
                 text_start.Text = "";
@@ -127,5 +129,37 @@ namespace F_Final_Project
         {
             this.Dispose();
         }
+
+        bool text_check(string time)
+        {
+            if (time == "")
+                return true;
+            try
+            {
+                string[] str = time.Split(":");
+                if (Convert.ToInt32(str[0]) < 0 || Convert.ToInt32(str[0]) > 24)
+                {
+                    MessageBox.Show("잘못된 형식입니다.");
+                    return false;
+                }
+                if(Convert.ToInt32(str[1])<0 || Convert.ToInt32(str[1])>59)
+                {
+                    MessageBox.Show("잘못된 형식입니다.");
+                    return false;
+                }
+                if(Convert.ToInt32(str[2])<0 || Convert.ToInt32(str[2])>59)
+                {
+                    MessageBox.Show("잘못된 형식입니다.");
+                    return false;
+                }
+                return true;
+            }
+            catch 
+            {
+                MessageBox.Show("잘못된 형식입니다.");
+                return false;
+            }
+        }
+
     }
 }
