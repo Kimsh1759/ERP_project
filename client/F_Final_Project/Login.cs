@@ -80,5 +80,13 @@ namespace F_Final_Project
                 MessageBox.Show("사원번호를 입력하세요");
             }
         }
+
+        private void KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Click_LogIN.PerformClick();
+            }
+        }
     }
 }
