@@ -577,7 +577,7 @@ namespace F_Final_Project
 
         }
 
-        public List<JObject> CallApis(string url)
+        public List<JObject> CallApis(string url) // 오류
         {
             // HTTP 요청 생성
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -590,14 +590,11 @@ namespace F_Final_Project
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        // 응답 데이터를 JSON 형식으로 Deserialize
-
+                    {                       // 응답 데이터를 JSON 형식으로 Deserialize
                         Stream responseStream = response.GetResponseStream();
                         StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                         string jsonContent = reader.ReadToEnd();
                         dic_list = JsonConvert.DeserializeObject<List<JObject>>(jsonContent);
-
                     }
                     else
                     {

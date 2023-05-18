@@ -21,6 +21,12 @@ namespace F_Final_Project
         private void btnongoing_Click(object sender, EventArgs e)
         {
             loadlist(0, 1, false);
+
+            btnongoing.BackColor = Color.DarkGray;
+            btnfinish.BackColor = Color.WhiteSmoke;
+            btnregistration.BackColor = Color.WhiteSmoke;
+            btnongoingfile.BackColor = Color.WhiteSmoke;
+            btnfinishedfile.BackColor = Color.WhiteSmoke;
         }
 
         private void btnregistration_Click(object sender, EventArgs e)
@@ -34,17 +40,28 @@ namespace F_Final_Project
             registration.ControlBox = false;
             registration.Parent = panel;
             registration.Show();
+
+            btnongoing.BackColor = Color.WhiteSmoke;
+            btnfinish.BackColor = Color.WhiteSmoke;
+            btnregistration.BackColor = Color.DarkGray;
+            btnongoingfile.BackColor = Color.WhiteSmoke;
+            btnfinishedfile.BackColor = Color.WhiteSmoke;
         }
 
         private void btnfinish_Click(object sender, EventArgs e)
         {
             loadlist(1, 1, false);
+            btnongoing.BackColor = Color.WhiteSmoke;
+            btnfinish.BackColor = Color.DarkGray;
+            btnregistration.BackColor = Color.WhiteSmoke;
+            btnongoingfile.BackColor = Color.WhiteSmoke;
+            btnfinishedfile.BackColor = Color.WhiteSmoke;
         }
 
         private void Document_Load(object sender, EventArgs e)
         {
-            if (LoginApp.user.authority == 0 || LoginApp.user.authority == 1)
-            {
+            if (LoginApp.user.authority != 2)
+            {                
                 btnfinishedfile.Visible = true;
                 btnongoingfile.Visible = true;
                 manegersmenu.Visible = true;
@@ -54,12 +71,24 @@ namespace F_Final_Project
         private void btnongoingfile_Click(object sender, EventArgs e)
         {
             loadlist(0, 2, true);
+
+            btnongoing.BackColor = Color.WhiteSmoke;
+            btnfinish.BackColor = Color.WhiteSmoke;
+            btnregistration.BackColor = Color.WhiteSmoke;
+            btnongoingfile.BackColor = Color.DarkGray;
+            btnfinishedfile.BackColor = Color.WhiteSmoke;
         }
 
         private void btnfinishedfile_Click(object sender, EventArgs e)
         {
 
             loadlist(1, 2, false);
+
+            btnongoing.BackColor = Color.WhiteSmoke;
+            btnfinish.BackColor = Color.WhiteSmoke;
+            btnregistration.BackColor = Color.WhiteSmoke;
+            btnongoingfile.BackColor = Color.WhiteSmoke;
+            btnfinishedfile.BackColor = Color.DarkGray;
         }
 
         private void loadlist(int state, int btn_num, bool approval)

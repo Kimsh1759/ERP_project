@@ -53,7 +53,7 @@ namespace F_Final_Project
             readFile(state, page);
             pageColor(page, 2);
         }
-        public void readFile(int state, int page)
+        public void readFile(int state, int page) //오류
         {
             DocumentList.Items.Clear();
             List<JObject> list = new List<JObject>();

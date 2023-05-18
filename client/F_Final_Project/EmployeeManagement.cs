@@ -114,6 +114,11 @@ namespace F_Final_Project
 
         private void EmployeeManagement_Load(object sender, EventArgs e)
         {
+            if(LoginApp.user.authority != 0)
+            {
+                ManagementL.Text = "사원조회";
+            }
+
             label_page.Add(page1);
             label_page.Add(page2);
             label_page.Add(page3);
