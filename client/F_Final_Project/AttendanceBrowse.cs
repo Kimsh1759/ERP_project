@@ -86,6 +86,14 @@ namespace F_Final_Project
         private void AttendanceBrowse_Load(object sender, EventArgs e)
         {
             restart();
+            if(LoginApp.user.authority<2)
+            {
+                button1.Visible = true;
+            }
+            else
+            {
+                button1.Visible = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
