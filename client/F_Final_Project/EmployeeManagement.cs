@@ -117,6 +117,11 @@ namespace F_Final_Project
             if(LoginApp.user.authority != 0)
             {
                 ManagementL.Text = "사원조회";
+                btnregistration.Visible = false;
+            }
+            else
+            {
+                btnregistration.Visible = true;
             }
 
             label_page.Add(page1);
